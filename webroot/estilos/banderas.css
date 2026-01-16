@@ -1,0 +1,28 @@
+/* Banderas */        
+#espana{
+    width: 20px;
+    height: 20px;
+    background-image: url("https://flagcdn.com/es.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#portugal{
+    width: 20px;
+    height: 20px;
+    background-image: url("https://flagcdn.com/pt.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#francia{
+    width: 20px;
+    height: 20px;
+    background-image: url("https://flagcdn.com/fr.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/********/

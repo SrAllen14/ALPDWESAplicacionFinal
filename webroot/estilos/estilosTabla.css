@@ -1,0 +1,64 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 20 nov 2025, 16:14:15
+    Author     : Clase
+*/
+
+/* Contenedor general para controlar el desbordamiento */ 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tabla{
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.tabla table{
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.tabla th, .tabla td{
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    text-align: left;
+    word-break: break-word;
+}
+
+.tabla th{
+    font-weight: bold;
+}
+
+
+
+.nombre{
+    background-color: lightblue;
+    font-weight: bold;
+}
+
+.valor{
+    background-color: antiquewhite;
+}
+
+.titulo{
+    background-color: lightgreen;
+}
+
+@media(max-width: 600px){
+    .tabla table{
+        font-size: 14px;
+        min-width: 100%;
+    }
+    
+    .tabla th, .tabla td{
+        padding: 8px;
+    }
+}

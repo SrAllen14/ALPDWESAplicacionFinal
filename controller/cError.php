@@ -1,0 +1,41 @@
+<?php
+
+/*
+ * @author: Álvaro Allén alvaro.allper.1@educa.jcyl.es
+ * @since: 15/01/2026
+ */
+
+$avError = [
+    'codError' => '',
+    'descError' => '',
+    'archivoError' => '',
+    'lineaError' => '',
+    'paginaSiguiente' => ''
+];
+
+// Se recoge los datos del error guardados en la sesión.
+if(isset($_SESSION['error'])){
+    $oError = $_SESSION['error'];
+    $avError = [
+        'codError' => $oError->getCodError(),
+        'descError' => $oError->getDescError(),
+        'archivoError' => $oError->getArchivoError(),
+        'lineaError' => $oError->getLineaError(),
+        'paginaSiguiente' => $oError->getPaginaSiguiente()
+    ];
+    
+    unset($_SESSION['error']);
+}
+
+// Comprobamos si el botón ha sido pulsado.
+if(isset($_REQUEST['volver'])){
+    // Si se pulsa le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = $_SESSION['paginaAnterior'];
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
+// Cargamos el layout principal, y cargará cada página a parte de la estructura principal de la web.
+require_once $view['layout'];
+
+?>
