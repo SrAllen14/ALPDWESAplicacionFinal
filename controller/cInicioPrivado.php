@@ -43,6 +43,15 @@ if(isset($_REQUEST['wip'])){
     exit;
 }
 
+// Comprobamos si el botón "wip" ha sido pulsado.
+if(isset($_REQUEST['rest'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si se ha pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'rest';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
 // Comprobamos si el botón "cerrarS" ha sido pulsado.
 if(isset($_REQUEST['cerrarS'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
