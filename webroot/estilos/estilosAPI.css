@@ -1,0 +1,41 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 19 ene. 2026, 11:40:20
+    Author     : alvaro.allper.1
+*/
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.subcontainer{
+    display: flex;
+    width: 100%;
+    padding: 20px;
+}
+
+.api1, .api2, .api3{
+    width: 33%;
+    border: 1px solid lightgray;
+    justify-items: center;
+    padding: 20px;
+}
+
+.tit{
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.api1 .foto img{
+    width: 100%;
+    max-width: 300px;
+}
+
+.api1 .textDetalles{
+    
+}

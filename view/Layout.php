@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="webroot/estilos/banderas.css"/>
     <link rel="stylesheet" href="webroot/estilos/estilosFormulario.css"/>
     <link rel="stylesheet" href="webroot/estilos/estilosTabla.css"/>
+    <link rel="stylesheet" href="webroot/estilos/estilosAPI.css"/>
     <title>Álvaro Allén Perlines</title>
 </head>
 <body>
