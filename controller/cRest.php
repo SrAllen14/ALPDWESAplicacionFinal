@@ -9,7 +9,16 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
     exit;
 }
 
-// Comprobamos si el botón "iniciar" ha sido pulsado.
+// Comprobamos si el botón "detalles" ha sido pulsado.
+if(isset($_REQUEST['detalles'])){
+    // Si ha sido pulsado el damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaEnCurso'] = 'detallesNasa';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
+// Comprobamos si el botón "volver" ha sido pulsado.
 if(isset($_REQUEST['volver'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.

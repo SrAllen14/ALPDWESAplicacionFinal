@@ -29,6 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .tit{
     max-width: 100%;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .api1 .foto img{

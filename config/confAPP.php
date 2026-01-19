@@ -21,7 +21,8 @@ $controller = [
     'detalles' => 'controller/cDetalles.php',
     'error' => 'controller/cError.php',
     'wip' => 'controller/cWIP.php',
-    'rest' => 'controller/cRest.php'
+    'rest' => 'controller/cRest.php',
+    'detallesNasa' => 'controller/cDetallesNasa.php'
 ];
 
 $view = [
@@ -32,5 +33,6 @@ $view = [
     'detalles' => 'view/vDetalles.php',
     'error' => 'view/vError.php',
     'wip' => 'view/vWIP.php',
-    'rest' => 'view/vRest.php'
+    'rest' => 'view/vRest.php',
+    'detallesNasa' => 'view/vDetallesNasa.php'
 ];
