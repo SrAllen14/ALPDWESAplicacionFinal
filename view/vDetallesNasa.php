@@ -3,13 +3,13 @@
     <div class="container">
         <div class="nasa">
             <div class="tit">
-                <h2><?php echo $avRest['oFotoNasa']->getTitulo(); ?></h2>
+                <h2><?php echo $avRest['tituloNasa']; ?></h2>
             </div>
             <div class="foto">
-                <img src="<?php echo $avRest['oFotoNasa']->getUrl(); ?>" alt="fotoNasa"/>
+                <img src="<?php echo $avRest['fotoNasa']; ?>" alt="fotoNasa"/>
             </div> 
             <div class="textDetalles">
-                <p><?php echo $avRest['oFotoNasa']->getExplicacion(); ?></p>
+                <p><?php echo $avRest['explicacionNasa']; ?></p>
             </div>
         </div>
         <form>

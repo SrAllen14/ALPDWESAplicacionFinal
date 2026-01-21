@@ -14,17 +14,18 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
-// Se obtiene la fecha de hoy para la foto del día de la Nasa.
-$fechaHoy = new DateTime();
-$fechaHoyFormateada = $fechaHoy->format('Y-m-d');
+$oFotoNasa = null;
 
-// Se llama a la api con la fecha formateada.
-$oFotoNasa = REST::apiNasa($fechaHoyFormateada);
-
+if(isset($_COOKIE['fotoNasa'])){
+    $data = json_decode($_COOKIE['fotoNasa'], true);
+    $oFotoNasa = new FotoNasa($data['titulo'], $data['url'], $data['fecha'], $data['explicacion']);
+}
 
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
-    'oFotoNasa' => $oFotoNasa
+    'tituloNasa' => ($oFotoNasa) ? $oFotoNasa->getTitulo() : "No hay datos",
+    'fotoNasa' => ($oFotoNasa) ? $oFotoNasa->getUrl() : "",
+    'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : ""
 ];
 
 require_once $view['layout'];

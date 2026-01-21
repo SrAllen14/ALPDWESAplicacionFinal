@@ -30,13 +30,79 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     max-width: 100%;
     margin-bottom: 10px;
     font-weight: bold;
+    overflow: hidden;
 }
 
-.api1 .foto img{
+.foto img{
     width: 100%;
     max-width: 300px;
 }
 
-.api1 .textDetalles{
+.divDetalles{
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.form-detalles{
+    display: block;
+    max-width: 100%;
+    align-items: center;
+}
+
+.fecha {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-fecha{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    max-width: 100%;
+}
+
+.btnFecha, .btnDetalles{
+    overflow: hidden;
+}
+
+.inFecha, .btnFecha{
+    padding: 8px;
+    font-size: 16px;
+}
+
+.inFecha{
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 2px solid skyblue;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+}
+
+.inFecha:hover{
+    border-color: #45a049;
+}
+@media (max-width: 800px) {
+    .subcontainer{
+        display: flex;
+        flex-direction: column;
+    }
     
+    .api1, .api2, .api3{
+        width: 100%;
+        padding: 20px;
+    }
+    .api1 .fecha .form-fecha {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .inFecha,
+    .btnFecha,
+    .btnDetalles{
+        max-width: 100%;
+    }
 }

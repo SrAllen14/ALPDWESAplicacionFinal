@@ -10,7 +10,7 @@ class REST{
     
     public static function apiNasa($fecha){
         // Se accede a la URL de la nasa.
-        $resultado = file_get_contents($url = "https://api.nasa.gov/planetary/apod?api_key=".self::API_KEY_NASA);
+        $resultado = file_get_contents($url = "https://api.nasa.gov/planetary/apod?date=$fecha&api_key=".self::API_KEY_NASA);
         $archivoApi = json_decode($resultado, true);
         
         if(isset($archivoApi)){
