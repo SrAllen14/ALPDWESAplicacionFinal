@@ -18,6 +18,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     width: 100%;
     max-width: 90%;
     padding: 20px;
+    justify-content: center;
 }
 
 .api1, .api2, .api3{
@@ -61,9 +62,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .form-fecha{
     display: flex;
-    gap: 10px;
     align-items: center;
     max-width: 100%;
+    flex-direction: column;
 }
 
 .btnFecha, .btnDetalles{
@@ -101,7 +102,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
         padding: 20px;
     }
     .api1 .fecha .form-fecha {
-        flex-direction: column;
         align-items: stretch;
     }
     
