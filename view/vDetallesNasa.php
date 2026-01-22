@@ -6,7 +6,7 @@
                 <h2><?php echo $avRest['tituloNasa']; ?></h2>
             </div>
             <div class="foto">
-                <img src="<?php echo $avRest['fotoNasa']; ?>" alt="fotoNasa"/>
+                <img src="<?php echo $avRest['fotoNasaHD']; ?>" alt="fotoNasaHD"/>
             </div> 
             <div class="textDetalles">
                 <p><?php echo $avRest['explicacionNasa']; ?></p>

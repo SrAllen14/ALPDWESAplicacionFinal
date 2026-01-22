@@ -17,8 +17,8 @@
                 if(!empty($_SESSION)){
                     foreach ($_SESSION as $key => $value) {
                         echo "<tr>";
-                        echo '<td class = nombre>'.$key.'</td>';
-                        echo "<td class='valor'><pre> ". print_r($value, true) ."</pre></td>";
+                        echo "<td class='nombre'>$key</td>";
+                        echo "<td class='valor'>".print_r($value, true) ."</td>";
                         echo "</tr>";
                     }
                 }  else{

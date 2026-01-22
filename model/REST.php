@@ -14,7 +14,7 @@ class REST{
         $archivoApi = json_decode($resultado, true);
         
         if(isset($archivoApi)){
-            $fotoNasa = new FotoNasa($archivoApi['title'], $archivoApi['url'], $archivoApi['date'], $archivoApi['explanation']);
+            $fotoNasa = new FotoNasa($archivoApi['title'], $archivoApi['url'], $archivoApi['hdurl'],$archivoApi['date'], $archivoApi['explanation']);
             return $fotoNasa;
         }
     }

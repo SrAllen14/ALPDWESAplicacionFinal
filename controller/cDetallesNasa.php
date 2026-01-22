@@ -16,15 +16,14 @@ if(isset($_REQUEST['volver'])){
 
 $oFotoNasa = null;
 
-if(isset($_COOKIE['fotoNasa'])){
-    $data = json_decode($_COOKIE['fotoNasa'], true);
-    $oFotoNasa = new FotoNasa($data['titulo'], $data['url'], $data['fecha'], $data['explicacion']);
+if(isset($_SESSION['fotoNasa'])){
+    $oFotoNasa = $_SESSION['fotoNasa'];
 }
 
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
     'tituloNasa' => ($oFotoNasa) ? $oFotoNasa->getTitulo() : "No hay datos",
-    'fotoNasa' => ($oFotoNasa) ? $oFotoNasa->getUrl() : "",
+    'fotoNasaHD' => ($oFotoNasa) ? $oFotoNasa->getUrlHD() : "",
     'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : ""
 ];
 

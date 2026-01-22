@@ -16,6 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .subcontainer{
     display: flex;
     width: 100%;
+    max-width: 90%;
     padding: 20px;
 }
 
@@ -33,9 +34,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     overflow: hidden;
 }
 
+.foto{
+    text-align: center;
+}
+
 .foto img{
-    width: 100%;
-    max-width: 300px;
+    width: 90%;
+    max-width: 256px;
 }
 
 .divDetalles{

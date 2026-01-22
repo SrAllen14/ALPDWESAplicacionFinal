@@ -9,6 +9,14 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
     exit;
 }
 
+// Comprobamos si la sesión "fotoNasa" está vacia.
+if(empty($_SESSION['fotoNasa'])){
+    // Se obtiene la fecha de hoy para valores.
+    $fechaHoy = new DateTime();
+    $fechaHoyFormateada = $fechaHoy->format('Y-m-d');
+    $_SESSION['fotoNasa'] = REST::apiNasa($fechaHoyFormateada);
+}
+
 // Comprobamos si el botón "detalles" ha sido pulsado.
 if(isset($_REQUEST['detalles'])){
     // Si ha sido pulsado el damos el valor de la página solicitada a la variable $_SESSION.
@@ -27,10 +35,13 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
+
+$entradaOk = true;
 // Inicializamos las variables de control.
 $aErrores = [
     'fechaNasa' => null
 ];
+
 $oFotoNasa = null;
 
 // Se obtiene la fecha de hoy para valores.
@@ -50,21 +61,24 @@ if(isset($_REQUEST['btnFecha'])){
     if($entradaOk){
         $fechaNasa = $_REQUEST['inFecha'];  
     }
+    
+    if($entradaOk){
+        $oFotoNasa = REST::apiNasa($fechaNasa);
+        $_SESSION['fotoNasa'] = $oFotoNasa;
+    }
 }
-$oFotoNasa = REST::apiNasa($fechaNasa);
-$cookieFotoNasa = json_encode([
-    'titulo' => $oFotoNasa->getTitulo(),
-    'url' => $oFotoNasa->getUrl(),
-    'fecha' => $oFotoNasa->getFecha(),
-    'explicacion' => $oFotoNasa->getExplicacion()
-]);
-setcookie("fotoNasa", $cookieFotoNasa);
+
+
+
+
 
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
-    'tituloNasa' => ($oFotoNasa) ? $oFotoNasa->getTitulo() : "No hay datos",
-    'fotoNasa' => ($oFotoNasa) ? $oFotoNasa->getUrl() : "",
-    'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : "",
+    'tituloNasa' => $_SESSION['fotoNasa']->getTitulo(),
+    'fotoNasa' => $_SESSION['fotoNasa']->getUrl(),
+    'fotoNasaHD' => $_SESSION['fotoNasa']->getUrlHD(),
+    'explicacionNasa' => $_SESSION['fotoNasa']->getExplicacion(),
+    'fechaNasa' => $_SESSION['fotoNasa']->getFecha(),
     'errorNasa' => $aErrores['fechaNasa']
 ];
 

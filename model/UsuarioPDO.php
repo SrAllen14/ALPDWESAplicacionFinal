@@ -93,11 +93,11 @@ class UsuarioPDO {
         
         // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
         $sql = <<<SQL
-        INSERT INTO T01_Usuario
-        (T01_CodUsuario, T01_Password, T01_DescUsuario,
-        T01_FechaHoraUltimaConexion, T01_NumConexiones, T01_Perfil)
-        VALUES(
-        :codUsuario, SHA2(:password, 256), :descUsuario, now(), 1, 'usuario')
+            INSERT INTO T01_Usuario
+                (T01_CodUsuario, T01_Password, T01_DescUsuario,
+                T01_FechaHoraUltimaConexion, T01_NumConexiones, T01_Perfil)
+            VALUES
+                (:codUsuario, SHA2(:password, 256), :descUsuario, now(), 1, 'usuario')
         SQL;
         
         try {
