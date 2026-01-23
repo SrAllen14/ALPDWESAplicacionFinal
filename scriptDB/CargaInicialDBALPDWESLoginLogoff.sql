@@ -1,5 +1,5 @@
 -- Seleccionamos la base de datos en la que queremos trabajar --
-USE DBALPDWESLoginLogoff;
+USE DBALPDWESAplicacionFinal;
 
 
 INSERT INTO T01_Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario, T01_FechaHoraUltimaConexion, T01_ImagenUsuario) VALUES

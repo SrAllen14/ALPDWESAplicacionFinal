@@ -1,6 +1,6 @@
 <?php
-    define('DSN', 'mysql:host='.$_SERVER['SERVER_ADDR'].'; dbname=DBALPDWESLoginLogoff');
-    define('USERNAME','userALPDWESLoginLogoff');
+    define('DSN', 'mysql:host='.$_SERVER['SERVER_ADDR'].'; dbname=DBALPDWESAplicacionFinal');
+    define('USERNAME','userALPDWESAplicacionFinal');
     define('PASSWORD', 'paso');
  
  /*

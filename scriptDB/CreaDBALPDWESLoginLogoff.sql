@@ -10,10 +10,10 @@
 
 
 -- Creación de la base de datos en caso de que no exista --
-CREATE DATABASE IF NOT EXISTS DBALPDWESLoginLogoff;
+CREATE DATABASE IF NOT EXISTS DBALPDWESAplicacionFinal;
 
 -- Seleccionamos la base de datos para poder trabajar en ella --
-USE DBALPDWESLoginLogoff;
+USE DBALPDWESAplicacionFinal;
 
 --Creamos, en caso de que no exista, la tabla y dentro cada campo con el tipo de valor correspondiente --
 CREATE TABLE IF NOT EXISTS T01_Usuario(
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS T02_Departamento(
 
 
 -- Creamos el usuario que se va a encargar de gestionar toda la base de datos --
-CREATE USER IF NOT EXISTS 'userALPDWESLoginLogoff'@'%' IDENTIFIED BY 'paso';
+CREATE USER IF NOT EXISTS 'userALPDWESAplicacionFinal'@'%' IDENTIFIED BY 'paso';
 
 -- Le damos privilegios completos para poder crear, insertar, borrar y modificar tablas y datos --
-GRANT ALL ON DBALPDWESLoginLogoff.* TO 'userALPDWESLoginLogoff'@'%';
+GRANT ALL ON DBALPDWESAplicacionFinal.* TO 'userALPDWESAplicacionFinal'@'%';

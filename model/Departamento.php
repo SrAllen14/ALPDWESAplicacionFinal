@@ -1,0 +1,63 @@
+<?php
+/*
+ * @author: Álvaro Allén alvaro.allper.1@educa.jcyl.es
+ * @since: 23/01/2026
+ */
+
+class Departamento{
+    private $codDepartamento;
+    private $descDepartamento;
+    private $fechaCreacionDepartamento;
+    private $volumenDeNegocio;
+    private $fechaBajaDepartamento;
+    
+    
+    public function __construct($codDepartamento, $descDepartamento, $fechaCreacionDepartamento, $volumenDeNegocio) {
+        $this->codDepartamento = $codDepartamento;
+        $this->descDepartamento = $descDepartamento;
+        $this->fechaCreacionDepartamento = $fechaCreacionDepartamento;
+        $this->volumenDeNegocio = $volumenDeNegocio;
+        $this->fechaBajaDepartamento = null;
+    }
+    
+    public function getCodDepartamento() {
+        return $this->codDepartamento;
+    }
+    
+    public function getDescDepartamento(){
+        return $this->descDepartamento;
+    }
+    
+    public function getFechaCreacionDepartamento(){
+        return $this->fechaCreacionDepartamento;
+    }
+    
+    public function getVolumenNegocio(){
+        return $this->volumenDeNegocio;
+    }
+    
+    public function getFechaBajaDepartamento(){
+        return $this->fechaBajaDepartamento;
+    }
+    
+    public function setCodDepartamento($codDepartamento){
+        $this->codDepartamento = $codDepartamento;
+    }
+    
+    public function setDescDepartamento($descDepartamento){
+        $this->descDepartamento = $descDepartamento;
+    }
+    
+    public function setFechaCreacionDepartamento($fechaCreacionDepartamento){
+        $this->fechaCreacionDepartamento = $fechaCreacionDepartamento;
+    }
+    
+    public function setVolumenNegocio($volumenNegocio){
+        $this->volumenDeNegocio = $volumenNegocio;
+    }
+    
+    public function setFechaBajaDepartamento($fechaBajaDepartamento){
+        $this->fechaBajaDepartamento = $fechaBajaDepartamento;
+    }
+}
+

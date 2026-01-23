@@ -38,7 +38,7 @@ if(isset($_REQUEST['error'])){
 if(isset($_REQUEST['wip'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si se ha pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-    $_SESSION['paginaEnCurso'] = 'wip';
+    $_SESSION['paginaEnCurso'] = 'departamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
