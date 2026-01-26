@@ -58,11 +58,10 @@ if(isset($_REQUEST['btnFecha'])){
         $entradaOk = false;
     }
     
-    if($entradaOk){
-        $fechaNasa = $_REQUEST['inFecha'];  
-    }
+        
     
     if($entradaOk){
+        $fechaNasa = $_REQUEST['inFecha'];
         $oFotoNasa = REST::apiNasa($fechaNasa);
         $_SESSION['fotoNasa'] = $oFotoNasa;
     }
