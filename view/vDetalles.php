@@ -2,8 +2,8 @@
         <h2>Detalles</h2>
     </div>
     <div class="cabecera3">
-        <form method="post">
-            <button type="submit" name="cerrarS" id="cerrarS">Cerrar Sesión</button>
+        <form>
+            <button type="submit" name="salir" id="salir">Salir</button>
         </form>
     </div>
 </header>
@@ -66,8 +66,5 @@
                 echo "</table>";
             ?>
         </div>
-        <form>
-            <button type="submit" name="salir" id="salir">Salir</button>
-        </form>
     </div>
 </main>

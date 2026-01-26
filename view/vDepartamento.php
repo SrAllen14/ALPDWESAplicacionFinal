@@ -1,12 +1,17 @@
-<div class="cabecera2">
-    <h2>Mantenimiento de Departamentos</h2>
-</div>
+    <div class="cabecera2">
+        <h2>Mantenimiento de Departamentos</h2>
+    </div>
+    <div class="cabecera3">
+        <form>
+            <button type="submit" name="volver" id="volver">Volver</button>
+        </form>
+    </div>
 </header>
 <main>
     <div class="container">
         <div class="formulario">
             <form>
-                <input type="text" name="codDepartamento" id="codDepartamento" placeholder="Código de departamento...">
+                <input type="text" name="codDepartamento" id="codDepartamento" placeholder="Código de departamento..." value="<?php echo $_SESSION['descDptoBuscado'] ?>">
                 <button type="submit" name="buscar" id="buscar">Buscar</button>
             </form>
         </div>
@@ -65,8 +70,5 @@
                 </tbody>
             </table>
         </div>
-        <form>
-            <button type="submit" name="volver" id="volver">Volver</button>
-        </form>
     </div>
 </main>

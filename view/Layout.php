@@ -15,14 +15,15 @@
 <body>
     <header>
         <div class="cabecera1">
-            <h2>Log In - Log Off </h2>
+            <h2>Aplicación Final</h2>
         </div>
         <?php require_once $view[$_SESSION['paginaEnCurso']];?>
     <footer>
         <div class="pie1">
             <a href="../index.html">Álvaro Allén Perlines</a>
-            <time>2025-12-15</time>
+            <time>2026/01/26</time>
         </div>
+        <div class="pie3"></div>
         <div class="pie2">
             <a href="https://github.com/SrAllen14/ALPDWESLoginLogoff/tree/master" target="blank"><i class="fab fa-github"></i></a>
         </div>
