@@ -1,0 +1,103 @@
+.seccionCarrusel {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.carruselContenedor {
+    position: relative;
+    width: 1000px;
+    /* Ajusta el ancho que quieras que tenga el visor */
+    height: 700px;
+    /* Ajusta el alto */
+    overflow: hidden;
+    /* Oculta las fotos que no están activas */
+    border: 3px solid skyblue;
+    border-radius: 10px;
+}
+
+.images {
+    display: flex;
+    width: 500%;
+    /* 4 fotos = 400% de ancho */
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.images img {
+    width: 20%;
+    /* Cada foto ocupa 1/4 del contenedor (100% / 4) */
+    height: 100%;
+    object-fit: contain;
+    /* Para que los diagramas no se deformen */
+    background-color: white;
+}
+
+/* Estilo de los botones (Radios) */
+.carruselContenedor input {
+    position: absolute;
+    bottom: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 10;
+    appearance: none;
+    /* Oculta el radio original */
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+/* Posicionamiento horizontal de los botones */
+#rd1 {
+    left: 40%;
+}
+
+#rd2 {
+    left: 46%;
+}
+
+#rd3 {
+    left: 52%;
+}
+
+#rd4 {
+    left: 58%;
+}
+#rd5 {
+    left: 64%;
+}
+
+/* Color cuando están seleccionados */
+.carruselContenedor input:checked {
+    background-color: skyblue;
+    transform: scale(1.2);
+}
+
+
+/* Cuando el radio X está marcado, mueve el div .photos */
+#rd1:checked~.images {
+    transform: translateX(0%);
+}
+
+#rd2:checked~.images {
+    transform: translateX(-20%);
+}
+
+#rd3:checked~.images {
+    transform: translateX(-40%);
+}
+
+#rd4:checked~.images {
+    transform: translateX(-60%);
+}
+#rd5:checked~.images {
+    transform: translateX(-80%);
+}
+
+@media(max-width: 600px){
+    .carruselContenedor input{
+        flex-flow: column;
+    }
+}

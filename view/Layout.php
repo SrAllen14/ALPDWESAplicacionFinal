@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="webroot/estilos/estilosTabla.css"/>
     <link rel="stylesheet" href="webroot/estilos/estilosAPI.css"/>
     <link rel="stylesheet" href="webroot/estilos/estilosNasa.css"/>
+    <link rel="stylesheet" href="webroot/estilos/carrusel.css"/>
     <title>Álvaro Allén Perlines</title>
 </head>
 <body>
@@ -26,6 +27,7 @@
         <div class="pie3"></div>
         <div class="pie2">
             <a href="https://github.com/SrAllen14/ALPDWESLoginLogoff/tree/master" target="blank"><i class="fab fa-github"></i></a>
+            <a href="doc/CV.pdf" target="blank"><i class="fa-solid fa-address-card"></i></a>
         </div>
     </footer>
 </body>

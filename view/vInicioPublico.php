@@ -17,8 +17,19 @@
     </header>
     <main>
         <div class="container">
-            <div class="image">
-                <img src="webroot/images/diagramaVentanas.PNG" alt="fasdf"/>
-            </div>
+            <section class="seccionCarrusel">
+                <div class="carruselContenedor">
+                    <input type="radio" name="rd" id="rd1" checked>
+                    <input type="radio" name="rd" id="rd2">
+                    <input type="radio" name="rd" id="rd3">
+                    <input type="radio" name="rd" id="rd4">
+                    <div class="images">
+                        <img src="webroot/images/arbolDeNavegacion.JPG" alt=""/>
+                        <img src="webroot/images/diagramaClases.jpg" alt=""/>
+                        <img src="webroot/images/diagramaClasesII.jpg" alt=""/>
+                        <img src="webroot/images/tablaSesion.JPG" alt=""/>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
