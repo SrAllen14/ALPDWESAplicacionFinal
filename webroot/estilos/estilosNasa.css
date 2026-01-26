@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.nasa{
+    width: 100%;
+    padding: 20px;
+    justify-items: center;
+}
+
+.nasa .tit{
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.foto img{
+    max-width: 100%;
+}
+
+.nasa .textDetalles{
+    text-align: justify;
+    font-size: 1.1rem
+}

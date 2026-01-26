@@ -2,8 +2,8 @@
         <h2>Detalles</h2>
     </div>
     <div class="cabecera3">
-        <form method="post">
-            <button type="submit" name="cerrarS" id="cerrarS">Cerrar Sesión</button>
+        <form>
+            <button type="submit" name="salir" id="salir">Salir</button>
         </form>
     </div>
 </header>
@@ -17,8 +17,8 @@
                 if(!empty($_SESSION)){
                     foreach ($_SESSION as $key => $value) {
                         echo "<tr>";
-                        echo '<td class = nombre>'.$key.'</td>';
-                        echo "<td class='valor'><pre> ". print_r($value, true) ."</pre></td>";
+                        echo "<td class='nombre'>$key</td>";
+                        echo "<td class='valor'>".print_r($value, true) ."</td>";
                         echo "</tr>";
                     }
                 }  else{
@@ -66,8 +66,5 @@
                 echo "</table>";
             ?>
         </div>
-        <form>
-            <button type="submit" name="salir" id="salir">Salir</button>
-        </form>
     </div>
 </main>

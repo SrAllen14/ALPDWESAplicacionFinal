@@ -1,0 +1,113 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 19 ene. 2026, 11:40:20
+    Author     : alvaro.allper.1
+*/
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.subcontainer{
+    display: flex;
+    width: 100%;
+    max-width: 90%;
+    padding: 20px;
+    justify-content: center;
+}
+
+.api1, .api2, .api3{
+    width: 33%;
+    border: 1px solid lightgray;
+    justify-items: center;
+    padding: 20px;
+}
+
+.tit{
+    max-width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.foto{
+    text-align: center;
+}
+
+.foto img{
+    width: 90%;
+    max-width: 256px;
+}
+
+.divDetalles{
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.form-detalles{
+    display: block;
+    max-width: 100%;
+    align-items: center;
+}
+
+.fecha {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-fecha{
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    flex-direction: column;
+}
+
+.btnFecha, .btnDetalles{
+    overflow: hidden;
+}
+
+.inFecha, .btnFecha{
+    padding: 8px;
+    font-size: 16px;
+}
+
+.inFecha{
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 2px solid skyblue;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+}
+
+.inFecha:hover{
+    border-color: #45a049;
+}
+@media (max-width: 800px) {
+    .subcontainer{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .api1, .api2, .api3{
+        width: 100%;
+        padding: 20px;
+    }
+    .api1 .fecha .form-fecha {
+        align-items: stretch;
+    }
+    
+    .inFecha,
+    .btnFecha,
+    .btnDetalles{
+        max-width: 100%;
+    }
+}

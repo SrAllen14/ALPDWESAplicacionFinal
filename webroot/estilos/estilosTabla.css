@@ -26,6 +26,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     min-width: 600px;
 }
 
+table td:nth-of-type(1){
+    width: 30%;
+}
 .tabla th, .tabla td{
     border: 1px solid #CCCCCC;
     padding: 10px;
