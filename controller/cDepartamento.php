@@ -14,11 +14,31 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
-$aDepartamentos = DepartamentoPDO::mostrarDepartamentos();
+$aErrores = [
+    'descDepartamento' => null
+];
+
+$entradaOk = true;
+
+if(isset($_REQUEST['buscar'])){
+    $aErrores['descDepartamento'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['codDepartamento'], 255, 0, 0);
+    
+    if($aErrores['descDepartamento'] != null){
+        $entradaOk = false;
+    }
+} else{
+    $entradaOk = false;
+}
+
+if($entradaOk){
+    $sBuscada = $_REQUEST['codDepartamento'];
+} else{
+    $sBuscada = "";
+}
+$aDepartamentos = DepartamentoPDO::buscaDepartamentoPorDesc($sBuscada);
 
 $avDepartamentos = [
     'aDepartamentos' => $aDepartamentos
 ];
 
-var_dump($avDepartamentos['aDepartamentos']);
 require_once $view['layout'];

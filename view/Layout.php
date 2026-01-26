@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Indice general de la asignatura">
     <meta name="author" content="Álvaro Allén Perlines">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="webroot/estilos/estilos.css"/>
     <link rel="stylesheet" href="webroot/estilos/banderas.css"/>
     <link rel="stylesheet" href="webroot/estilos/estilosFormulario.css"/>
