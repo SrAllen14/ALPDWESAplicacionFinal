@@ -59,9 +59,10 @@ class REST{
             $fotoNasa = new FotoNasa(
             $archivoApi['title'],
             $archivoApi['url'], 
+            $archivoApi['hdurl'] ?? '',
             $archivoApi['date'],
-            $archivoApi['explanation'],
-            $archivoApi['hdurl'] ?? ''  
+            $archivoApi['explanation']
+             
         );
             return $fotoNasa;
         }
