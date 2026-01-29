@@ -3,6 +3,7 @@
     </div>
     <div class="cabecera3">
         <form method="post">
+            <button type="submit" name="editar" id="editar">Editar</button>
             <button type="submit" name="cerrarS" id="cerrarS">Cerrar Sesión</button>
         </form>
     </div>

@@ -56,6 +56,15 @@ if(isset($_REQUEST['rest'])){
     exit;
 }
 
+// Comprobamos si el boton "editar" ha sido pulsado.
+if(isset($_REQUEST['editar'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'editar';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
 // Comprobamos si el botón "cerrarS" ha sido pulsado.
 if(isset($_REQUEST['cerrarS'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];

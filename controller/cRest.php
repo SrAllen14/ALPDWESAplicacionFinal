@@ -1,7 +1,7 @@
 <?php
 
 // Comprobamos que la sesión ha sido iniciada.
-if(empty($_SESSION['usuarioDWESLoginLogoff'])){
+if (empty($_SESSION['usuarioDWESLoginLogoff'])) {
     // En caso de que no se haya iniciado sesión volvemos a la página de inicio público.
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso'] = 'inicioPublico';
@@ -10,7 +10,7 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
 }
 
 // Comprobamos si la sesión "fotoNasa" está vacia.
-if(empty($_SESSION['fotoNasa'])){
+if (empty($_SESSION['fotoNasa'])) {
     // Se obtiene la fecha de hoy para valores.
     $fechaHoy = new DateTime();
     $fechaHoyFormateada = $fechaHoy->format('Y-m-d');
@@ -18,7 +18,7 @@ if(empty($_SESSION['fotoNasa'])){
 }
 
 // Comprobamos si el botón "detalles" ha sido pulsado.
-if(isset($_REQUEST['detalles'])){
+if (isset($_REQUEST['detalles'])) {
     // Si ha sido pulsado el damos el valor de la página solicitada a la variable $_SESSION.
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso'] = 'detallesNasa';
@@ -27,7 +27,7 @@ if(isset($_REQUEST['detalles'])){
 }
 
 // Comprobamos si el botón "volver" ha sido pulsado.
-if(isset($_REQUEST['volver'])){
+if (isset($_REQUEST['volver'])) {
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
     $_SESSION['paginaEnCurso'] = 'inicioPrivado';
@@ -48,37 +48,29 @@ $oFotoNasa = null;
 $fechaHoy = new DateTime();
 $fechaHoyFormateada = $fechaHoy->format('Y-m-d');
 $fechaNasa = $fechaHoyFormateada; // Fecha formateada del día de hoy.
-
 // Comprobamos si el botón "btnFecha" ha sido pulsado.
-if(isset($_REQUEST['btnFecha'])){
-    $entradaOk = true;
+if (isset($_REQUEST['btnFecha'])) {
     $aErrores['fechaNasa'] = validacionFormularios::validarFecha($_REQUEST['inFecha'], $fechaHoyFormateada, '1995-06-16', 1);
-    
-    if($aErrores['fechaNasa'] != null){
+
+    if ($aErrores['fechaNasa'] != null) {
         $entradaOk = false;
-    }  
-    
-    if($entradaOk){
+    }
+
+    if ($entradaOk) {
         $fechaNasa = $_REQUEST['inFecha'];
         $oFotoNasa = REST::apiNasa($fechaNasa);
-        
-        if(!empty($oFotoNasa->getUrl())){
-            $_SESSION['fotoNasa'] = $oFotoNasa;
-        } else{
-            $_SESSION['fotoNasa'] = false;
-        }
-        
+        $_SESSION['fotoNasa'] = $oFotoNasa;        
     }
 }
 
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
-    'tituloNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getTitulo() : 'Información no existente',
-    'fotoNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getUrl() : '',
-    'fotoNasaHD' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getUrlHD() : '',
-    'explicacionNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getExplicacion() : '',
-    'fechaNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getFecha() : $_REQUEST['inFecha'],
-    'errorNasa' => ($_SESSION['fotoNasa']) ? $aErrores['fechaNasa'] : null
+    'tituloNasa' => $_SESSION['fotoNasa']->getTitulo(),
+    'fotoNasa' => $_SESSION['fotoNasa']->getUrl(),
+    'fotoNasaHD' => $_SESSION['fotoNasa']->getUrlHD(),
+    'explicacionNasa' => $_SESSION['fotoNasa']->getExplicacion(),
+    'fechaNasa' => $_SESSION['fotoNasa']->getFecha(),
+    'errorNasa' => $_SESSION['fotoNasa']->getError()
 ];
 
 require_once $view['layout'];

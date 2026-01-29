@@ -115,8 +115,29 @@ class UsuarioPDO {
         return $oUsuario;
     }
 
-    public static function modificarUsuario() {
+    public static function modificarUsuario($oUsuario, $descUsuarioNuevo) {
+
+        // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
+        $sql = <<<SQL
+            UPDATE T01_Usuario
+                SET T01_DescUsuario = :descUsuario
+                WHERE T01_CodUsuario = :codUsuario
+        SQL;
         
+        try {
+            $consulta = DBPDO::ejecutaConsulta($sql,
+                            [':descUsuario' => $descUsuarioNuevo,
+                            ':codUsuario' => $oUsuario->getCodUsuario()]);
+            
+            if ($consulta) {
+                $oUsuario->setDescUsuario($descUsuarioNuevo);
+                return $oUsuario;
+            } else{
+                return null;
+            }
+        } catch (Exception $ex) {
+            return null;
+        }
     }
 
     public static function borrarUsuario() {

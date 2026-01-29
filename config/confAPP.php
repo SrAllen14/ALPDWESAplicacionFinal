@@ -6,6 +6,7 @@
  */
 
 const RESP_SEGURIDAD = "pimentel";
+const API_KEY_NASA = 'uzpJUwOHnBD391Xblgeh1wiMDprUWeP91FRkajuI';
 
 require_once 'core/iValidacionFormularios.php';
 
@@ -28,7 +29,8 @@ $controller = [
     'rest' => 'controller/cRest.php',
     'detallesNasa' => 'controller/cDetallesNasa.php',
     'registro' => 'controller/cRegistro.php',
-    'departamento' => 'controller/cDepartamento.php'
+    'departamento' => 'controller/cDepartamento.php',
+    'editar' => 'controller/cEditar.php'
 ];
 
 $view = [
@@ -42,5 +44,6 @@ $view = [
     'rest' => 'view/vRest.php',
     'detallesNasa' => 'view/vDetallesNasa.php',
     'registro' => 'view/vRegistro.php',
-    'departamento' => 'view/vDepartamento.php'
+    'departamento' => 'view/vDepartamento.php',
+    'editar' => 'view/vEditar.php'
 ];

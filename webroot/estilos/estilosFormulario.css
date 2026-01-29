@@ -27,7 +27,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .formulario form{
     max-width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 .formulario h1{
@@ -55,7 +55,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     border: none;
     border-bottom: 1px solid #ccc;
     font-size: 16px;
-    background-color: #FCF8CC;
 }
 
 button{
@@ -67,4 +66,12 @@ button{
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.lectura{
+    background-color: lightgray;
+}
+
+.obligatorio{
+    background-color: #FCF8CC;
 }
