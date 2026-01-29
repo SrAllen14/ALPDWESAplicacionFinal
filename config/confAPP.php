@@ -5,6 +5,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
  */
 
+const RESP_SEGURIDAD = "pimentel";
+
 require_once 'core/iValidacionFormularios.php';
 
 // Cargamos las clases.

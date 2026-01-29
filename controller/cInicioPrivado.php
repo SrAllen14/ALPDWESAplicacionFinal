@@ -14,6 +14,10 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
     exit;
 }
 
+if($_SESSION['usuarioDWESLoginLogoff']->getPerfil() !== "administrador"){
+    
+}
+
 // Comprobamos si el botón "iniciar" ha sido pulsado.
 if(isset($_REQUEST['detalles'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];

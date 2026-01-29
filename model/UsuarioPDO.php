@@ -90,7 +90,7 @@ class UsuarioPDO {
     public static function altaUsuario($codUsuario, $password, $descUsuario) {
         // Creamos un objeto usuario pero inicializado a null.
         $oUsuario = null;
-        
+
         // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
         $sql = <<<SQL
             INSERT INTO T01_Usuario
@@ -99,19 +99,19 @@ class UsuarioPDO {
             VALUES
                 (:codUsuario, SHA2(:password, 256), :descUsuario, now(), 1, 'usuario')
         SQL;
-        
+
         try {
-            $consulta = DBPDO::ejecutaConsulta($sql, 
-                    [':codUsuario' => $codUsuario,
-                     ':password' => $codUsuario.$password,
-                     ':descUsuario' => $descUsuario]);
-            if($consulta){
+            $consulta = DBPDO::ejecutaConsulta($sql,
+                            [':codUsuario' => $codUsuario,
+                                ':password' => $codUsuario . $password,
+                                ':descUsuario' => $descUsuario]);
+            if ($consulta) {
                 $oUsuario = self::validarUsuario($codUsuario, $password);
             }
         } catch (Exception $ex) {
             return null;
         }
-        
+
         return $oUsuario;
     }
 
@@ -123,8 +123,30 @@ class UsuarioPDO {
         
     }
 
-    public static function validarCodNoExiste() {
-        
+    public static function validarCodNoExiste($codUsuario) {
+        $sql = <<<SQL
+            SELECT T01_CodUsuario FROM T01_Usuario
+            WHERE T01_CodUsuario = :usuario
+        SQL;
+
+        try {
+            // Ejecutar la consulta. 
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                        ':usuario' => $codUsuario]);
+
+            // Obtener el resultado de la consulta.
+            $usuarioDB = $consulta->fetch(PDO::FETCH_ASSOC);
+
+            // Si no existe el usuario o la contraseña es incorrecta, devolvemos null.
+            if (!$usuarioDB) {
+                return true;
+            } else{
+                return false;
+            }
+        } catch (Exception $ex) {
+            // En caso de error, devolvemos null.
+            echo $ex->getMessage();
+        }
     }
 }
 

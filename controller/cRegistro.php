@@ -18,14 +18,14 @@ $aErrores = [
     'nombre' => null,
     'usuario' => null,
     'password' => null,
-    'passwordRep' => null
+    'passwordRep' => null,
+    'respSeguridad' => null
 ];
 
 $aRespuestas = [
     'nombre' => null,
     'usuario' => null,
     'password' => null,
-    'passwordRep' => null
 ];
 
 $entradaOk = true;
@@ -45,9 +45,24 @@ if(isset($_REQUEST['registrar'])){
         }
     }
     
+    // Comprobamos que el código de usuario introducido pertenece a la base de datos.
+    if(!UsuarioPDO::validarCodNoExiste($_REQUEST['codUsuario'])){
+        // En caso de existir un usuario con el mismo código invalidamos la entrada.
+        $aErrores['usuario'] = "El código de usuario introducido ya pertenece a un usuario existente";
+        $entradaOk = false;
+    }
+    
     // Comprobamos que los campos de "password" y "passwordRep" son diferentes.
     if($_REQUEST['password'] !== $_REQUEST['passwordRep']){
         // En caso de ser diferentes invalidamos la entrada.
+        $aErrores['passwordRep'] = "Las contraseñas no coinciden";
+        $entradaOk = false;
+    }
+    
+    // Comprobamos que se ha introducido en el campo de "Respuesta de seguridad".
+    if($_REQUEST['respSeguridad'] !== RESP_SEGURIDAD){
+        // En caso de no coincidir con la constante RESP_SEGURIDAD invalidamos la entrada.
+        $aErrores['respSeguridad'] = "La respuesta es incorrecta";
         $entradaOk = false;
     }
     
@@ -72,6 +87,13 @@ if(isset($_REQUEST['registrar'])){
     $entradaOk = false;
 }
 
+$avRegistro = [
+    'aErrores' => $aErrores,
+    'nombre' => (empty($_REQUEST['nombre'])) ? null : $_REQUEST['descUsuario'], 
+    'usuario' => (empty($_REQUEST['usuario'])) ? null : $_REQUEST['codUsuario'],
+    'respSeguridad' => (empty($_REQUEST['respSeguridad'])) ? null : $_REQUEST['respSeguridad'] 
+];
+
 // Si la validación es correcta, validar con la BD.
 if($entradaOk){
     // Crea la sesión con el objeto usuario
@@ -82,7 +104,8 @@ if($entradaOk){
     $_SESSION['paginaEnCurso'] = 'inicioPrivado';
     header('Location: indexLoginLogoff.php');
     exit; 
-}  
+}
+
 // Cargamos el layout principal, y cargará cada página a parte de la estructura principal de la web.
 require_once $view['layout'];
 ?>
