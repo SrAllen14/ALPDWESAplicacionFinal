@@ -10,6 +10,7 @@
         <div class="nasa">
             <div class="tit">
                 <h2><?php echo $avRest['tituloNasa']; ?></h2>
+                <p><?php echo $avRest['fechaNasa']; ?></p>
             </div>
             <div class="foto">
                 <img src="<?php echo $avRest['fotoNasaHD']; ?>" alt="fotoNasaHD"/>

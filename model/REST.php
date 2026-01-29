@@ -19,6 +19,8 @@ class REST{
         }
     }
     */
+    
+    // Código cedido por Vero Grue
     public static function apiNasa($fecha) {
         // URL de la API de NASA con la clave y la fecha
         $url = "https://api.nasa.gov/planetary/apod?api_key=". self::API_KEY_NASA ."&date=$fecha";

@@ -24,7 +24,8 @@ if(isset($_SESSION['fotoNasa'])){
 $avRest = [
     'tituloNasa' => ($oFotoNasa) ? $oFotoNasa->getTitulo() : "No hay datos",
     'fotoNasaHD' => ($oFotoNasa) ? $oFotoNasa->getUrlHD() : "",
-    'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : ""
+    'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : "",
+    'fechaNasa' => ($oFotoNasa) ? $oFotoNasa->getFecha() : "No hay datos"
 ];
 
 require_once $view['layout'];
