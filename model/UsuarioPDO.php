@@ -140,6 +140,30 @@ class UsuarioPDO {
         }
     }
 
+    public static function modificarContraseña($oUsuario, $passwordNueva){
+         // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
+        $sql = <<<SQL
+            UPDATE T01_Usuario
+                SET T01_Password = SHA2(:password, 256)
+                WHERE T01_CodUsuario = :codUsuario
+        SQL;
+        
+        try {
+            $consulta = DBPDO::ejecutaConsulta($sql,
+                            [':password' => $oUsuario->getCodUsuario().$passwordNueva,
+                            ':codUsuario' => $oUsuario->getCodUsuario()]);
+            
+            if ($consulta) {
+                $oUsuario->setPassword(hash('sha256', $oUsuario->getCodUsuario().$passwordNueva));
+                return $oUsuario;
+            } else{
+                return null;
+            }
+        } catch (Exception $ex) {
+            return null;
+        }
+    }
+    
     public static function borrarUsuario() {
         
     }

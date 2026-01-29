@@ -30,7 +30,8 @@ $controller = [
     'detallesNasa' => 'controller/cDetallesNasa.php',
     'registro' => 'controller/cRegistro.php',
     'departamento' => 'controller/cDepartamento.php',
-    'editar' => 'controller/cEditar.php'
+    'editar' => 'controller/cEditar.php',
+    'cambiarContraseña' => 'controller/cCambiarContraseña.php'
 ];
 
 $view = [
@@ -45,5 +46,6 @@ $view = [
     'detallesNasa' => 'view/vDetallesNasa.php',
     'registro' => 'view/vRegistro.php',
     'departamento' => 'view/vDepartamento.php',
-    'editar' => 'view/vEditar.php'
+    'editar' => 'view/vEditar.php',
+    'cambiarContraseña' => 'view/vCambiarContraseña.php'
 ];

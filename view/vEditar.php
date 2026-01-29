@@ -30,7 +30,6 @@
                 <label>Última conexión anterior</label><br>
                 <input class="lectura" type="datetime-local" name="fechaUltimaConexionAnterior" id="desc" value="<?php echo $avEditar['fechaUltimaConexionAnterior']?>" readonly/><br>
                 <button type="submit" name="aplicarC" id="aplicarC">Aplicar Cambios</button> 
-                <button type="submit" name="cancelar" id="cancelar">Cancelar</button>
             </form>
         </div>
         <div class="formulario2">

@@ -33,8 +33,16 @@ if(isset($_REQUEST['cerrarS'])){
     exit;
 }
 
+// Comprobamos que el botón "cambiarC" ha sido pulsado.
+if(isset($_REQUEST['cambiarC'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'cambiarContraseña';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
 $oUsuarioActual = $_SESSION['usuarioDWESLoginLogoff'];
-$oUsuarioNuevo = $oUsuarioActual;
 $entradaOk = true;
 
 $aErrores = [
@@ -51,8 +59,8 @@ if(isset($_REQUEST['aplicarC'])){
     }
     
     if($entradaOk){
-        $oUsuarioNuevo = UsuarioPDO::modificarUsuario($oUsuarioActual, $_REQUEST['descUsuario']);
-        $_SESSION['usuarioDWESLoginLogoff'] = $oUsuarioNuevo;
+        $oUsuarioActual = UsuarioPDO::modificarUsuario($oUsuarioActual, $_REQUEST['descUsuario']);
+        $_SESSION['usuarioDWESLoginLogoff'] = $oUsuarioActual;
     }
 }
 

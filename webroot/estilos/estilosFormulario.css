@@ -42,12 +42,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
         font-size: 14px;
     }
     
-    #nombre, #pass, #desc, #passR, #codDepartamento, #respS{
+    #nombre, #pass, #desc, #passR, #codDepartamento, #respS, #passA, #passN, #passNR{
         width: 100px;
         max-width: 90%;
     }
 }
-#nombre, #pass, #desc, #passR, #codDepartamento, #respS{
+#nombre, #pass, #desc, #passR, #codDepartamento, #respS, #passA, #passN, #passNR{
     max-width: 90%;
     width: 400px;
     padding: 12px;
