@@ -35,7 +35,7 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
-
+$fotoExiste = true;
 $entradaOk = true;
 // Inicializamos las variables de control.
 $aErrores = [
@@ -56,29 +56,29 @@ if(isset($_REQUEST['btnFecha'])){
     
     if($aErrores['fechaNasa'] != null){
         $entradaOk = false;
-    }
-    
-        
+    }  
     
     if($entradaOk){
         $fechaNasa = $_REQUEST['inFecha'];
         $oFotoNasa = REST::apiNasa($fechaNasa);
-        $_SESSION['fotoNasa'] = $oFotoNasa;
+        
+        if(!empty($oFotoNasa->getUrl())){
+            $_SESSION['fotoNasa'] = $oFotoNasa;
+        } else{
+            $_SESSION['fotoNasa'] = false;
+        }
+        
     }
 }
 
-
-
-
-
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
-    'tituloNasa' => $_SESSION['fotoNasa']->getTitulo(),
-    'fotoNasa' => $_SESSION['fotoNasa']->getUrl(),
-    'fotoNasaHD' => $_SESSION['fotoNasa']->getUrlHD(),
-    'explicacionNasa' => $_SESSION['fotoNasa']->getExplicacion(),
-    'fechaNasa' => $_SESSION['fotoNasa']->getFecha(),
-    'errorNasa' => $aErrores['fechaNasa']
+    'tituloNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getTitulo() : 'Información no existente',
+    'fotoNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getUrl() : '',
+    'fotoNasaHD' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getUrlHD() : '',
+    'explicacionNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getExplicacion() : '',
+    'fechaNasa' => ($_SESSION['fotoNasa']) ? $_SESSION['fotoNasa']->getFecha() : $_REQUEST['inFecha'],
+    'errorNasa' => ($_SESSION['fotoNasa']) ? $aErrores['fechaNasa'] : null
 ];
 
 require_once $view['layout'];
