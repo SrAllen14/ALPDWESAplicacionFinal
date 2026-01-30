@@ -23,7 +23,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .tabla table{
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px;
+    min-width: 1200px;
 }
 
 table td:nth-of-type(1){
@@ -40,8 +40,6 @@ table td:nth-of-type(1){
     font-weight: bold;
 }
 
-
-
 .nombre{
     background-color: lightblue;
     font-weight: bold;
@@ -53,6 +51,7 @@ table td:nth-of-type(1){
 
 .titulo{
     background-color: lightgreen;
+    font-weight: bold;
 }
 
 .baja{
@@ -63,10 +62,19 @@ table td:nth-of-type(1){
     color: green;
 }
 
-@media(max-width: 600px){
+.iconosDpto form button{
+    max-width: 50%;
+    text-align: left;
+}
+
+i{
+    text-align: left;
+}
+@media(max-width: 800px){
     .tabla table{
-        font-size: 14px;
-        min-width: 100%;
+        font-size: 10px;
+        width: 100%;
+        min-width: 800px;
     }
     
     .tabla th, .tabla td{
