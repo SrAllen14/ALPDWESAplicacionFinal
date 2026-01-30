@@ -56,7 +56,7 @@
                                 <td class="iconosDpto"><i class="fa-solid fa-eye"></td>
                                 <td class="iconosAltaBaja">
                                     <?php if ($oDepartamento->getFechaBajaDepartamento() === null): ?>
-                                        <span id="activo" ><i class="fa-regular fa-flag"></i></span>
+                                    <span id="activo" ><button type="submit" name="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fa-regular fa-flag"></i></button></span>
                                     <?php else: ?>
                                         <span id="baja" ><i class="fa-regular fa-flag"></i></span>
                                     <?php endif; ?>

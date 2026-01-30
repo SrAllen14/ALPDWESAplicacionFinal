@@ -31,7 +31,8 @@ $controller = [
     'registro' => 'controller/cRegistro.php',
     'departamento' => 'controller/cDepartamento.php',
     'editar' => 'controller/cEditar.php',
-    'cambiarContraseña' => 'controller/cCambiarContraseña.php'
+    'cambiarContraseña' => 'controller/cCambiarContraseña.php',
+    'borrarCuenta' => 'controller/cBorrarCuenta.php'
 ];
 
 $view = [
@@ -47,5 +48,6 @@ $view = [
     'registro' => 'view/vRegistro.php',
     'departamento' => 'view/vDepartamento.php',
     'editar' => 'view/vEditar.php',
-    'cambiarContraseña' => 'view/vCambiarContraseña.php'
+    'cambiarContraseña' => 'view/vCambiarContraseña.php',
+    'borrarCuenta' => 'view/vBorrarCuenta.php'
 ];

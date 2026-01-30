@@ -75,3 +75,17 @@ button{
 .obligatorio{
     background-color: #FCF8CC;
 }
+
+.cPassword{
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    
+    & .lectura{
+        max-width: 50%;
+    }
+    
+    & #cambiarC{
+        max-width: 50%;
+    }
+}

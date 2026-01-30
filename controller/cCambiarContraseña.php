@@ -32,14 +32,13 @@ $aErrores = [
     'passwordNuevaRepetir' => null
 ];
 if(isset($_REQUEST['aplicarC'])){
-    $aErrores['passwordActual'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['passwordActual'], 255, 0, 1);
-    $aErrores['passwordNueva'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['passwordNueva'], 255, 0, 1);
-    $aErrores['passwordNuevaRepetir'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['passwordNuevaRepetir'], 255, 0, 1);
+    $aErrores['passwordActual'] = validacionFormularios::validarPassword($_REQUEST['passwordActual'], 16, 4, 1, 1);
+    $aErrores['passwordNueva'] = validacionFormularios::validarPassword($_REQUEST['passwordNueva'], 16, 4, 1, 1);
+    $aErrores['passwordNuevaRepetir'] = validacionFormularios::validarPassword($_REQUEST['passwordNuevaRepetir'], 16, 4, 1, 1);
     
     foreach($aErrores as $valor){
         if($valor != null){
             $entradaOk = false;
-            echo "adios";
         }
     }
     

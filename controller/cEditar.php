@@ -42,6 +42,15 @@ if(isset($_REQUEST['cambiarC'])){
     exit;
 }
 
+// Comprobamos que el botón "borrarCuenta" ha sido pulsado.
+if(isset($_REQUEST['borrarC'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'borrarCuenta';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
 $oUsuarioActual = $_SESSION['usuarioDWESLoginLogoff'];
 $entradaOk = true;
 

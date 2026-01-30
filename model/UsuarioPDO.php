@@ -164,8 +164,25 @@ class UsuarioPDO {
         }
     }
     
-    public static function borrarUsuario() {
+    public static function borrarUsuario($oUsuario){
+        $sql = <<<SQL
+            DELETE FROM T01_Usuario
+            WHERE T01_codUsuario = :codUsuario
+        SQL;
         
+        try{
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                ':codUsuario' => $oUsuario->getCodUsuario()
+            ]);
+            
+            if($consulta->rowCount() > 0){
+                return true;
+            }
+        } catch (Exception $ex){
+            return false;
+        }
+        
+        return false;
     }
 
     public static function validarCodNoExiste($codUsuario) {
