@@ -36,12 +36,16 @@ class DepartamentoPDO {
 
             $fechaDB = $departamentoDB['T02_FechaCreacionDepartamento'];
             $oFechaValida = ($fechaDB) ? new DateTime($fechaDB) : null;
-
+            
+            $fechaBajaDB = $departamentoDB['T02_FechaBajaDepartamento'];
+            $oFechaBajaValida = ($fechaBajaDB) ? new DateTime($fechaBajaDB) : null;
+            
             $oDepartamento = new Departamento(
                     $departamentoDB['T02_CodDepartamento'],
                     $departamentoDB['T02_DescDepartamento'],
-                    $departamentoDB['T02_FechaCreacionDepartamento'],
-                    $departamentoDB['T02_VolumenDeNegocio']);
+                    $oFechaValida,
+                    $departamentoDB['T02_VolumenDeNegocio'],
+                    $oFechaBajaValida);
             return $oDepartamento;
         } catch (Exception $ex) {
             // En caso de error, devolvemos null.
@@ -69,7 +73,6 @@ class DepartamentoPDO {
                     $oDepartamento->T02_FechaBajaDepartamento
                 );
             }
-
             return $aDepartamentos;
         } catch (Exception $ex) {
             // En caso de error, devolvemos null.
@@ -82,20 +85,74 @@ class DepartamentoPDO {
         
     }
 
-    public static function bajaFisicaDepartamento() {
+    public static function bajaFisicaDepartamento($oDepartamento) {
+        $sql = <<<SQL
+            DELETE FROM T02_Departamento
+            WHERE T02_CodDepartamento = :codDepartamento
+        SQL;
         
+        try{
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+            ]);
+            
+            if($consulta->rowCount() > 0){
+                return true;
+            }
+        } catch(Exception $ex){
+            return false;
+        }
+        return false;
     }
 
-    public static function bajaLogicaDepartamento() {
+    public static function bajaLogicaDepartamento($oDepartamento) {
+        $sql = <<<SQL
+            UPDATE T02_Departamento
+                SET T02_FechaBajaDepartamento = now()
+                WHERE T02_CodDepartamento = :codDepartamento
+        SQL;
         
+        try{
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+            ]);
+            
+            if($consulta){
+                $oDepartamento->setFechaBajaDepartamento(new DateTime());
+                return $oDepartamento;
+            } else{
+                return null;
+            }
+        } catch(Exception $ex){
+            return null;
+        }
     }
 
     public static function modificaDepartamento() {
         
     }
 
-    public static function rehabilitaDepartamento() {
+    public static function rehabilitaDepartamento($oDepartamento) {
+        $sql = <<<SQL
+            UPDATE T02_Departamento
+                SET T02_FechaBajaDepartamento = null
+                WHERE T02_CodDepartamento = :codDepartamento
+        SQL;
         
+        try{
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+            ]);
+            
+            if($consulta){
+                $oDepartamento->setFechaBajaDepartamento(null);
+                return $oDepartamento;
+            } else{
+                return null;
+            }
+        } catch(Exception $ex){
+            return null;
+        }
     }
 
     public static function validaCodNoExiste() {

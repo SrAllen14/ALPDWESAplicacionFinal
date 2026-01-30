@@ -57,6 +57,37 @@ if(isset($_REQUEST['buscar'])){
 
 $aDepartamentos = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descDptoBuscado']);
 
+
+if(isset($_REQUEST['bVer'])){
+    $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bVer']);
+    $_SESSION['departamentoActual'] = $oDepartamentoActual;
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaEnCurso'] = 'verDepartamento';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
+if(isset($_REQUEST['bEditar'])){
+    $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bEditar']);
+    $_SESSION['departamentoActual'] = $oDepartamentoActual;
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaEnCurso'] = 'editarDepartamento';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
+if(isset($_REQUEST['bBorrar'])){
+    $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bBorrar']);
+    if(DepartamentoPDO::bajaFisicaDepartamento($oDepartamentoActual)){
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'departamento';
+        header('Location: indexLoginLogoff.php');
+        exit;
+    }
+}
+
+
+
 $avDepartamentos = [
     'aDepartamentos' => $aDepartamentos
 ];

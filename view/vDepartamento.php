@@ -53,16 +53,16 @@
                                     ?>
                                 </td>
                                 <td><?php echo $oDepartamento->getVolumenNegocio(); ?></td>
-                                <td class="iconosDpto"><i class="fa-solid fa-eye"></td>
+                                <td class="iconosDpto"><form method="post"><button type="submit" name="bVer" value="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fa-solid fa-eye"></i></button></form></td>
                                 <td class="iconosAltaBaja">
                                     <?php if ($oDepartamento->getFechaBajaDepartamento() === null): ?>
-                                    <span id="activo" ><button type="submit" name="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fa-regular fa-flag"></i></button></span>
+                                        <span class="activo" ><i class="fa-regular fa-flag"></i></span>
                                     <?php else: ?>
-                                        <span id="baja" ><i class="fa-regular fa-flag"></i></span>
+                                        <span class="baja" ><i class="fa-regular fa-flag"></i></span>
                                     <?php endif; ?>
                                 </td>
-                                <td class="iconosDpto"><i class="fa-regular fa-pen-to-square"></i></td>
-                                <td class="iconosDpto"><i class="fa-regular fa-trash-can"></i></td>
+                                <td class="iconosDpto"><form method="post"><button type="submit" name="bEditar" value="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fa-regular fa-pen-to-square"></i></button></form></td>
+                                <td class="iconosDpto"><form method="post"><button type="submit" name="bBorrar" value="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fa-regular fa-trash-can"></i></button></form></td>
                             </tr>
                         <?php endforeach; ?>
 
