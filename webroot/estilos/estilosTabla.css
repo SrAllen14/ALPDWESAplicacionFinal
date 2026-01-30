@@ -55,6 +55,14 @@ table td:nth-of-type(1){
     background-color: lightgreen;
 }
 
+.baja{
+    color: red;
+}
+
+.activo{
+    color: green;
+}
+
 @media(max-width: 600px){
     .tabla table{
         font-size: 14px;
