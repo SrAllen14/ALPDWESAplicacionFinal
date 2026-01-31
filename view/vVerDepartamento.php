@@ -14,15 +14,15 @@
         <div class="formulario">
             <form method="post" action="">
                 <h1>Información del departamento</h1>
-                <label>Código de departamento</label><br>
+                <label><b>Código de departamento</b></label><br>
                 <input class="lectura" type="text" name="codDepartamento" id="desc" value="<?php echo $avVerDepartamento['codDepartamento'] ?>" readonly/><br><br>
-                <label>Descripción del departamento</label><br>
+                <label><b>Descripción del departamento</b></label><br>
                 <input class="lectura" type="text" name="descDepartamento" id="desc" value="<?php echo $avVerDepartamento['descDepartamento'] ?>" readonly/><br><br>
-                <label>Fecha de creación</label><br>
+                <label><b>Fecha de creación</b></label><br>
                 <input class="lectura" type="date" name="fechaAlta" id="desc" value="<?php echo $avVerDepartamento['fechaCreacionDepartamento'] ?>" readonly/><br><br>
-                <label>Volumen de negocio</label><br>
-                <input class="lectura" type="text" name="volumenNegocio" id="desc" value="<?php echo $avVerDepartamento['volumenNegocio']?>" readonly/><br><br>
-                <label>Fecha de baja</label><br>
+                <label><b>Volumen de negocio</b></label><br>
+                <input class="lectura" type="text" name="volumenNegocio" id="desc" value="<?php echo number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.')." €"; ?>" readonly/><br><br>
+                <label><b>Fecha de baja</b></label><br>
                 <input class="lectura" type="date" name="fechaBaja" id="desc" value="<?php echo $avVerDepartamento['fechaBajaDepartamento']?>" readonly/><br><br>
             </form>
         </div>

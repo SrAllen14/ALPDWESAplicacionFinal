@@ -52,7 +52,7 @@
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo $oDepartamento->getVolumenNegocio(); ?></td>
+                                <td><?php echo number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.')." €"; ?></td>
                                 <td class="iconosDpto"><form method="post"><button type="submit" name="bVer" value="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fa-solid fa-eye"></i></button></form></td>
                                 <td class="iconosAltaBaja">
                                     <?php if ($oDepartamento->getFechaBajaDepartamento() === null): ?>

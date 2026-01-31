@@ -13,18 +13,21 @@
     <div class="container">
         <div class="formulario">
             <form method="post" action="">
-                <h1>Información del departamento</h1>
-                <label>Código de departamento</label><br>
+                <h1>Información del departamento</h1><br>
+                <label><b>Código de departamento</b></label><br>
                 <input class="lectura" type="text" name="codDepartamento" id="desc" value="<?php echo $avEditarDepartamento['codDepartamento'] ?>" readonly/><br><br>
-                <label>Descripción del departamento</label><br>
-                <input class="lectura" type="text" name="descDepartamento" id="desc" value="<?php echo $avEditarDepartamento['descDepartamento'] ?>"/><br><br>
-                <label>Fecha de creación</label><br>
+                <label><b>Descripción del departamento</b></label><br>
+                <input type="text" name="descDepartamento" id="desc" value="<?php echo $avEditarDepartamento['descDepartamento'] ?>"/><br><br>
+                <label><b>Fecha de creación</b></label><br>
                 <input class="lectura" type="date" name="fechaAlta" id="desc" value="<?php echo $avEditarDepartamento['fechaCreacionDepartamento'] ?>" readonly/><br><br>
-                <label>Volumen de negocio</label><br>
-                <input class="lectura" type="text" name="volumenNegocio" id="desc" value="<?php echo $avEditarDepartamento['volumenNegocio']?>"/><br><br>
-                <label>Fecha de baja</label><br>
-                <input class="lectura" type="date" name="fechaBaja" id="desc" value="<?php echo $avEditarDepartamento['fechaBajaDepartamento']?>" readonly/><br><br>
-                <button type="submit" name="<?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'alta' : 'baja'?>" id="volver"><?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'Alta' :  'Baja'?></button>
+                <label><b>Volumen de negocio</b></label><br>
+                <input type="text" name="volumenNegocio" id="desc" value="<?php echo $avEditarDepartamento['volumenNegocio']?>"/><br><br>
+                <div class="cEstado">
+                    <label><b>Fecha de baja</b> (Estado: <?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'Inactivo' :  'Activo'?>)</label><br>
+                    <input class="lectura" type="date" name="fechaBaja" id="desc" value="<?php echo $avEditarDepartamento['fechaBajaDepartamento']?>" readonly/><br>
+                    <button type="submit" name="<?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'alta' : 'baja'?>" id="volver">Dar de <?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'Alta' :  'Baja'?></button>
+                </div>
+                <button type="submit" name="bAplicar">Aplicar Cambios</button>
             </form>
         </div>
     </div>

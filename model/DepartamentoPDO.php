@@ -128,8 +128,31 @@ class DepartamentoPDO {
         }
     }
 
-    public static function modificaDepartamento() {
+    public static function modificaDepartamento($oDepartamento, $descDepartamentoNuevo, $volumenNegocioNuevo) {
+        $sql = <<<SQL
+            UPDATE T02_Departamento
+                SET T02_DescDepartamento = :descDepartamento,
+                T02_VolumenDeNegocio = :volumenNegocio
+                WHERE T02_CodDepartamento = :codDepartamento
+        SQL;
         
+        try{
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                ':descDepartamento' => $descDepartamentoNuevo,
+                ':volumenNegocio' => $volumenNegocioNuevo,
+                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+            ]);
+            
+            if($consulta){
+                $oDepartamento->setDescDepartamento($descDepartamentoNuevo);
+                $oDepartamento->setVolumenNegocio($volumenNegocioNuevo);
+                return $oDepartamento;
+            } else{
+                return null;
+            }
+        } catch(Exception $ex){
+            return null;
+        }
     }
 
     public static function rehabilitaDepartamento($oDepartamento) {

@@ -53,6 +53,33 @@ if(isset($_REQUEST['alta'])){
     exit;
 }
 
+$entradaOk = true;
+$aErrores = [
+    'descDepartamento' => null,
+    'volumenNegocio' => null
+];
+
+if(isset($_REQUEST['bAplicar'])){
+    $aErrores['descDepartamento'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['descDepartamento'], 255, 0, 1);
+    $aErrores['volumenNegocio'] = validacionFormularios::comprobarFloat($_REQUEST['volumenNegocio'], PHP_FLOAT_MAX, PHP_FLOAT_MIN, 1);
+    
+    foreach($aErrores as $valor){
+        if($valor != null){
+            $entradaOk = false;
+            echo "hola";
+        }
+    }
+    
+    if($entradaOk){
+        $oDepartamento = DepartamentoPDO::modificaDepartamento($_SESSION['departamentoActual'], $_REQUEST['descDepartamento'], $_REQUEST['volumenNegocio']);
+        $_SESSION['departamentoActual'] = $oDepartamento;
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'editarDepartamento';
+        header('Location: indexLoginLogoff.php');
+        exit;
+    }
+}
+
 $_SESSION['departamentoActual'] = $oDepartamento;
 
 $avEditarDepartamento = [
