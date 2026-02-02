@@ -42,7 +42,7 @@ if(isset($_REQUEST['error'])){
 if(isset($_REQUEST['wip'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si se ha pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-    $_SESSION['paginaEnCurso'] = 'departamento';
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
@@ -60,7 +60,7 @@ if(isset($_REQUEST['rest'])){
 if(isset($_REQUEST['editar'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-    $_SESSION['paginaEnCurso'] = 'editar';
+    $_SESSION['paginaEnCurso'] = 'miCuenta';
     header('Location: indexLoginLogoff.php');
     exit;
 }

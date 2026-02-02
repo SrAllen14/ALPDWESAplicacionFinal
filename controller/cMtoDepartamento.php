@@ -23,6 +23,15 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
+// Comprobamos si el botón "bAlta" ha sido pulsado.
+if(isset($_REQUEST['bAlta'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'altaDepartamento';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
 // Comprobamos que exista el valor de la sesión 'busquedaRealizada'.
 if(empty($_SESSION['descDptoBuscado'])){
     // En caso de que no este exista le damos un valor por defecto.
@@ -61,29 +70,30 @@ $aDepartamentos = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descDptoB
 if(isset($_REQUEST['bVer'])){
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bVer']);
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
+    $_SESSION['accionDepartamento'] = "ver";
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'verDepartamento';
+    $_SESSION['paginaEnCurso'] = 'consultarModificarDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
 
 if(isset($_REQUEST['bEditar'])){
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bEditar']);
+    $_SESSION['accionDepartamento'] = "editar";
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'editarDepartamento';
+    $_SESSION['paginaEnCurso'] = 'consultarModificarDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
 
 if(isset($_REQUEST['bBorrar'])){
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bBorrar']);
-    if(DepartamentoPDO::bajaFisicaDepartamento($oDepartamentoActual)){
-        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        $_SESSION['paginaEnCurso'] = 'departamento';
-        header('Location: indexLoginLogoff.php');
-        exit;
-    }
+    $_SESSION['departamentoActual'] = $oDepartamentoActual;
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaEnCurso'] = 'eliminarDepartamento';
+    header('Location: indexLoginLogoff.php');
+    exit;
 }
 
 if(isset($_REQUEST['bBajaLogica'])){
@@ -92,7 +102,7 @@ if(isset($_REQUEST['bBajaLogica'])){
     $oDepartamento = DepartamentoPDO::bajaLogicaDepartamento($_SESSION['departamentoActual']);
     $_SESSION['departamentoActual'] = $oDepartamento;
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'departamento';
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
@@ -103,7 +113,7 @@ if(isset($_REQUEST['bAltaLogica'])){
     $oDepartamento = DepartamentoPDO::rehabilitaDepartamento($_SESSION['departamentoActual']);
     $_SESSION['departamentoActual'] = $oDepartamento;
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'departamento';
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }

@@ -29,12 +29,13 @@ $controller = [
     'rest' => 'controller/cRest.php',
     'detallesNasa' => 'controller/cDetallesNasa.php',
     'registro' => 'controller/cRegistro.php',
-    'departamento' => 'controller/cDepartamento.php',
-    'editar' => 'controller/cEditar.php',
-    'cambiarContraseña' => 'controller/cCambiarContraseña.php',
+    'mtoDepartamento' => 'controller/cMtoDepartamento.php',
+    'miCuenta' => 'controller/cMiCuenta.php',
+    'cambiarPassword' => 'controller/cCambiarPassword.php',
     'borrarCuenta' => 'controller/cBorrarCuenta.php',
-    'verDepartamento' => 'controller/cVerDepartamento.php',
-    'editarDepartamento' => 'controller/cEditarDepartamento.php'
+    'consultarModificarDepartamento' => 'controller/cConsultarModificarDepartamento.php',
+    'eliminarDepartamento' => 'controller/cEliminarDepartamento.php',
+    'altaDepartamento' => 'controller/cAltaDepartamento.php'
 ];
 
 $view = [
@@ -48,10 +49,11 @@ $view = [
     'rest' => 'view/vRest.php',
     'detallesNasa' => 'view/vDetallesNasa.php',
     'registro' => 'view/vRegistro.php',
-    'departamento' => 'view/vDepartamento.php',
-    'editar' => 'view/vEditar.php',
-    'cambiarContraseña' => 'view/vCambiarContraseña.php',
+    'mtoDepartamento' => 'view/vMtoDepartamento.php',
+    'miCuenta' => 'view/vMiCuenta.php',
+    'cambiarPassword' => 'view/vCambiarPassword.php',
     'borrarCuenta' => 'view/vBorrarCuenta.php',
-    'verDepartamento' => 'view/vVerDepartamento.php',
-    'editarDepartamento' => 'view/vEditarDepartamento.php'
+    'consultarModificarDepartamento' => 'view/vConsultarModificarDepartamento.php',
+    'eliminarDepartamento' => 'view/vEliminarDepartamento.php',
+    'altaDepartamento' => 'view/vAltaDepartamento.php'
 ];

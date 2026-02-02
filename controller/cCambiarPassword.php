@@ -18,7 +18,7 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
 if(isset($_REQUEST['cancelar'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-    $_SESSION['paginaEnCurso'] = 'editar';
+    $_SESSION['paginaEnCurso'] = 'miCuenta';
     header('Location: indexLoginLogoff.php');
     exit;
 }
@@ -55,7 +55,7 @@ if(isset($_REQUEST['aplicarC'])){
         $_SESSION['usuarioDWESLoginLogoff'] = $oUsuarioActual;
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-        $_SESSION['paginaEnCurso'] = 'editar';
+        $_SESSION['paginaEnCurso'] = 'miCuenta';
         header('Location: indexLoginLogoff.php');
         exit;
     }

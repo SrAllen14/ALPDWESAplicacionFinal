@@ -36,17 +36,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     text-align: center;
 }
 
-@media(max-width: 480px){
-    .formulario{
-        padding: 5px;
-        font-size: 14px;
-    }
-    
-    #nombre, #pass, #desc, #passR, #codDepartamento, #respS, #passA, #passN, #passNR{
-        width: 100px;
-        max-width: 90%;
-    }
-}
 #nombre, #pass, #desc, #passR, #codDepartamento, #respS, #passA, #passN, #passNR{
     max-width: 90%;
     width: 400px;
@@ -87,5 +76,21 @@ button{
     
     & #cambiarC{
         max-width: 50%;
+    }
+}
+
+.botones{
+    justify-items: center;
+}
+
+@media(max-width: 480px){
+    .formulario{
+        padding: 5px;
+        font-size: 14px;
+    }
+    
+    #nombre, #pass, #desc, #passR, #codDepartamento, #respS, #passA, #passN, #passNR{
+        width: 100px;
+        max-width: 90%;
     }
 }

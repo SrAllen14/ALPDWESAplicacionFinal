@@ -37,7 +37,7 @@ if(isset($_REQUEST['cerrarS'])){
 if(isset($_REQUEST['cambiarC'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-    $_SESSION['paginaEnCurso'] = 'cambiarContraseña';
+    $_SESSION['paginaEnCurso'] = 'cambiarPassword';
     header('Location: indexLoginLogoff.php');
     exit;
 }

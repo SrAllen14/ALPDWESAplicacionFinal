@@ -18,7 +18,7 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
 if(empty($_SESSION['departamentoActual'])){
     // En caso de que no haya iniciado sesión volvemos a la página de inicio público.
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'departamento';
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
@@ -27,31 +27,13 @@ if(empty($_SESSION['departamentoActual'])){
 if(isset($_REQUEST['volver'])){
     // En caso de que no haya iniciado sesión volvemos a la página de inicio público.
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'departamento';
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
 
 $oDepartamento = $_SESSION['departamentoActual'];
 
-
-if(isset($_REQUEST['baja'])){
-    $oDepartamento = DepartamentoPDO::bajaLogicaDepartamento($_SESSION['departamentoActual']);
-    $_SESSION['departamentoActual'] = $oDepartamento;
-    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'editarDepartamento';
-    header('Location: indexLoginLogoff.php');
-    exit;
-}
-
-if(isset($_REQUEST['alta'])){
-    $oDepartamento = DepartamentoPDO::rehabilitaDepartamento($_SESSION['departamentoActual']);
-    $_SESSION['departamentoActual'] = $oDepartamento;
-    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaEnCurso'] = 'editarDepartamento';
-    header('Location: indexLoginLogoff.php');
-    exit;
-}
 
 $entradaOk = true;
 $aErrores = [
@@ -74,20 +56,22 @@ if(isset($_REQUEST['bAplicar'])){
         $oDepartamento = DepartamentoPDO::modificaDepartamento($_SESSION['departamentoActual'], $_REQUEST['descDepartamento'], $_REQUEST['volumenNegocio']);
         $_SESSION['departamentoActual'] = $oDepartamento;
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        $_SESSION['paginaEnCurso'] = 'editarDepartamento';
+        $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
         header('Location: indexLoginLogoff.php');
         exit;
     }
 }
 
 $_SESSION['departamentoActual'] = $oDepartamento;
+$accion = $_SESSION['accionDepartamento'];
 
 $avEditarDepartamento = [
     'codDepartamento' => $oDepartamento->getCodDepartamento(),
     'descDepartamento' => $oDepartamento->getDescDepartamento(),
     'fechaCreacionDepartamento' => ($oDepartamento) ? $oDepartamento->getFechaCreacionDepartamento()->format('Y-m-d') : null,
     'volumenNegocio' => $oDepartamento->getVolumenNegocio(),
-    'fechaBajaDepartamento' => ($oDepartamento->getFechaBajaDepartamento()) ? $oDepartamento->getFechaBajaDepartamento()->format('Y-m-d') : null
+    'fechaBajaDepartamento' => ($oDepartamento->getFechaBajaDepartamento()) ? $oDepartamento->getFechaBajaDepartamento()->format('Y-m-d') : null,
+    'accion' => $accion
 ];
 
 require_once $view['layout'];

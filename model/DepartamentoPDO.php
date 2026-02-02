@@ -81,8 +81,32 @@ class DepartamentoPDO {
         }
     }
 
-    public static function altaDepartamento() {
-        
+    public static function altaDepartamento($codDepartamento, $descDepartamento, $volumenNegocio) {
+        // Creamos un objeto usuario pero inicializado a null.
+        $oDepartamento = null;
+
+        // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
+        $sql = <<<SQL
+            INSERT INTO T02_Departamento
+                (T02_CodDepartamento, T02_FechaCreacionDepartamento, T02_FechaBajaDepartamento,
+                T02_DescDepartamento, T02_VolumenDeNegocio)
+            VALUES
+                (:codDepartamento, now(), null, :descDepartamento, :volumenNegocio)
+        SQL;
+
+        try {
+            $consulta = DBPDO::ejecutaConsulta($sql,
+                            [':codDepartamento' => $codDepartamento,
+                             ':descDepartamento' => $descDepartamento,
+                             ':volumenNegocio' => $volumenNegocio]);
+            if ($consulta) {
+                $oDepartamento = self::buscaDepartamentoPorCod($codDepartamento);
+            }
+        } catch (Exception $ex) {
+            return null;
+        }
+
+        return $oDepartamento;
     }
 
     public static function bajaFisicaDepartamento($oDepartamento) {
@@ -178,7 +202,29 @@ class DepartamentoPDO {
         }
     }
 
-    public static function validaCodNoExiste() {
-        
+    public static function validaCodNoExiste($codDepartamento) {
+        $sql = <<<SQL
+            SELECT T02_CodDepartamento FROM T02_Departamento
+            WHERE T02_CodDepartamento = :codDepartamento
+        SQL;
+
+        try {
+            // Ejecutar la consulta. 
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                        ':codDepartamento' => $codDepartamento]);
+
+            // Obtener el resultado de la consulta.
+            $departamentoDB = $consulta->fetch(PDO::FETCH_ASSOC);
+
+            // Si no existe el usuario o la contraseña es incorrecta, devolvemos null.
+            if (!$departamentoDB) {
+                return true;
+            } else{
+                return false;
+            }
+        } catch (Exception $ex) {
+            // En caso de error, devolvemos null.
+            echo $ex->getMessage();
+        }
     }
 }
