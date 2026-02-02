@@ -22,11 +22,8 @@
                 <input class="lectura" type="date" name="fechaAlta" id="desc" value="<?php echo $avEditarDepartamento['fechaCreacionDepartamento'] ?>" readonly/><br><br>
                 <label><b>Volumen de negocio</b></label><br>
                 <input type="text" name="volumenNegocio" id="desc" value="<?php echo $avEditarDepartamento['volumenNegocio']?>"/><br><br>
-                <div class="cEstado">
-                    <label><b>Fecha de baja</b> (Estado: <?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'Inactivo' :  'Activo'?>)</label><br>
-                    <input class="lectura" type="date" name="fechaBaja" id="desc" value="<?php echo $avEditarDepartamento['fechaBajaDepartamento']?>" readonly/><br>
-                    <button type="submit" name="<?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'alta' : 'baja'?>" id="volver">Dar de <?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'Alta' :  'Baja'?></button>
-                </div>
+                <label><b>Fecha de baja</b> (Estado: <?php echo ($avEditarDepartamento['fechaBajaDepartamento']) ? 'Inactivo' :  'Activo'?>)</label><br>
+                <input class="lectura" type="date" name="fechaBaja" id="desc" value="<?php echo $avEditarDepartamento['fechaBajaDepartamento']?>" readonly/><br>
                 <button type="submit" name="bAplicar">Aplicar Cambios</button>
             </form>
         </div>

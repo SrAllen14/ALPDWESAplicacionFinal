@@ -57,8 +57,10 @@
                                 <td class="iconosAltaBaja">
                                     <?php if ($oDepartamento->getFechaBajaDepartamento() === null): ?>
                                         <span class="activo" ><i class="fa-regular fa-flag"></i></span>
+                                        <form method="post"><button type="submit" name="bBajaLogica" value="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fas fa-arrow-down"></i></button></form>
                                     <?php else: ?>
                                         <span class="baja" ><i class="fa-regular fa-flag"></i></span>
+                                        <form method="post"><button type="submit" name="bAltaLogica" value="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fas fa-arrow-up"></i></button></form>
                                     <?php endif; ?>
                                 </td>
                                 <td class="iconosDpto"><form method="post"><button type="submit" name="bEditar" value="<?php echo $oDepartamento->getCodDepartamento()?>"><i class="fa-regular fa-pen-to-square"></i></button></form></td>
