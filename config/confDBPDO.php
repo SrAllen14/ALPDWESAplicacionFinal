@@ -5,8 +5,8 @@
     define('PASSWORD', 'paso');
 */ 
  
-    define('DSN', 'mysql:host=localhost; dbname=DBALPDWESLoginLogoffTema5');
-    define('USERNAME','userALPDWESLoginLogoffTema5');
+    define('DSN', 'mysql:host=localhost; dbname=DBALPDWESAplicacionFinal');
+    define('USERNAME','userALPDWESAplicacionFinal');
     define('PASSWORD', 'pasoDWES1234');
  
 ?>
