@@ -6,6 +6,7 @@
  */
 
 class REST{
+    /*
     public static function apiNasa($fecha){
         $error = false;
         // Se accede a la URL de la nasa.
@@ -31,7 +32,7 @@ class REST{
         }
     }
     
-    /*
+    */
     // Código cedido por Vero Grue
     public static function apiNasa($fecha) {
         try{
@@ -85,5 +86,5 @@ class REST{
         } catch(Exception $ex){
             echo $ex->getMessage();
         }
-    }*/
+    }
 }
