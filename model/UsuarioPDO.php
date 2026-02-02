@@ -90,7 +90,7 @@ class UsuarioPDO {
     public static function altaUsuario($codUsuario, $password, $descUsuario) {
         // Creamos un objeto usuario pero inicializado a null.
         $oUsuario = null;
-        
+
         // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
         $sql = <<<SQL
             INSERT INTO T01_Usuario
@@ -99,32 +99,116 @@ class UsuarioPDO {
             VALUES
                 (:codUsuario, SHA2(:password, 256), :descUsuario, now(), 1, 'usuario')
         SQL;
-        
+
         try {
-            $consulta = DBPDO::ejecutaConsulta($sql, 
-                    [':codUsuario' => $codUsuario,
-                     ':password' => $codUsuario.$password,
-                     ':descUsuario' => $descUsuario]);
-            if($consulta){
+            $consulta = DBPDO::ejecutaConsulta($sql,
+                            [':codUsuario' => $codUsuario,
+                                ':password' => $codUsuario . $password,
+                                ':descUsuario' => $descUsuario]);
+            if ($consulta) {
                 $oUsuario = self::validarUsuario($codUsuario, $password);
             }
         } catch (Exception $ex) {
             return null;
         }
-        
+
         return $oUsuario;
     }
 
-    public static function modificarUsuario() {
+    public static function modificarUsuario($oUsuario, $descUsuarioNuevo) {
+
+        // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
+        $sql = <<<SQL
+            UPDATE T01_Usuario
+                SET T01_DescUsuario = :descUsuario
+                WHERE T01_CodUsuario = :codUsuario
+        SQL;
         
+        try {
+            $consulta = DBPDO::ejecutaConsulta($sql,
+                            [':descUsuario' => $descUsuarioNuevo,
+                            ':codUsuario' => $oUsuario->getCodUsuario()]);
+            
+            if ($consulta) {
+                $oUsuario->setDescUsuario($descUsuarioNuevo);
+                return $oUsuario;
+            } else{
+                return null;
+            }
+        } catch (Exception $ex) {
+            return null;
+        }
     }
 
-    public static function borrarUsuario() {
+    public static function modificarContraseña($oUsuario, $passwordNueva){
+         // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
+        $sql = <<<SQL
+            UPDATE T01_Usuario
+                SET T01_Password = SHA2(:password, 256)
+                WHERE T01_CodUsuario = :codUsuario
+        SQL;
         
+        try {
+            $consulta = DBPDO::ejecutaConsulta($sql,
+                            [':password' => $oUsuario->getCodUsuario().$passwordNueva,
+                            ':codUsuario' => $oUsuario->getCodUsuario()]);
+            
+            if ($consulta) {
+                $oUsuario->setPassword(hash('sha256', $oUsuario->getCodUsuario().$passwordNueva));
+                return $oUsuario;
+            } else{
+                return null;
+            }
+        } catch (Exception $ex) {
+            return null;
+        }
+    }
+    
+    public static function borrarUsuario($oUsuario){
+        $sql = <<<SQL
+            DELETE FROM T01_Usuario
+            WHERE T01_codUsuario = :codUsuario
+        SQL;
+        
+        try{
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                ':codUsuario' => $oUsuario->getCodUsuario()
+            ]);
+            
+            if($consulta->rowCount() > 0){
+                return true;
+            }
+        } catch (Exception $ex){
+            return false;
+        }
+        
+        return false;
     }
 
-    public static function validarCodNoExiste() {
-        
+    public static function validarCodNoExiste($codUsuario) {
+        $sql = <<<SQL
+            SELECT T01_CodUsuario FROM T01_Usuario
+            WHERE T01_CodUsuario = :usuario
+        SQL;
+
+        try {
+            // Ejecutar la consulta. 
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                        ':usuario' => $codUsuario]);
+
+            // Obtener el resultado de la consulta.
+            $usuarioDB = $consulta->fetch(PDO::FETCH_ASSOC);
+
+            // Si no existe el usuario o la contraseña es incorrecta, devolvemos null.
+            if (!$usuarioDB) {
+                return true;
+            } else{
+                return false;
+            }
+        } catch (Exception $ex) {
+            // En caso de error, devolvemos null.
+            echo $ex->getMessage();
+        }
     }
 }
 

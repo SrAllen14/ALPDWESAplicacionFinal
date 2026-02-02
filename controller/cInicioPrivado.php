@@ -14,6 +14,10 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
     exit;
 }
 
+if($_SESSION['usuarioDWESLoginLogoff']->getPerfil() !== "administrador"){
+    
+}
+
 // Comprobamos si el botón "iniciar" ha sido pulsado.
 if(isset($_REQUEST['detalles'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
@@ -38,7 +42,7 @@ if(isset($_REQUEST['error'])){
 if(isset($_REQUEST['wip'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si se ha pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-    $_SESSION['paginaEnCurso'] = 'departamento';
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
     header('Location: indexLoginLogoff.php');
     exit;
 }
@@ -48,6 +52,15 @@ if(isset($_REQUEST['rest'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si se ha pulsado le damos el valor de la página solicitada a la variable $_SESSION.
     $_SESSION['paginaEnCurso'] = 'rest';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
+// Comprobamos si el boton "editar" ha sido pulsado.
+if(isset($_REQUEST['editar'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'miCuenta';
     header('Location: indexLoginLogoff.php');
     exit;
 }

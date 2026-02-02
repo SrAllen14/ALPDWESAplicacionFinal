@@ -5,6 +5,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
  */
 
+const RESP_SEGURIDAD = "pimentel";
+const API_KEY_NASA = 'uzpJUwOHnBD391Xblgeh1wiMDprUWeP91FRkajuI';
+
 require_once 'core/iValidacionFormularios.php';
 
 // Cargamos las clases.
@@ -26,7 +29,13 @@ $controller = [
     'rest' => 'controller/cRest.php',
     'detallesNasa' => 'controller/cDetallesNasa.php',
     'registro' => 'controller/cRegistro.php',
-    'departamento' => 'controller/cDepartamento.php'
+    'mtoDepartamento' => 'controller/cMtoDepartamento.php',
+    'miCuenta' => 'controller/cMiCuenta.php',
+    'cambiarPassword' => 'controller/cCambiarPassword.php',
+    'borrarCuenta' => 'controller/cBorrarCuenta.php',
+    'consultarModificarDepartamento' => 'controller/cConsultarModificarDepartamento.php',
+    'eliminarDepartamento' => 'controller/cEliminarDepartamento.php',
+    'altaDepartamento' => 'controller/cAltaDepartamento.php'
 ];
 
 $view = [
@@ -40,5 +49,11 @@ $view = [
     'rest' => 'view/vRest.php',
     'detallesNasa' => 'view/vDetallesNasa.php',
     'registro' => 'view/vRegistro.php',
-    'departamento' => 'view/vDepartamento.php'
+    'mtoDepartamento' => 'view/vMtoDepartamento.php',
+    'miCuenta' => 'view/vMiCuenta.php',
+    'cambiarPassword' => 'view/vCambiarPassword.php',
+    'borrarCuenta' => 'view/vBorrarCuenta.php',
+    'consultarModificarDepartamento' => 'view/vConsultarModificarDepartamento.php',
+    'eliminarDepartamento' => 'view/vEliminarDepartamento.php',
+    'altaDepartamento' => 'view/vAltaDepartamento.php'
 ];

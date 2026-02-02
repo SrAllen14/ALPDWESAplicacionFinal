@@ -23,8 +23,11 @@ if(isset($_SESSION['fotoNasa'])){
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
     'tituloNasa' => ($oFotoNasa) ? $oFotoNasa->getTitulo() : "No hay datos",
+    'fotoNasa' => ($oFotoNasa) ? $oFotoNasa->getUrl() : "",
     'fotoNasaHD' => ($oFotoNasa) ? $oFotoNasa->getUrlHD() : "",
-    'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : ""
+    'explicacionNasa' => ($oFotoNasa) ? $oFotoNasa->getExplicacion() : "",
+    'fechaNasa' => ($oFotoNasa) ? $oFotoNasa->getFecha() : "No hay datos",
+    'errorNasa' => ($oFotoNasa) ? $oFotoNasa->getError() : null
 ];
 
 require_once $view['layout'];

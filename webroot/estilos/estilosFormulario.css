@@ -27,7 +27,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .formulario form{
     max-width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 .formulario h1{
@@ -36,18 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     text-align: center;
 }
 
-@media(max-width: 480px){
-    .formulario{
-        padding: 5px;
-        font-size: 14px;
-    }
-    
-    #nombre, #pass, #desc, #passR, #codDepartamento{
-        width: 100px;
-        max-width: 90%;
-    }
-}
-#nombre, #pass, #desc, #passR, #codDepartamento{
+#nombre, #pass, #desc, #passR, #codDepartamento, #respS, #passA, #passN, #passNR{
     max-width: 90%;
     width: 400px;
     padding: 12px;
@@ -55,7 +44,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     border: none;
     border-bottom: 1px solid #ccc;
     font-size: 16px;
-    background-color: #FCF8CC;
 }
 
 button{
@@ -67,4 +55,42 @@ button{
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.lectura{
+    background-color: lightgray;
+}
+
+.obligatorio{
+    background-color: #FCF8CC;
+}
+
+.cPassword{
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    
+    & .lectura{
+        max-width: 50%;
+    }
+    
+    & #cambiarC{
+        max-width: 50%;
+    }
+}
+
+.botones{
+    justify-items: center;
+}
+
+@media(max-width: 480px){
+    .formulario{
+        padding: 5px;
+        font-size: 14px;
+    }
+    
+    #nombre, #pass, #desc, #passR, #codDepartamento, #respS, #passA, #passN, #passNR{
+        width: 100px;
+        max-width: 90%;
+    }
 }

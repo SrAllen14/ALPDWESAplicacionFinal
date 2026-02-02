@@ -15,25 +15,34 @@
                 <div class="fecha">
                     <form method="post" class="form-fecha">
                         <input type="date" name="inFecha" class="inFecha" value="<?php echo $avRest['fechaNasa']?>">
-                        <button type="submit" name="btnFecha" class="btnFecha">Validar</button>
+                        <button type="submit" name="btnFecha" class="btnFecha">Buscar</button>
                     </form>
                 </div>
                 <div class="tit">
-                    <?php echo $avRest['tituloNasa']; ?>
+                    <?php if (!$avRest['errorNasa']): ?>
+                        <?php echo $avRest['tituloNasa']; ?>
+                    <?php else :?>
+                    <p>No hay información con esta fecha</p>
+                    <p>Introduzca otra fecha</p>
+                    <?php endif; ?>
                 </div>
                 <div class="foto">
-                    <img src="<?php echo $avRest['fotoNasa']; ?>" alt="fotoNasa"/>
+                    <?php if (!$avRest['errorNasa']): ?>
+                        <img src="<?php echo $avRest['fotoNasa']?>" alt="">
+                    <?php endif; ?>
                 </div> 
                 <div class="infoApi">
                     <p><b>Instrucciones de uso:</b> <a target="blank" href=" https://api.nasa.gov" id="urlNasa"> https://api.nasa.gov</a></p>
                     <p><b>Parámetros:</b> Fecha</p>
                     <p><b>Método:</b> GET</p>
                 </div>
+                <?php if (!$avRest['errorNasa']): ?>
                 <div class="divDetalles">
                     <form method="post" class="form-detalles">
                         <button type="submit" name="detalles" class="btnDetalles">Detalles</button>
                     </form>
                 </div>
+                <?php endif; ?>
             </div>
             <div class="api2">
                 <div class="tit">
