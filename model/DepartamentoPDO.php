@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Clase DepartamentoPDO
+ * 
+ * Conecta la base de datos con el controlador de la aplicación.
+ * 
  * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
  * @since 23/01/2026
  * @source DepartamentoPDO.php

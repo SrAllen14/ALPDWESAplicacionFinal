@@ -66,7 +66,6 @@ if(isset($_REQUEST['buscar'])){
 
 $aDepartamentos = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descDptoBuscado']);
 
-
 if(isset($_REQUEST['bVer'])){
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bVer']);
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
@@ -118,8 +117,26 @@ if(isset($_REQUEST['bAltaLogica'])){
     exit;
 }
 
-$avDepartamentos = [
-    'aDepartamentos' => $aDepartamentos
-];
+$avDepartamentos = [];
+if (!is_null($aDepartamentos) && is_array($aDepartamentos)) {
+    foreach ($aDepartamentos as $oDepartamento) {
 
+        // Creamos las fechas que vienen del objeto Departamento para formatearlas antes de pasarlas a la vista
+        $fechaCreacion = new DateTime($oDepartamento->getFechaCreacionDepartamento());
+        $fechaBajaFormateada = '';
+        if (!is_null($oDepartamento->getFechaBajaDepartamento())) {
+            $fechaBaja = new DateTime($oDepartamento->getFechaBajaDepartamento());
+            $fechaBajaFormateada = $fechaBaja->format('d/m/Y');
+        }
+
+        $avDepartamentos[] = [
+            'codDepartamento'           => $oDepartamento->getCodDepartamento(),
+            'descDepartamento'          => $oDepartamento->getDescDepartamento(),
+            'fechaCreacionDepartamento' => $fechaCreacion->format('d/m/Y'),
+            'volumenDeNegocio'          => (number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.') . ' €'),
+            'fechaBajaDepartamento'     => $fechaBajaFormateada,
+            'estadoDepartamento'        => $fechaBajaFormateada==''?'baja':'alta'
+        ];
+    }
+}
 require_once $view['layout'];
