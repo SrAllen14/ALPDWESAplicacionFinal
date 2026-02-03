@@ -29,7 +29,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .tabla th, .tabla td{
     border: 1px solid #CCCCCC;
     padding: 10px;
-    text-align: left;
     word-break: break-word;
 }
 
@@ -58,6 +57,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .activo{
     color: green;
+}
+
+.volumen{
+    text-align: right;
 }
 
 .iconosDpto form button{
