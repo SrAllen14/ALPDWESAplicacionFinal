@@ -5,6 +5,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit $this template
  */
 
+
+/**
+ * Clase usuario.
+ * 
+ * Representa un usuario del sistema con sus datos de acceso, perfil y control de conexiones.
+ * 
+ * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+ * @since 22/01/2026
+ * @version 1.0
+ */
 class Usuario{
     private $codUsuario;
     private $password;

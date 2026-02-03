@@ -1,6 +1,10 @@
 <?php
 
-/*
+/**
+ * Class REST
+ * 
+ * Interactua con las diferentes APIs recibiendo la información y enviándola al controlador.
+ * 
  * @author: Álvaro Allén alvaro.allper.1@educa.jcyl.es
  * @since: 19/01/2026
  */

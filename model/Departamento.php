@@ -4,6 +4,15 @@
  * @since: 23/01/2026
  */
 
+/**
+ * Clase Departamento.
+ * 
+ * Representa un departamento del sistema con su código, descripción, fechas de alta y baja, y volumen de negocio que ocupa.
+ * 
+ * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+ * @since 29/01/2026
+ * @version 1.0
+ */
 class Departamento{
     private $codDepartamento;
     private $descDepartamento;
