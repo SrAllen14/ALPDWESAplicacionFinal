@@ -1,15 +1,33 @@
 <?php
 
-/*
- * @author: Álvaro Allén alvaro.allper.1@educa.jcyl.es
- * @since: 22/01/2026
+/**
+ * Clase UsuarioPDO
+ * 
+ * Conecta la base de datos con el controlador de la aplicación.
+ * 
+ * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+ * @since 22/01/2026
+ * @source iValidacionFormularios.php
  */
 
 require_once 'DBPDO.php';
 require_once 'Usuario.php';
 
 class UsuarioPDO {
-
+    /**
+     * Método validarUsuario
+     * 
+     * Recibe un código de usuario y una contraseña
+     * con el fin de confirmar que existe el usuario 
+     * con ese código y que coinciden la contraseña 
+     * introducida con la del usuario encontrado.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 22/01/2026
+     * @param (string) código indentificativo de cada usuario.
+     * @param (string) contraseña del usuario para confirmar su identificación.
+     * @return (Usuario) objeto de la clase usuario construido con la base de datos.
+     */
     public static function validarUsuario($codUsuario, $password) {
         $sql = <<<SQL
             SELECT
@@ -62,6 +80,17 @@ class UsuarioPDO {
         }
     }
 
+    /**
+     * Método actualizarUltimaConexionUsuario
+     * 
+     * Actualiza el atributo ultimaConexionUsuario del objeto Usuario
+     * con el valor de la fecha en el momento de hacer login.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 22/01/2026
+     * @param (Usuario) objeto de la clase usuario.
+     * @return (Usuario) objeto de la clase usuario.
+     */
     public static function actualizarUltimaConexionUsuario($oUsuario) {
         $sql = <<<SQL
             UPDATE T01_Usuario SET
@@ -87,6 +116,18 @@ class UsuarioPDO {
         return $oUsuario;
     }
 
+    /**
+     * Método altaUsuario
+     * 
+     * Crear un nuevo usuario y guardarlo en la base de datos
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 22/01/2026
+     * @param (string) Código del usuario.
+     * @param (string) Contraseña del usuario.
+     * @param (string) Descripción (nombre) del usuario.
+     * @return (Usuario) objeto de la clase usuario.
+     */
     public static function altaUsuario($codUsuario, $password, $descUsuario) {
         // Creamos un objeto usuario pero inicializado a null.
         $oUsuario = null;
@@ -115,6 +156,17 @@ class UsuarioPDO {
         return $oUsuario;
     }
 
+    /**
+     * Método modificarUsuario
+     * 
+     * Actualiza la información del usuario mediante una consulta a la base de datos
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 26/01/2026
+     * @param (Usuario) objeto de la clase Usuario.
+     * @param (string) descripción nueva del usuario.
+     * @return (Usuario) objeto de la clase Usuario.
+     */
     public static function modificarUsuario($oUsuario, $descUsuarioNuevo) {
 
         // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
@@ -140,6 +192,17 @@ class UsuarioPDO {
         }
     }
 
+    /**
+     * Método modificarContraseña.
+     * 
+     * Cambiar la contraseña del usuario.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 26/01/2026
+     * @param (Usuario) objeto de la clase Usuario.
+     * @param (string) contraseña nueva del usuario.
+     * @return (Usuario) objeto de la clase Usuario. 
+     */
     public static function modificarContraseña($oUsuario, $passwordNueva){
          // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
         $sql = <<<SQL
@@ -164,6 +227,16 @@ class UsuarioPDO {
         }
     }
     
+    /**
+     * Método borrarUsuario.
+     * 
+     * Eliminar el usuario de la base de datos (darlo de baja física).
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 26/01/2026
+     * @param (Usuario) objeto de la clase Usuario.
+     * @return (boolean) true: ha funcionado la ejecución. false: no ha funcionado la ejecución.
+     */
     public static function borrarUsuario($oUsuario){
         $sql = <<<SQL
             DELETE FROM T01_Usuario
@@ -185,6 +258,16 @@ class UsuarioPDO {
         return false;
     }
 
+    /**
+     * Método validarCodNoExiste.
+     * 
+     * Comprobar que el código introducido no pertenece a ningún usuario.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 27/01/2026
+     * @param (string) Código de usuario.
+     * @return (boolean) true: el código no pertenece a ningún usuario. false: el código si pertenece a un usuario.
+     */
     public static function validarCodNoExiste($codUsuario) {
         $sql = <<<SQL
             SELECT T01_CodUsuario FROM T01_Usuario

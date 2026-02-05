@@ -1,10 +1,14 @@
 <?php
 
-/*
- * @author: Álvaro Allén alvaro.allper.1@educa.jcyl.es 
- * @since: 19/01/2026
+/**
+ * Clase FotoNasa.
+ * 
+ * Representa una foto recibida de la Nasa con su título, su url y urlHD, su fecha, sus detalles y posibles errores de ejecución.
+ * 
+ * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+ * @since 19/01/2026
+ * @version 1.0
  */
-
 class FotoNasa{
     private $titulo;
     private $url;

@@ -1,15 +1,29 @@
 <?php
 
-/*
- * @author: Álvaro Allén alvaro.allper.1@educa.jcyl.es
- * @since: 23/01/2026
+/**
+ * Clase DepartamentoPDO
+ * 
+ * Conecta la base de datos con el controlador de la aplicación.
+ * 
+ * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+ * @since 23/01/2026
+ * @source DepartamentoPDO.php
  */
 
 require_once 'model/Departamento.php';
 require_once 'model/DBPDO.php';
 
 class DepartamentoPDO {
-
+    /**
+     * Método buscaDepartamentoPorCod
+     * 
+     * Buscar un departamento por su código en la base de datos.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (string) $codDepartamento Código del departamento
+     * @return (Departamento) Objeto de la clase departamento.
+     */
     public static function buscaDepartamentoPorCod($codDepartamento) {
         $sql = <<<SQL
             SELECT
@@ -54,6 +68,16 @@ class DepartamentoPDO {
         }
     }
 
+    /**
+     * Método buscaDepartmentoPorDesc
+     * 
+     * Busca los departamentos que contengan en la descripción la cadena introducida.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (string) $descDepartamento Descripción de departamento a buscar.
+     * @return (Array) Array de objetos de la clase Departamento que coinciden con la descripción.
+     */
     public static function buscaDepartamentoPorDesc($descDepartamento = null) {
         $aDepartamentos = [];
         $sql = <<<SQL
@@ -81,6 +105,18 @@ class DepartamentoPDO {
         }
     }
 
+    /**
+     * Método altaDepartamento
+     * 
+     * Inserta un departamento nuevo en la base de datos.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (string) $codDepartamento Código del departamento.
+     * @param (string) $descDepartamento Descripción del departamento.
+     * @param (float) $volumenNegocio Cantidad de dinero que tiene el departamento.
+     * @return (Departamento) Objeto de la clase Departamento.
+     */
     public static function altaDepartamento($codDepartamento, $descDepartamento, $volumenNegocio) {
         // Creamos un objeto usuario pero inicializado a null.
         $oDepartamento = null;
@@ -109,6 +145,16 @@ class DepartamentoPDO {
         return $oDepartamento;
     }
 
+    /**
+     * Método bajaFisicaDepartamento
+     * 
+     * Borra el departamento de la base de datos.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (Departamento) $oDepartamento Objeto de la clase Departamento.
+     * @return (boolean) true: ha sido borrado correctamente. false: ha habido un error en la ejecución.
+     */
     public static function bajaFisicaDepartamento($oDepartamento) {
         $sql = <<<SQL
             DELETE FROM T02_Departamento
@@ -129,6 +175,16 @@ class DepartamentoPDO {
         return false;
     }
 
+    /**
+     * Método bajaLogicaDepartamento
+     * 
+     * Inhabilita el departamento para que no pueda ser utilizado (dar de baja temporal o lógica).
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (Departamento) $oDepartamento Objeto de la clase Departamento.
+     * @return (Departamento) Objeto de la clase Departamento.
+     */
     public static function bajaLogicaDepartamento($oDepartamento) {
         $sql = <<<SQL
             UPDATE T02_Departamento
@@ -151,7 +207,19 @@ class DepartamentoPDO {
             return null;
         }
     }
-
+    
+    /**
+     * Método modificaDepartamento
+     * 
+     * Editar los datos de un objeto en la base de datos.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (string) $oDepartamento Objeto de la clase Departamento
+     * @param (string) $descDepartamentoNuevo Descripción nueva del departamento.
+     * @param (float) $volumenNegocioNuevo Volumen nuevo del departamento.
+     * @return (Departamento) Objeto de la clase Departamento.
+     */
     public static function modificaDepartamento($oDepartamento, $descDepartamentoNuevo, $volumenNegocioNuevo) {
         $sql = <<<SQL
             UPDATE T02_Departamento
@@ -179,6 +247,16 @@ class DepartamentoPDO {
         }
     }
 
+    /**
+     * Método rehabilitarDepartamento
+     * 
+     * Habilita un departamento que está dado de baja lógica.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (Departamento) $oDepartamento Objeto de la clase Departamento.
+     * @return (Departamento) Objeto de la clase Departamento.
+     */
     public static function rehabilitaDepartamento($oDepartamento) {
         $sql = <<<SQL
             UPDATE T02_Departamento
@@ -202,6 +280,16 @@ class DepartamentoPDO {
         }
     }
 
+    /**
+     * Método validarCodNoExiste
+     * 
+     * Comprobar que el código introducido no pertenece a un objeto de la clase Departamento existente.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     * @param (string) $codDepartamento Código del departamento
+     * @return (boolean) true: en caso de que no pertenezca a nadie. false: en caso de que ya pertenezca a un departamento.
+     */
     public static function validaCodNoExiste($codDepartamento) {
         $sql = <<<SQL
             SELECT T02_CodDepartamento FROM T02_Departamento

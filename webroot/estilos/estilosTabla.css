@@ -29,12 +29,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .tabla th, .tabla td{
     border: 1px solid #CCCCCC;
     padding: 10px;
-    text-align: left;
     word-break: break-word;
+    font-size: 16px;
 }
 
 .tabla td, .tabla tr{
     max-width: 75px;
+}
+
+.tabla td:nth-child(n+6){
+    max-width: 40px;
 }
 
 .nombre{
@@ -47,17 +51,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .titulo{
-    background-color: lightgreen;
+    background-color: lightblue;
     font-weight: bold;
 }
 
 .baja{
-    color: red;
     background-color: lightgray
+}
+
+button i{
+    font-size: 16px;
+}
+
+button.baja{
+    background-color: red;
+}
+
+button.alta{
+    background-color: green;
 }
 
 .activo{
     color: green;
+}
+
+.volumen{
+    text-align: right;
 }
 
 .iconosDpto form button{
