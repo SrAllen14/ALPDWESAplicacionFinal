@@ -30,10 +30,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     border: 1px solid #CCCCCC;
     padding: 10px;
     word-break: break-word;
+    font-size: 16px;
 }
 
 .tabla td, .tabla tr{
     max-width: 75px;
+}
+
+.tabla td:nth-child(n+6){
+    max-width: 40px;
 }
 
 .nombre{
@@ -46,13 +51,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .titulo{
-    background-color: lightgreen;
+    background-color: lightblue;
     font-weight: bold;
 }
 
 .baja{
-    color: red;
     background-color: lightgray
+}
+
+button i{
+    font-size: 16px;
+}
+
+button.baja{
+    background-color: red;
+}
+
+button.alta{
+    background-color: green;
 }
 
 .activo{
