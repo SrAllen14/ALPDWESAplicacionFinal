@@ -79,7 +79,48 @@ class UsuarioPDO {
             return null;
         }
     }
-
+    
+    /**
+     * Método buscarUsuarioPorDesc
+     * 
+     * Busca mediante una sentencia SELECT a un usuario dada
+     * una descripción.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 05/02/2026
+     * @param (string) $descusuario atributo descripción del objeto usuario
+     * @return (Collection) colección de objetos de la clase usuario
+     */
+    
+    public static function buscarUsuariosPorDesc($descUsuario){
+        $sql = <<<SQL
+            SELECT * FROM T01_Usuario
+            WHERE T01_DescUsuario LIKE :descUsuario
+        SQL;
+        
+        try{
+            // Ejecutamos la busqueda en la base de datos.
+            $consulta = DBPDO::ejecutaConsulta($sql, [':descUsuario' => "%$descUsuario%"]);
+            // El resultado de la consulta lo guardamos en una colección.
+            while ($oUsuario = $consulta->fetchObject()) {
+                $aUsuarios[] = new Usuario(
+                    $oUsuario->T01_CodUsuario,
+                    $oUsuario->T01_Password,
+                    $oUsuario->T01_DescUsuario,
+                    $oUsuario->T01_NumConexiones,
+                    $oUsuario->T01_FechaHoraUltimaConexion,
+                    $oUsuario->T01_FechaHoraUltimaConexionAnterior,
+                    $oUsuario->T01_Perfil,
+                    $oUsuario->T01_ImagenUsuario
+                );
+            }
+            return $aUsuarios;  
+        } catch(Exception $ex){
+            return null;
+        }
+    }
+    
+    
     /**
      * Método actualizarUltimaConexionUsuario
      * 
