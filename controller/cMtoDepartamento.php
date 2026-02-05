@@ -45,7 +45,9 @@ $aErrores = [
 
 $entradaOk = true;
 
+// Comprobamos que el botón "buscar" ha sido pulsado.
 if(isset($_REQUEST['buscar'])){
+    // En caso de ser pulsado realizamos la busqueda de departamento por descripción.
     $aErrores['descDepartamento'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['codDepartamento'], 255, 0, 0);
     
     if($aErrores['descDepartamento'] != null){
@@ -66,7 +68,10 @@ if(isset($_REQUEST['buscar'])){
 
 $aDepartamentos = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descDptoBuscado']);
 
+// Comprobamos que el botón "bVer" ha sido pulsado.
 if(isset($_REQUEST['bVer'])){
+    // En caso de haber sido pulsado buscamos el departamento por código, 
+    // lo guardamos en la sesión y nos dirigimos a la página de consultar.
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bVer']);
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
     $_SESSION['accionDepartamento'] = "ver";
@@ -76,7 +81,10 @@ if(isset($_REQUEST['bVer'])){
     exit;
 }
 
+// Comprobamos que el botón "bEditar" ha sido pulsado.
 if(isset($_REQUEST['bEditar'])){
+    // En caso de haber sido pulsado buscamos el departamento por código,
+    // lo guardamos en la sesión y nos dirigimos a la página de editar.
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bEditar']);
     $_SESSION['accionDepartamento'] = "editar";
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
@@ -86,7 +94,10 @@ if(isset($_REQUEST['bEditar'])){
     exit;
 }
 
+// Comprobamos que el botón "bBorrar" ha sido pulsado.
 if(isset($_REQUEST['bBorrar'])){
+    // En caso de haber sido pulsado buscamos el departamento por código,
+    // lo guardamos en la sesión y nos dirigimos a la página de editar.
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bBorrar']);
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
@@ -95,7 +106,10 @@ if(isset($_REQUEST['bBorrar'])){
     exit;
 }
 
+// Comprobamos que el botón "bBajaLogica" ha sido pulsado.
 if(isset($_REQUEST['bBajaLogica'])){
+    // En caso de haber sido pulsado guardamos el departamento por código en
+    // la sesión y realizamos la baja lógica del departamento. Recargamos la página.
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bBajaLogica']);
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
     $oDepartamento = DepartamentoPDO::bajaLogicaDepartamento($_SESSION['departamentoActual']);
@@ -106,7 +120,10 @@ if(isset($_REQUEST['bBajaLogica'])){
     exit;
 }
 
+// Comprobamos que el botón "bAltaLogica" ha sido pulsado.
 if(isset($_REQUEST['bAltaLogica'])){
+    // En caso de haber sido pulsado guardamos el departamento por código en
+    // la sesión y realizamos la rehabilitación del departamento. Recargamos la página.
     $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bAltaLogica']);
     $_SESSION['departamentoActual'] = $oDepartamentoActual;
     $oDepartamento = DepartamentoPDO::rehabilitaDepartamento($_SESSION['departamentoActual']);
