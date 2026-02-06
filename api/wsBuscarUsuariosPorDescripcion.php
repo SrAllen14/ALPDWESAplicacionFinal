@@ -12,11 +12,11 @@ require_once '../model/UsuarioPDO.php';
 require_once '../model/DBPDO.php';
 require_once '../config/confDBPDO.php';
 
-
+header('Content-Type: application/json; charset-utf-8');
 $entradaOk = true;
 
 if($entradaOk){
-    $aUsuariosDevueltos = UsuarioPDO::buscarUsuariosPorDesc('');
+    $aUsuariosDevueltos = UsuarioPDO::buscarUsuariosPorDesc($_REQUEST['descUsuario'] = "");
     $amUsuarios = [];
     
     if($aUsuariosDevueltos){

@@ -97,7 +97,7 @@ class UsuarioPDO {
             SELECT * FROM T01_Usuario
             WHERE T01_DescUsuario LIKE :descUsuario
         SQL;
-        
+        $aUsuarios = null;
         try{
             // Ejecutamos la busqueda en la base de datos.
             $consulta = DBPDO::ejecutaConsulta($sql, [':descUsuario' => "%$descUsuario%"]);
