@@ -10,29 +10,18 @@
 <main>
     <div class="container">
         <div class="formulario">
-            <form>
-                <input type="text" name="codDepartamento" id="codDepartamento" placeholder="Código de departamento..." value="">
-                <button type="submit" name="buscar" id="buscar">Buscar</button>
+            <form method="post">
+                <label for="desUsuario"><b>Descripción:</b></label>
+                <input type="text" name="descUsuario" id="descUsuario" placeholder="Código de departamento...">
             </form>
         </div>
         <div class="tabla">
             <table id="tabla">
-                <thead>
-                    <th>
-                        <td>Cod Usuario</td>
-                        <td>Desc Usuario</td>
-                        <td>Nº Conexiones</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </th>
-                </thead>
-                <tbody>
-                    
-                </tbody>
+                
             </table>
         </div>
         <script>
+            var table = document.getElementById("tabla");
             /**
              * Función mostrarUsuarios
              * 
@@ -42,21 +31,91 @@
              * @returns {undefined}
              */
             function mostrarUsuarios(usuarios){
-                var table = document.getElementById("tabla");
+                
+                table.innerHTML = `<thead class="titulo">
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Nº Conexiones</th>
+                    <th>Fecha Última Conexión</th>
+                    <th>Perfil</th>
+                    <th colspan="2">Opciones</th>
+                </thead>`;
                 for (i = 0; i < usuarios.length; i++){
                     var fila = document.createElement("tr");
-                    var celda = document.createElement("td");
-                    
+
                     // Introducimos el dato codUsuario.
-                    celda.textContent = usuarios[i].codUsuario;
-                    fila.appendChild(celda);
+                    var celda1 = document.createElement("td");
+                    celda1.textContent = usuarios[i].codUsuario;
+                    fila.appendChild(celda1);
                     
                     // Introducimos el dato descUsuario.
-                    celda.textContent = usuarios[i].descUsuario;
-                    fila.appendChild(celda);
+                    var celda2 = document.createElement("td");
+                    celda2.textContent = usuarios[i].descUsuario;
+                    fila.appendChild(celda2);
                     
+                    // Introducimos el dato contadorAccesos.
+                    var celda3 = document.createElement("td");
+                    celda3.textContent = usuarios[i].contadorAccesos;
+                    fila.appendChild(celda3);
+                    
+                    // Introducimos el dato fechaHoraUltimaConexion
+                    var celda4 = document.createElement("td");
+                    // Comprobamos que la fecha no es nula.
+                    if(usuarios[i].fechaHoraUltimaConexion !== null){
+                        // En caso de que no sea nula formateamos la fecha.
+                        var fecha = new Date(usuarios[i].fechaHoraUltimaConexion);
+                        var dia = String(fecha.getDate()).padStart(2,'0');
+                        var mes = String(fecha.getMonth()+1).padStart(2, '0');
+                        var anio = String(fecha.getFullYear());
+                        
+                        var fechaFormateada = `${dia}-${mes}-${anio}`;
+                    } else{
+                        // En caso de que sea nula dejamos vacia la celda.
+                        var fechaFormateada = "";
+                    }
+
+                    celda4.textContent = fechaFormateada;
+                    fila.appendChild(celda4);
+                    
+                    // Introducimos el dato perfil.
+                    var celda5 = document.createElement("td");
+                    celda5.textContent = usuarios[i].perfil;
+                    fila.appendChild(celda5);
+                    
+                    // Introducimos el icono consultar.
+                    var celda6 = document.createElement("td");
+                    celda6.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                    fila.appendChild(celda6);
+                    
+                    // Introducimos el icono borrar.
+                    var celda7 = document.createElement("td");
+                    celda7.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
+                    fila.appendChild(celda7);
+                    
+                    table.appendChild(fila);
                 }
             }
+            var urlApi = "http://daw201.local.ieslossauces.es/ALPDWESAplicacionFinal/api/wsBuscarUsuariosPorDescripcion.php";
+            
+            fetch(urlApi)
+                .then((response)=>{
+                    return response.json();
+                })
+                .then((datos)=>{
+                    mostrarUsuarios(datos);
+                });
+            var cBuscarDesc = document.getElementById("descUsuario");
+            cBuscarDesc.addEventListener("input", ()=>{
+                
+                fetch(urlApi + "?descUsuario=" + cBuscarDesc.value)
+                    .then((response)=>{
+                        return response.json();
+                    })
+                    .then((datos)=>{
+                        mostrarUsuarios(datos);
+                    });
+            });
+            
         </script>
     </div>
 </main>

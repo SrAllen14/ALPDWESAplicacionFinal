@@ -16,7 +16,7 @@ header('Content-Type: application/json; charset-utf-8');
 $entradaOk = true;
 
 if($entradaOk){
-    $aUsuariosDevueltos = UsuarioPDO::buscarUsuariosPorDesc($_REQUEST['descUsuario'] = "");
+    $aUsuariosDevueltos = UsuarioPDO::buscarUsuariosPorDesc($_REQUEST['descUsuario'] ?? '');
     $amUsuarios = [];
     
     if($aUsuariosDevueltos){
