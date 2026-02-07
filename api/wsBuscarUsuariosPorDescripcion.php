@@ -36,4 +36,5 @@ if($entradaOk){
     echo json_encode($amUsuarios, JSON_PRETTY_PRINT);
 }
 
+
 ?>

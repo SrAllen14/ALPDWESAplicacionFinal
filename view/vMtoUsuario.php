@@ -36,7 +36,7 @@
                     <th>Código</th>
                     <th>Descripción</th>
                     <th>Nº Conexiones</th>
-                    <th>Fecha Última Conexión</th>
+                    <th>Última Conexión</th>
                     <th>Perfil</th>
                     <th colspan="2">Opciones</th>
                 </thead>`;
@@ -84,18 +84,18 @@
                     
                     // Introducimos el icono consultar.
                     var celda6 = document.createElement("td");
-                    celda6.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                    celda6.innerHTML = '<form method="post"><button type="submit" name="bVer" value="'+usuarios[i].codUsuario+'"><i class="fa-solid fa-eye"></i></button></form>';
                     fila.appendChild(celda6);
                     
                     // Introducimos el icono borrar.
                     var celda7 = document.createElement("td");
-                    celda7.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
+                    celda7.innerHTML = '<form method="post"><button type="submit" name="bBorrar" value="'+usuarios[i].codUsuario+'"><i class="fa-regular fa-trash-can"></i></i></button></form>';
                     fila.appendChild(celda7);
                     
                     table.appendChild(fila);
                 }
             }
-            var urlApi = "http://daw201.local.ieslossauces.es/ALPDWESAplicacionFinal/api/wsBuscarUsuariosPorDescripcion.php";
+            var urlApi = "http://192.168.1.240/ALPDWESAplicacionFinal/api/wsBuscarUsuariosPorDescripcion.php";
             
             fetch(urlApi)
                 .then((response)=>{

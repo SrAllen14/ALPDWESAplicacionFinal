@@ -36,7 +36,9 @@ $controller = [
     'consultarModificarDepartamento' => 'controller/cConsultarModificarDepartamento.php',
     'eliminarDepartamento' => 'controller/cEliminarDepartamento.php',
     'altaDepartamento' => 'controller/cAltaDepartamento.php',
-    'mtoUsuario' => 'controller/cMtoUsuario.php'
+    'mtoUsuario' => 'controller/cMtoUsuario.php',
+    'eliminarUsuario' => 'controller/cEliminarUsuario.php',
+    'consultarUsuario' => 'controller/cConsultarUsuario.php'
 ];
 
 $view = [
@@ -57,5 +59,7 @@ $view = [
     'consultarModificarDepartamento' => 'view/vConsultarModificarDepartamento.php',
     'eliminarDepartamento' => 'view/vEliminarDepartamento.php',
     'altaDepartamento' => 'view/vAltaDepartamento.php',
-    'mtoUsuario' => 'view/vMtoUsuario.php'
+    'mtoUsuario' => 'view/vMtoUsuario.php',
+    'eliminarUsuario' => 'view/vEliminarUsuario.php',
+    'consultarUsuario' => 'view/vConsultarUsuario.php'
 ];

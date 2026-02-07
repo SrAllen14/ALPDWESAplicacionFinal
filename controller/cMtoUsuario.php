@@ -13,6 +13,20 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
+if(isset($_REQUEST['bVer'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'consultarUsuario';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+if(isset($_REQUEST['bBorrar'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'eliminarUsuario';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
 
 require_once $view['layout'];
 ?>
