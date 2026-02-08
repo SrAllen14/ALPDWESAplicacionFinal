@@ -1,0 +1,50 @@
+.apartados iframe{
+    height: 100dvh;
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Ocultar los inputs radio de la vista */ 
+input[type="radio"] {
+    display: none;
+}
+.apartados img,
+.apartados iframe{
+    width: 100%;
+    display: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    scroll-margin-top: 200px;
+    margin: 16px;
+    border: var(--colorBorde1) solid var(--anchoBorde);
+    border-radius: var(--radioBorde);
+}
+
+/* 1. Estilo para el Label seleccionado */
+#btn1:checked ~ .menu label[for="btn1"],
+#btn2:checked ~ .menu label[for="btn2"],
+#btn3:checked ~ .menu label[for="btn3"],
+#btn4:checked ~ .menu label[for="btn4"],
+#btn5:checked ~ .menu label[for="btn5"],
+#btn6:checked ~ .menu label[for="btn6"],
+#btn7:checked ~ .menu label[for="btn7"] {
+    color: var(--colorTexto2);
+    font-weight: bold;
+}
+
+/* Mostramos el elemento correspondiente según el radio pulsado */
+#btn1:checked ~ .apartados #vInicioPublico01,
+#btn2:checked ~ .apartados #vInicioPublico02,
+#btn3:checked ~ .apartados #vInicioPublico03,
+#btn4:checked ~ .apartados #vInicioPublico04,
+#btn5:checked ~ .apartados #vInicioPublico05,
+#btn6:checked ~ .apartados #vInicioPublico06,
+#btn7:checked ~ .apartados #vInicioPublico07 {
+    display: block;
+}

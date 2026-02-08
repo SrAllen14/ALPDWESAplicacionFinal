@@ -12,18 +12,10 @@
     <div class="container">
         <div class="formulario">
             <?php
-                // Guardamos el objeto Usuario actual en una variable.
-                $oUsuarioActual = $_SESSION['usuarioDWESLoginLogoff'];
-                
-                // Guardamos los datos necesarios en variables para ser usados posteriormente.
-                $nombreUsuario = $oUsuarioActual->getDescUsuario();
-                $numConexiones = $oUsuarioActual->getContadorAccesos();
-                $fechaUltimaConexion = $oUsuarioActual->getFechaHoraUltimaConexionAnterior();
-                
-                echo "<h2>Bienvenido ".$nombreUsuario."</h2><br>";
+                echo "<h2>Bienvenido ".$avInicioPrivado['nombre']."</h2><br>";
                 
                 // Comprobar cuantas veces se ha conectado el usuario.
-                if($numConexiones <=1){
+                if($avInicioPrivado['numConexiones'] <=1){
                     // En caso de ser la primera vez mostrar el siguiente mensaje.
                     echo "Esta es tu primera conexión";
                 } else{
@@ -33,12 +25,14 @@
                     $oFormatoFecha = new IntlDateFormatter('es_ES', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
                     
                     // Guardamos la fecha formateada en una variable usando el objeto creado y pasándole como parámetro la fecha recogida de la sesión.
-                    $fecha = $oFormatoFecha->format($fechaUltimaConexion);
+                    $fecha = $oFormatoFecha->format($avInicioPrivado['fechaHoraUltimaConexionAnterior']);
                     
                     // Guardamos en formato horas:minutos la hora de la variable fecha.
-                    $hora = $fechaUltimaConexion->format('H:i');
+                    if($avInicioPrivado['fechaHoraUltimaConexionAnterior']){
+                        $hora = $avInicioPrivado['fechaHoraUltimaConexionAnterior']->format('H:i');
+                    }
 
-                    echo "<h2>Te has conectado ".$numConexiones." veces. La última vez que te conectaste fue ".$fecha." a las ".$hora."</h2>";
+                    echo "<h2>Te has conectado ".$avInicioPrivado['numConexiones']." veces. La última vez que te conectaste fue ".$fecha." a las ".$hora."</h2>";
                 }
                 
             ?>
@@ -47,6 +41,9 @@
                 <button type="submit" name="error" id="error">Error</button>
                 <button type="submit" name="wip" id="wip">Mantenimiento de Departamentos</button>
                 <button type="submit" name="rest" id="rest">REST</button>
+                <?php if ($avInicioPrivado['perfil'] == "administrador") :?>
+                    <button type="submit" name="mtoU" id="rest">Mantenimiento Usuarios</button>
+                <?php endif;?>
             </form>
         </div>
     </div>

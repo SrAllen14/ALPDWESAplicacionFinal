@@ -43,5 +43,13 @@ if(isset($_REQUEST['aceptar'])){
     }
 }
 
+$avEliminarDepartamento = [
+    'codDepartamento' => $_SESSION['departamentoActual']->getCodDepartamento(),
+    'descDepartamento' => $_SESSION['departamentoActual']->getDescDepartamento(),
+    'fechaCreacionDepartamento' => $_SESSION['departamentoActual']->getFechaCreacionDepartamento()->format('Y-m-d'),
+    'volumenNegocio' => $_SESSION['departamentoActual']->getVolumenNegocio(),
+    'fechaBajaDepartamento' => ($_SESSION['departamentoActual']->getFechaBajaDepartamento()) ? $_SESSION['departamentoActual']->getFechaBajaDepartamento()->format('Y-m-d') : null
+];
+
 require_once $view['layout'];
 ?>

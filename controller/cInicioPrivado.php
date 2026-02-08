@@ -14,10 +14,6 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
     exit;
 }
 
-if($_SESSION['usuarioDWESLoginLogoff']->getPerfil() !== "administrador"){
-    
-}
-
 // Comprobamos si el botón "iniciar" ha sido pulsado.
 if(isset($_REQUEST['detalles'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
@@ -56,6 +52,15 @@ if(isset($_REQUEST['rest'])){
     exit;
 }
 
+// Comprobamos si el botón "mtoU" ha sido pulsado.
+if(isset($_REQUEST['mtoU'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    // Si se ha pulsado le damos el valor de la página solicitada a la variable $_SESSION.
+    $_SESSION['paginaEnCurso'] = 'mtoUsuario';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
 // Comprobamos si el boton "editar" ha sido pulsado.
 if(isset($_REQUEST['editar'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
@@ -73,6 +78,14 @@ if(isset($_REQUEST['cerrarS'])){
     header('Location: indexLoginLogoff.php');
     exit;
 }
+
+
+$avInicioPrivado = [
+    'nombre' => $_SESSION['usuarioDWESLoginLogoff']->getDescUsuario(),
+    'fechaHoraUltimaConexionAnterior' => $_SESSION['usuarioDWESLoginLogoff']->getFechaHoraUltimaConexionAnterior(),
+    'numConexiones' => $_SESSION['usuarioDWESLoginLogoff']->getContadorAccesos(),
+    'perfil' => $_SESSION['usuarioDWESLoginLogoff']->getPerfil()
+];
 
 // Cargamos el layout principal, y cargará cada página a parte de la estructura principal de la web.
 require_once $view['layout'];
