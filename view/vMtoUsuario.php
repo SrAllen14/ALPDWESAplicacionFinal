@@ -95,7 +95,7 @@
                     table.appendChild(fila);
                 }
             }
-            var urlApi = "http://192.168.1.240/ALPDWESAplicacionFinal/api/wsBuscarUsuariosPorDescripcion.php";
+            var urlApi = "http://alvaroallper.ieslossauces.es/ALPDWESAplicacionFinal/api/wsBuscarUsuariosPorDescripcion.php";
             
             fetch(urlApi)
                 .then((response)=>{
