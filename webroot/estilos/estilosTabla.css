@@ -33,9 +33,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     font-size: 16px;
 }
 
-.tabla td, .tabla tr{
-    max-width: 75px;
-}
 
 .tabla td:nth-child(n+6){
     max-width: 40px;
@@ -59,10 +56,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     background-color: lightgray
 }
 
-button i{
-    font-size: 16px;
-}
-
 button.baja{
     background-color: red;
 }
@@ -75,20 +68,34 @@ button.alta{
     color: green;
 }
 
+.anchoFijo{
+    width: 10%;
+    text-align: center;
+}
+
 .volumen{
+    width: 10%;
     text-align: right;
 }
 
-.iconosDpto form button{
-    max-width: 40px;
-    text-align: left;
+.iconosDpto{
+    min-width: 50px;
+    max-width: 100%;
 }
 
-i{
-    display: block;
-    font-size: 0.7rem;
-    text-align: left;
+.iconosDpto form button{
+    max-width: 10px;
+    background-color: white;
 }
+
+
+.iconosDpto form button i{
+    display: block;
+    font-size: 0.9rem;
+    justify-content: center;
+    align-items: center;
+}
+
 @media(max-width: 800px){
     .tabla table{
         font-size: 10px;

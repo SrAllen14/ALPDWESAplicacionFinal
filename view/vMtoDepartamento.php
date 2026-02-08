@@ -30,23 +30,20 @@
                     <th>Fecha de Creación</th>
                     <th>Fecha de Baja</th>
                     <th>Volumen de Negocio</th>
-                    <th>Ver</th>
-                    <th>Borrar</th>
-                    <th>Editar</th>
-                    <th>Estado</th>
+                    <th colspan="4">Acciones</th>
                 </thead>
                 <tbody>
                     <?php if ($avDepartamentos): ?>
                         <?php foreach ($avDepartamentos as $dto): ?>
                             <tr>
-                                <td <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja"' : ""?>><?php echo $dto['codDepartamento']; ?></td>
-                                <td <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja"' : ""?>><?php echo $dto['descDepartamento']; ?></td>
-                                <td <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja"' : ""?>>
+                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?>"><?php echo $dto['codDepartamento']; ?></td>
+                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?>"><?php echo $dto['descDepartamento']; ?></td>
+                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?> anchoFijo">
                                     <?php
                                     echo $dto['fechaCreacionDepartamento'];
                                     ?>
                                 </td>
-                                <td <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja"' : ""?>>
+                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?> anchoFijo">
                                     <?php
                                     if ($dto['fechaBajaDepartamento'] != null) {
                                         echo $dto['fechaBajaDepartamento'];
@@ -56,10 +53,10 @@
                                     ?>
                                 </td>
                                 <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ''?> volumen"><?php echo $dto['volumenDeNegocio']; ?></td>
-                                <td <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja"' : ""?> class="iconosDpto"><form method="post"><button type="submit" name="bVer" value="<?php echo $dto['codDepartamento']?>"><i class="fa-solid fa-eye"></i></button></form></td>
+                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?> iconosDpto"><form method="post"><button type="submit" name="bVer" value="<?php echo $dto['codDepartamento']?>"><i class="fa-solid fa-eye"></i></button></form></td>
                                 <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?> iconosDpto"><form method="post"><button type="submit" name="bEditar" value="<?php echo $dto['codDepartamento']?>"><i class="fa-regular fa-pen-to-square"></i></button></form></td>
-                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja"' : ""?> iconosDpto"><form method="post"><button type="submit" name="bBorrar" value="<?php echo $dto['codDepartamento']?>"><i class="fa-regular fa-trash-can"></i></button></form></td>
-                                <td <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja"' : ""?>><form method="post"><button type="submit" <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja" name="bAltaLogica"' : 'class="alta" name="bBajaLogica"'?> value="<?php echo $dto['codDepartamento']?>"><i <?php echo ($dto['fechaBajaDepartamento']) ? 'class="fas fa-arrow-up"' : 'class="fas fa-arrow-down"'?>></i></button></form></td>
+                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?> iconosDpto"><form method="post"><button type="submit" name="bBorrar" value="<?php echo $dto['codDepartamento']?>"><i class="fa-regular fa-trash-can"></i></button></form></td>
+                                <td class="<?php echo ($dto['fechaBajaDepartamento']) ? 'baja' : ""?> iconosBajaAlta"><form method="post"><button type="submit" <?php echo ($dto['fechaBajaDepartamento']) ? 'class="baja" name="bAltaLogica"' : 'class="alta" name="bBajaLogica"'?> value="<?php echo $dto['codDepartamento']?>"><i <?php echo ($dto['fechaBajaDepartamento']) ? 'class="fas fa-arrow-up"' : 'class="fas fa-arrow-down"'?>></i></button></form></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
