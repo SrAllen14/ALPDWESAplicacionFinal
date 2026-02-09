@@ -106,6 +106,120 @@ class DepartamentoPDO {
     }
 
     /**
+     * Método buscaDepartamentosPorDescEstado
+     * 
+     * Buscar departamentos por descripción y estado.
+     * 
+     * @param type $descDpto
+     * @param type $estadoDpto
+     * @return type
+     */
+    public static function buscaDepartamentosPorDescEstado($descDpto, $estadoDpto){
+        $aoDepartamentos = [];
+        if($estadoDpto == 'radioTodos'){
+            $aoDepartamentos = self::buscaDepartamentoPorDesc($descDpto);
+        } else{
+            $estado = ($estadoDpto === 'radioAlta') ? "IS NULL" : "IS NOT NULL";
+            
+            $sql = <<<SQL
+                SELECT * FROM T02_Departamento
+                WHERE T02_DescDepartamento LIKE :descDepartamento
+                AND T02_FechaBajaDepartamento $estado
+            SQL;
+            
+            $parametros = [
+                ':descDepartamento' => '%'.$descDpto.'%'
+            ];
+            
+            $consulta = DBPDO::ejecutaConsulta($sql, $parametros);
+            
+            while ($oDepartamento = $consulta->fetchObject()){
+                $aoDepartamentos[] = new Departamento(
+                    $oDepartamento->T02_CodDepartamento,
+                    $oDepartamento->T02_DescDepartamento,
+                    $oDepartamento->T02_FechaCreacionDepartamento,
+                    $oDepartamento->T02_VolumenDeNegocio,
+                    $oDepartamento->T02_FechaBajaDepartamento
+                );
+            }
+        }
+        return $aoDepartamentos;
+    }
+    
+    /**
+     * 
+     * @param type $descDpto
+     * @param type $estadoDpto     
+     */
+    public static function contarDepartamentoPorDescEstado($descDpto, $estadoDpto){
+        if($estadoDpto == 'radioTodos'){
+            $sql = <<<SQL
+                SELECT COUNT(*) numeroDepartamentos FROM T02_Departamento
+                WHERE T02_DescDepartamento LIKE :descDepartamento
+            SQL;
+        } else{
+            $estado = ($estadoDpto === 'radioAlta') ? "IS NULL" : "IS NOT NULL";
+            
+            $sql = <<<SQL
+                SELECT COUNT(*) numeroDepartamentos FROM T02_Departamento
+                WHERE T02_DescDepartamento LIKE :descDepartamento
+                AND T02_FechaBajaDepartamento $estado
+            SQL;
+        }
+        
+        $parametros = [
+            ':descDepartamento' => '%'.$descDpto.'%'
+        ];
+
+        $consulta = DBPDO::ejecutaConsulta($sql, $parametros);
+
+        if($contar = $consulta->fetchObject()){
+            return $contar->numeroDepartamentos;
+        }
+        return 0;
+    }
+    
+    public static function buscaDepartamentoPorDescEstadoPaginado($descDpto, $estadoDpto, $paginaActual){
+        $numResultados = (int) RESULTADOSPORPAGINA; 
+        $indicePagina = (int) (($paginaActual - 1) * $numResultados);
+        
+        if($estadoDpto == 'radioTodos'){
+            $sql = <<<SQL
+                SELECT * FROM T02_Departamento
+                WHERE lower(T02_DescDepartamento) LIKE lower(:descDepartamento)
+                LIMIT $numResultados OFFSET $indicePagina
+            SQL;
+        } else{
+            $estado = ($estadoDpto == 'radioAlta') ? "IS NULL" : "IS NOT NULL";
+
+            $sql = <<<SQL
+                SELECT * FROM T02_Departamento
+                WHERE lower(T02_DescDepartamento) LIKE lower(:descDepartamento)
+                AND T02_FechaBajaDepartamento $estado
+                LIMIT $numResultados OFFSET $indicePagina
+            SQL;  
+        }
+        
+        $parametros = [
+            ':descDepartamento' => '%'.$descDpto.'%'
+        ];
+        
+        $consulta = DBPDO::ejecutaConsulta($sql, $parametros);
+        
+        $aoDepartamentos = [];
+        while($oDpto = $consulta->fetchObject()){
+            $aoDepartamentos[] = new Departamento(
+                $oDpto->T02_CodDepartamento,
+                $oDpto->T02_DescDepartamento,
+                $oDpto->T02_FechaCreacionDepartamento,
+                $oDpto->T02_VolumenDeNegocio,
+                $oDpto->T02_FechaBajaDepartamento
+            );
+        }
+        return $aoDepartamentos;
+    }
+    
+    /**
      * Método altaDepartamento
      * 
      * Inserta un departamento nuevo en la base de datos.

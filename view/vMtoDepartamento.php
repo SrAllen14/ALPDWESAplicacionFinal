@@ -71,5 +71,17 @@
                 </tbody>
             </table>
         </div>
+        <div class="paginacion">
+            <form id="paginacionTabla" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                <button name="paginaInicial" class="boton" id="paginaInicial">|<</button>
+                <button name="paginaAnterior" class="boton" id="paginaAnterior"><</button>
+                <p><?php echo $paginaActual ?></p>
+                <p>de</p>
+                <p><?php echo $totalPaginas ?></p>
+                <button name="paginaSiguiente" class="boton" id="paginaSiguiente">></button>
+                <button name="paginaFinal" class="boton" id="paginaFinal">>|</button>
+            </form>
+        </div>
+        
     </div>
 </main>

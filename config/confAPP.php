@@ -7,6 +7,7 @@
 
 const RESP_SEGURIDAD = "pimentel";
 const API_KEY_NASA = 'uzpJUwOHnBD391Xblgeh1wiMDprUWeP91FRkajuI';
+const RESULTADOSPORPAGINA = 5;
 
 require_once 'core/iValidacionFormularios.php';
 

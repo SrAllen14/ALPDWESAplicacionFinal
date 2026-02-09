@@ -39,6 +39,10 @@ if(empty($_SESSION['descDptoBuscado'])){
     $_SESSION['descDptoBuscado'] = $sBuscada;
 }
 
+if(empty($_SESSION['estadoDptoBuscado'])){
+    $_SESSION['estadoDptoBuscado'] = 'radioTodos';
+}
+
 $aErrores = [
     'descDepartamento' => null
 ];
@@ -62,12 +66,24 @@ if(isset($_REQUEST['buscar'])){
     
     $_SESSION['descDptoBuscado'] = $sBuscada;
     $_SESSION['estadoDptoBuscado'] = (isset($_REQUEST['radio'])) ? $_REQUEST['radio'] : 'radioTodos';
+    $_SESSION['paginaActualTablaDepartamentos'] = 1;
 } else{
     $entradaOk = false;
 }
 
+$aDepartamentos = DepartamentoPDO::buscaDepartamentosPorDescEstado($_SESSION['descDptoBuscado'], $_SESSION['estadoDptoBuscado']);
 
-$aDepartamentos = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descDptoBuscado']);
+$totalPaginas = ceil(DepartamentoPDO::contarDepartamentoPorDescEstado($_SESSION['descDptoBuscado'], $_SESSION['estadoDptoBuscado'])/ RESULTADOSPORPAGINA) ;
+
+$paginaActual = $_SESSION['paginaActualTablaDepartamentos'] ?? 1;
+if(isset($_REQUEST['paginaInicial'])){$paginaActual = 1;}
+if(isset($_REQUEST['paginaAnterior'])){$paginaActual > 1 ? $paginaActual-- : '';}
+if(isset($_REQUEST['paginaSiguiente'])){$paginaActual < $totalPaginas ? $paginaActual++ : '';}
+if(isset($_REQUEST['paginaFinal'])){$paginaActual = $totalPaginas;}
+
+$_SESSION['paginaActualTablaDepartamentos'] = $paginaActual;
+
+$aDepartamentos = DepartamentoPDO::buscaDepartamentoPorDescEstadoPaginado($_SESSION['descDptoBuscado'], $_SESSION['estadoDptoBuscado'], $paginaActual);
 
 // Comprobamos que el botón "bVer" ha sido pulsado.
 if(isset($_REQUEST['bVer'])){
@@ -161,9 +177,5 @@ if (!is_null($aDepartamentos) && is_array($aDepartamentos)) {
 $avMtoDepartamentos = [
   'radioActual' => ($_SESSION['estadoDptoBuscado']) ? $_SESSION['estadoDptoBuscado'] : 'radioTodos'
 ];
-
-if(isset($_REQUEST['radio'])){
-    echo $_REQUEST['radio'];
-}
 
 require_once $view['layout'];
