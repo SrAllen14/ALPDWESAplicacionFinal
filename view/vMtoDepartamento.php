@@ -17,9 +17,17 @@
             </form>
         </div>
         <div class="formulario">
-            <form>
+            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                 <input type="text" name="codDepartamento" id="codDepartamento" placeholder="Código de departamento..." value="<?php echo $_SESSION['descDptoBuscado'] ?>">
-                <button type="submit" name="buscar" id="buscar">Buscar</button>
+                <button type="submit" name="buscar" id="buscar">Buscar</button><br>
+                <span>
+                    <label for="radioAlta">Alta</label>
+                    <input type="radio" name="radio" id="radioAlta" value="radioAlta" <?php echo $avMtoDepartamentos['radioActual']=='radioAlta'?'checked':''?>>
+                    <label for="radioBaja">Baja</label>
+                    <input type="radio" name="radio" id="radioBaja" value="radioBaja" <?php echo $avMtoDepartamentos['radioActual']=='radioBaja'?'checked':''?>>
+                    <label for="radioTodos">Todos</label>
+                    <input type="radio" name="radio" id="radioTodos" value="radioTodos" <?php echo $avMtoDepartamentos['radioActual']=='radioTodos'?'checked':''?>>
+                </span>                    
             </form>
         </div>
         <div class="tabla">

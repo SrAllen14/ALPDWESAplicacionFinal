@@ -61,6 +61,7 @@ if(isset($_REQUEST['buscar'])){
     }
     
     $_SESSION['descDptoBuscado'] = $sBuscada;
+    $_SESSION['estadoDptoBuscado'] = (isset($_REQUEST['radio'])) ? $_REQUEST['radio'] : 'radioTodos';
 } else{
     $entradaOk = false;
 }
@@ -156,4 +157,13 @@ if (!is_null($aDepartamentos) && is_array($aDepartamentos)) {
         ];
     }
 }
+
+$avMtoDepartamentos = [
+  'radioActual' => ($_SESSION['estadoDptoBuscado']) ? $_SESSION['estadoDptoBuscado'] : 'radioTodos'
+];
+
+if(isset($_REQUEST['radio'])){
+    echo $_REQUEST['radio'];
+}
+
 require_once $view['layout'];
