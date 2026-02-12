@@ -13,7 +13,6 @@
             <form>
                 <button type="submit" name="bAlta" id="altaDepartamento">Añadir departamento</button>
                 <button type="submit" name="bExportarDptos" id="exportarDepartamentos">Exportar departamentos</button>
-                <button type="submit" name="bImportarDptos" id="importarDepartamentos">Importar departamentos</button>
             </form>
         </div>
         <div>
@@ -22,6 +21,7 @@
             <!-- Propiedad imprescindible para enviar archivos al servidor -->
                 <label for="archivoDptos" class="labelFoto">Busca un archivo a importar: </label>
                 <input type="file" name="archivoDptos" id="archivoDptos" accept="application/json">
+                <button type="submit" name="bImportarDptos" id="importarDepartamentos">Importar departamentos</button>
             </form>
         </div>
         <div class="formulario">

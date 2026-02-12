@@ -270,12 +270,18 @@ class DepartamentoPDO {
      */
     public static function insertarDepartamentos($aDepartamentos){
         $sql = <<<SQL
-            INSERT INTO T02_Departamento VALUES (
+            INSERT INTO T02_Departamento(
+                T02_CodDepartamento, 
+                T02_FechaCreacionDepartamento, 
+                T02_FechaBajaDepartamento,
+                T02_DescDepartamento, 
+                T02_VolumenDeNegocio
+                )VALUES(
                 :codDepartamento, 
-                :descDepartamento, 
-                :fechaCreacionDepartamento, 
-                :volumenDeNegocio, 
+                :fechaCreacionDepartamento,
                 :fechaBajaDepartamento,
+                :descDepartamento,
+                :volumenDeNegocio
             )
         SQL;
         
@@ -307,7 +313,7 @@ class DepartamentoPDO {
         }
         
         try{
-            DBPDO::ejecutaConsulta($sql, $aParametros);
+            DBPDO::ejecutarConsultaTransaccion($sql, $aParametros);
             return true;
         } catch(PDOException $exPDO){
             return false;

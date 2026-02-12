@@ -35,7 +35,7 @@ if(isset($_REQUEST['bAlta'])){
 // Comprobamos si el botón "bExportar" ha sido pulsado.
 if(isset($_REQUEST['bExportarDptos'])){
     // Recuperamos de la base de datos lo que ha buscado el usuario.
-    $aoDptosExportar = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descDptoBuscado']);
+    $aoDptosExportar = DepartamentoPDO::buscaDepartamentosPorDescEstado($_SESSION['descDptoBuscado'], $_SESSION['estadoDptoBuscado']);
     
     $aArchivoExportar = [];
     if(!is_null($aoDptosExportar) && is_array($aoDptosExportar)){
@@ -88,7 +88,7 @@ if(isset($_REQUEST['bImportarDptos'])){
     }
     
     // Comprobamos si el archivo ha sido seleccionado.
-    if($_FILES['archivoDptos']['error'] == UPLOAD_ERR_NO_FILE){
+    if($_FILES['archivoDptos']['error'] === UPLOAD_ERR_NO_FILE){
         $aErrores['archivoDptos'] = "Por favor, seleccione un archivo antes de importar";
         $archivoOk = false;
     } else{
@@ -100,10 +100,11 @@ if(isset($_REQUEST['bImportarDptos'])){
         
         $aCamposObligatorios = [
             'codDepartamento',
-            'descDepartamento',
+            'fechaBajaDepartamento',
             'fechaCreacionDepartamento',
             'volumenDeNegocio',
-            'fechaBajaDepartamento'
+            'descDepartamento'
+            
         ];
         
         // Comprobamos que existe cada campo en el JSON.
@@ -126,12 +127,13 @@ if($archivoOk){
     // Verificamos si se ha subido un arhivo sin errores.
     if(isset($_FILES['archivoDptos']) && $_FILES['archivoDptos']['error'] === UPLOAD_ERR_OK){
         // Leemos el archivo subido.
-        $contenidoImagen = file_get_contents($_FILES['archivoDptos']['tmp-name']);
+        $contenidoImagen = file_get_contents($_FILES['archivoDptos']['tmp_name']);
 
         // Lo convertimos a un array.
         $aDptos = json_decode($contenidoImagen, true);
 
         // Lo guardamos en la base de datos
+        DepartamentoPDO::insertarDepartamentos($aDptos);
 
     } else{
         $aErrores['archivoDptos'] = "Error al subir el archivo";

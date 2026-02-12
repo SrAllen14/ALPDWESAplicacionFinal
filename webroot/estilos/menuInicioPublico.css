@@ -33,7 +33,8 @@ input[type="radio"] {
 #btn4:checked ~ .menu label[for="btn4"],
 #btn5:checked ~ .menu label[for="btn5"],
 #btn6:checked ~ .menu label[for="btn6"],
-#btn7:checked ~ .menu label[for="btn7"] {
+#btn7:checked ~ .menu label[for="btn7"],
+#btn8:checked ~ .menu label[for="btn8"] {
     color: var(--colorTexto2);
     font-weight: bold;
 }
@@ -45,6 +46,7 @@ input[type="radio"] {
 #btn4:checked ~ .apartados #vInicioPublico04,
 #btn5:checked ~ .apartados #vInicioPublico05,
 #btn6:checked ~ .apartados #vInicioPublico06,
-#btn7:checked ~ .apartados #vInicioPublico07 {
+#btn7:checked ~ .apartados #vInicioPublico07,
+#btn8:checked ~ .apartados #vInicioPublico08 {
     display: block;
 }
