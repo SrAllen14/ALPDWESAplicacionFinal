@@ -259,6 +259,61 @@ class DepartamentoPDO {
         return $oDepartamento;
     }
 
+    
+    /**
+     * Método insertarDepartamentos
+     * 
+     * Inserta una cantidad de departamentos importada desde un archivo JSON.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     */
+    public static function insertarDepartamentos($aDepartamentos){
+        $sql = <<<SQL
+            INSERT INTO T02_Departamento VALUES (
+                :codDepartamento, 
+                :descDepartamento, 
+                :fechaCreacionDepartamento, 
+                :volumenDeNegocio, 
+                :fechaBajaDepartamento,
+            )
+        SQL;
+        
+        $aParametros = [];
+        
+        // Construyo el array de parametros pasando los datos a objetos que pide la BBDD.
+        foreach($aDepartamentos as $departamento){
+            // Pasamos el campo fecha a un objeto DateTime para poder insertar correctamente en la BBDD.
+            $oFechaCreacion = new DateTime($departamento['fechaCreacionDepartamento']);
+            $oFechaCreacion = $oFechaCreacion->format('Y-m-d');
+            
+            // Comprobamos si el departamento está dado de baja
+            if($departamento['fechaBajaDepartamento'] === null){
+                // En caso de que no exista una fecha de baja devolvemos null.
+                $oFechaBaja = null;
+            } else{
+                // En caso de que si esté dado de baja.
+                $oFechaBaja = new DateTime($departamento['fechaBajaDepartamento']);
+                $oFechaBaja = $oFechaBaja->format('Y-m-d');
+            }
+            
+            $aParametros[] = [
+                ':codDepartamento' => $departamento['codDepartamento'],
+                ':descDepartamento' => $departamento['descDepartamento'],
+                ':fechaCreacionDepartamento' => $departamento['fechaCreacionDepartamento'],
+                ':volumenDeNegocio' => $departamento['volumenDeNegocio'],
+                ':fechaBajaDepartamento' => $oFechaBaja
+            ];
+        }
+        
+        try{
+            DBPDO::ejecutaConsulta($sql, $aParametros);
+            return true;
+        } catch(PDOException $exPDO){
+            return false;
+        }
+    }
+    
     /**
      * Método bajaFisicaDepartamento
      * 

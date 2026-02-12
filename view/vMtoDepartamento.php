@@ -12,8 +12,16 @@
         <div class="botones">
             <form>
                 <button type="submit" name="bAlta" id="altaDepartamento">Añadir departamento</button>
-                <button type="submit" name="exportarDepartamentos" id="exportarDepartamentos">Exportar departamentos</button>
-                <button type="submit" name="importarDepartamentos" id="importarDepartamentos">Importar departamentos</button>
+                <button type="submit" name="bExportarDptos" id="exportarDepartamentos">Exportar departamentos</button>
+                <button type="submit" name="bImportarDptos" id="importarDepartamentos">Importar departamentos</button>
+            </form>
+        </div>
+        <div>
+            <form class="archivoImportar" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" 
+                enctype="multipart/form-data"> 
+            <!-- Propiedad imprescindible para enviar archivos al servidor -->
+                <label for="archivoDptos" class="labelFoto">Busca un archivo a importar: </label>
+                <input type="file" name="archivoDptos" id="archivoDptos" accept="application/json">
             </form>
         </div>
         <div class="formulario">

@@ -32,6 +32,32 @@ if(isset($_REQUEST['bAlta'])){
     exit;
 }
 
+// Comprobamos si el botón "bExportar" ha sido pulsado.
+if(isset($_REQUEST['bExportarDptos'])){
+    // Recuperamos de la base de datos lo que ha buscado el usuario.
+    $aoDptosExportar = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['descDptoBuscado']);
+    
+    $aArchivoExportar = [];
+    if(!is_null($aoDptosExportar) && is_array($aoDptosExportar)){
+        foreach($aoDptosExportar as $oDptoExportar){
+            $aArchivoExportar[] = [
+                'codDepartamento' => $oDptoExportar->getCodDepartamento(),
+                'descDepartamento' => $oDptoExportar->getDescDepartamento(),
+                'fechaCreacionDepartamento' => $oDptoExportar->getFechaCreacionDepartamento(),
+                'volumenDeNegocio' => $oDptoExportar->getVolumenNegocio(),
+                'fechaBajaDepartamento' => $oDptoExportar->getFechaBajaDepartamento()
+            ];
+        }
+    }
+    
+    $jsonContenido = json_encode($aArchivoExportar, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    
+    header('Content-Disposition: attachment; filename="departamentos.json"');
+    
+    echo $jsonContenido;
+    exit;
+}
+
 // Comprobamos que exista el valor de la sesión 'busquedaRealizada'.
 if(empty($_SESSION['descDptoBuscado'])){
     // En caso de que no este exista le damos un valor por defecto.
@@ -44,10 +70,73 @@ if(empty($_SESSION['estadoDptoBuscado'])){
 }
 
 $aErrores = [
-    'descDepartamento' => null
+    'descDepartamento' => null,
+    'archivoDptos' => null
 ];
 
+$archivoOk = true;
 $entradaOk = true;
+
+// Comprobamos si el botón "bImportasDptos" ha sido pulsado.
+if(isset($_REQUEST['bImportarDptos'])){
+    $aExtensiones = ['json'];
+    $nombreArchivo = $_FILES['archivoDptos']['name'] ?? '';
+    $aErrores['archivoDptos'] = validacionFormularios::validarNombreArchivo($nombreArchivo, $aExtensiones, 150, 4, 0);
+    
+    if(!empty($aErrores['archivoDptos'])){
+        $archivoOk = false;
+    }
+    
+    // Comprobamos si el archivo ha sido seleccionado.
+    if($_FILES['archivoDptos']['error'] == UPLOAD_ERR_NO_FILE){
+        $aErrores['archivoDptos'] = "Por favor, seleccione un archivo antes de importar";
+        $archivoOk = false;
+    } else{
+        // Comprobamos que la estructura del archivo enviado está bien.
+        $contenidoImagen = file_get_contents($_FILES['archivoDptos']['tmp_name']);
+        
+        // Lo convertimos en array.
+        $aDptos = json_decode($contenidoImagen, true);
+        
+        $aCamposObligatorios = [
+            'codDepartamento',
+            'descDepartamento',
+            'fechaCreacionDepartamento',
+            'volumenDeNegocio',
+            'fechaBajaDepartamento'
+        ];
+        
+        // Comprobamos que existe cada campo en el JSON.
+        foreach($aDptos as $indice => $oDepartamento){
+            foreach($aCamposObligatorios as $campo){
+                // array_key_exists es más preciso que isset por si el valor es NULL
+                if(!array_key_exists($campo, $oDepartamento)){
+                    $archivoOk = false;
+                    $aErrores['archivoDptos'] = "Error en la estructura del archivo JSON: <br>En el registro $indice falta el campo $campo";
+                    break 2; // Rompe el bucle de campo y de dptos.
+                }
+            }
+        }
+    }
+} else {
+    $archivoOk = false;
+}
+
+if($archivoOk){
+    // Verificamos si se ha subido un arhivo sin errores.
+    if(isset($_FILES['archivoDptos']) && $_FILES['archivoDptos']['error'] === UPLOAD_ERR_OK){
+        // Leemos el archivo subido.
+        $contenidoImagen = file_get_contents($_FILES['archivoDptos']['tmp-name']);
+
+        // Lo convertimos a un array.
+        $aDptos = json_decode($contenidoImagen, true);
+
+        // Lo guardamos en la base de datos
+
+    } else{
+        $aErrores['archivoDptos'] = "Error al subir el archivo";
+    }
+}
 
 // Comprobamos que el botón "buscar" ha sido pulsado.
 if(isset($_REQUEST['buscar'])){
