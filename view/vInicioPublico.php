@@ -17,27 +17,34 @@
     </header>
     <main>
         <div class="container">
-            <input type="radio" name="btn" id="btn1">
-            <input type="radio" name="btn" id="btn2" checked>
+            <input type="radio" name="btn" id="btn1"checked>
+            <input type="radio" name="btn" id="btn2">
             <input type="radio" name="btn" id="btn3">
             <input type="radio" name="btn" id="btn4">
             <input type="radio" name="btn" id="btn5">
             <input type="radio" name="btn" id="btn6">
+            <input type="radio" name="btn" id="btn7">
+            <input type="radio" name="btn" id="btn8">
             <div class="menu">
                 <label for="btn1">Arbol de navegación</label>
-                <label for="btn2">Casos de uso</label>
-                <label for="btn3">Relacion de fichero</label>
-                <label for="btn4">Diagrama de clases</label>
+                <label for="btn2">Catálogo de requisitos</label>
+                <label for="btn3">Diagrama de casos de uso</label>
+                <label for="btn4">Relación ficheros</label>
                 <label for="btn5">Uso de sesión</label>
-                <label for="btn6">Catálogo de requisitos</label>
+                <label for="btn6">Modelo Físico de Datos</label>
+                <label for="btn7">Estructura de almacenamiento</label>
+                <label for="btn8">Diagrama de clases</label>
+
             </div>
             <div class="apartados">
                 <iframe id="vInicioPublico01" src="doc/ArbolDeNavegacion.pdf"></iframe>
                 <iframe id="vInicioPublico02" src="doc/CatalogoDeRequisitos.pdf"></iframe>
                 <iframe id="vInicioPublico03" src="doc/DiagramaDeCasosDeUso.pdf"></iframe>
                 <iframe id="vInicioPublico04" src="doc/RelacionDeFicheros.pdf"></iframe>
-                <img id="vInicioPublico05" src="webroot/images/UsoDeSesion.PNG"/>
-                <img id="vInicioPublico06" src="webroot/images/diagramaClasesII.jpg"/>
+                <iframe id="vInicioPublico05" src="doc/UsoDeSesion.pdf"></iframe>
+                <img id="vInicioPublico06" src="webroot/images/modeloFisicoDatos.jpg"/>
+                <iframe id="vInicioPublico07" src="doc/estructuraDeAlmacenamiento.pdf"></iframe>
+                <img id="vInicioPublico08" src="webroot/images/diagramaClases.png"/>
             </div>
         </div>
     </main>

@@ -12,14 +12,30 @@
         <div class="botones">
             <form>
                 <button type="submit" name="bAlta" id="altaDepartamento">Añadir departamento</button>
-                <button type="submit" name="exportarDepartamentos" id="exportarDepartamentos">Exportar departamentos</button>
-                <button type="submit" name="importarDepartamentos" id="importarDepartamentos">Importar departamentos</button>
+                <button type="submit" name="bExportarDptos" id="exportarDepartamentos">Exportar departamentos</button>
+            </form>
+        </div>
+        <div>
+            <form class="archivoImportar" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" 
+                enctype="multipart/form-data"> 
+            <!-- Propiedad imprescindible para enviar archivos al servidor -->
+                <label for="archivoDptos" class="labelFoto">Busca un archivo a importar: </label>
+                <input type="file" name="archivoDptos" id="archivoDptos" accept="application/json">
+                <button type="submit" name="bImportarDptos" id="importarDepartamentos">Importar departamentos</button>
             </form>
         </div>
         <div class="formulario">
-            <form>
+            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                 <input type="text" name="codDepartamento" id="codDepartamento" placeholder="Código de departamento..." value="<?php echo $_SESSION['descDptoBuscado'] ?>">
-                <button type="submit" name="buscar" id="buscar">Buscar</button>
+                <button type="submit" name="buscar" id="buscar">Buscar</button><br>
+                <span>
+                    <label for="radioAlta">Alta</label>
+                    <input type="radio" name="radio" id="radioAlta" value="radioAlta" <?php echo $avMtoDepartamentos['radioActual']=='radioAlta'?'checked':''?>>
+                    <label for="radioBaja">Baja</label>
+                    <input type="radio" name="radio" id="radioBaja" value="radioBaja" <?php echo $avMtoDepartamentos['radioActual']=='radioBaja'?'checked':''?>>
+                    <label for="radioTodos">Todos</label>
+                    <input type="radio" name="radio" id="radioTodos" value="radioTodos" <?php echo $avMtoDepartamentos['radioActual']=='radioTodos'?'checked':''?>>
+                </span>                    
             </form>
         </div>
         <div class="tabla">
@@ -63,5 +79,17 @@
                 </tbody>
             </table>
         </div>
+        <div class="paginacion">
+            <form id="paginacionTabla" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                <button name="paginaInicial" class="boton" id="paginaInicial">|<</button>
+                <button name="paginaAnterior" class="boton" id="paginaAnterior"><</button>
+                <p><?php echo $paginaActual ?></p>
+                <p>de</p>
+                <p><?php echo $totalPaginas ?></p>
+                <button name="paginaSiguiente" class="boton" id="paginaSiguiente">></button>
+                <button name="paginaFinal" class="boton" id="paginaFinal">>|</button>
+            </form>
+        </div>
+        
     </div>
 </main>

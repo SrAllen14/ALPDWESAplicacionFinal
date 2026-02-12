@@ -106,6 +106,120 @@ class DepartamentoPDO {
     }
 
     /**
+     * Método buscaDepartamentosPorDescEstado
+     * 
+     * Buscar departamentos por descripción y estado.
+     * 
+     * @param type $descDpto
+     * @param type $estadoDpto
+     * @return type
+     */
+    public static function buscaDepartamentosPorDescEstado($descDpto, $estadoDpto){
+        $aoDepartamentos = [];
+        if($estadoDpto == 'radioTodos'){
+            $aoDepartamentos = self::buscaDepartamentoPorDesc($descDpto);
+        } else{
+            $estado = ($estadoDpto === 'radioAlta') ? "IS NULL" : "IS NOT NULL";
+            
+            $sql = <<<SQL
+                SELECT * FROM T02_Departamento
+                WHERE T02_DescDepartamento LIKE :descDepartamento
+                AND T02_FechaBajaDepartamento $estado
+            SQL;
+            
+            $parametros = [
+                ':descDepartamento' => '%'.$descDpto.'%'
+            ];
+            
+            $consulta = DBPDO::ejecutaConsulta($sql, $parametros);
+            
+            while ($oDepartamento = $consulta->fetchObject()){
+                $aoDepartamentos[] = new Departamento(
+                    $oDepartamento->T02_CodDepartamento,
+                    $oDepartamento->T02_DescDepartamento,
+                    $oDepartamento->T02_FechaCreacionDepartamento,
+                    $oDepartamento->T02_VolumenDeNegocio,
+                    $oDepartamento->T02_FechaBajaDepartamento
+                );
+            }
+        }
+        return $aoDepartamentos;
+    }
+    
+    /**
+     * 
+     * @param type $descDpto
+     * @param type $estadoDpto     
+     */
+    public static function contarDepartamentoPorDescEstado($descDpto, $estadoDpto){
+        if($estadoDpto == 'radioTodos'){
+            $sql = <<<SQL
+                SELECT COUNT(*) numeroDepartamentos FROM T02_Departamento
+                WHERE T02_DescDepartamento LIKE :descDepartamento
+            SQL;
+        } else{
+            $estado = ($estadoDpto === 'radioAlta') ? "IS NULL" : "IS NOT NULL";
+            
+            $sql = <<<SQL
+                SELECT COUNT(*) numeroDepartamentos FROM T02_Departamento
+                WHERE T02_DescDepartamento LIKE :descDepartamento
+                AND T02_FechaBajaDepartamento $estado
+            SQL;
+        }
+        
+        $parametros = [
+            ':descDepartamento' => '%'.$descDpto.'%'
+        ];
+
+        $consulta = DBPDO::ejecutaConsulta($sql, $parametros);
+
+        if($contar = $consulta->fetchObject()){
+            return $contar->numeroDepartamentos;
+        }
+        return 0;
+    }
+    
+    public static function buscaDepartamentoPorDescEstadoPaginado($descDpto, $estadoDpto, $paginaActual){
+        $numResultados = (int) RESULTADOSPORPAGINA; 
+        $indicePagina = (int) (($paginaActual - 1) * $numResultados);
+        
+        if($estadoDpto == 'radioTodos'){
+            $sql = <<<SQL
+                SELECT * FROM T02_Departamento
+                WHERE lower(T02_DescDepartamento) LIKE lower(:descDepartamento)
+                LIMIT $numResultados OFFSET $indicePagina
+            SQL;
+        } else{
+            $estado = ($estadoDpto == 'radioAlta') ? "IS NULL" : "IS NOT NULL";
+
+            $sql = <<<SQL
+                SELECT * FROM T02_Departamento
+                WHERE lower(T02_DescDepartamento) LIKE lower(:descDepartamento)
+                AND T02_FechaBajaDepartamento $estado
+                LIMIT $numResultados OFFSET $indicePagina
+            SQL;  
+        }
+        
+        $parametros = [
+            ':descDepartamento' => '%'.$descDpto.'%'
+        ];
+        
+        $consulta = DBPDO::ejecutaConsulta($sql, $parametros);
+        
+        $aoDepartamentos = [];
+        while($oDpto = $consulta->fetchObject()){
+            $aoDepartamentos[] = new Departamento(
+                $oDpto->T02_CodDepartamento,
+                $oDpto->T02_DescDepartamento,
+                $oDpto->T02_FechaCreacionDepartamento,
+                $oDpto->T02_VolumenDeNegocio,
+                $oDpto->T02_FechaBajaDepartamento
+            );
+        }
+        return $aoDepartamentos;
+    }
+    
+    /**
      * Método altaDepartamento
      * 
      * Inserta un departamento nuevo en la base de datos.
@@ -145,6 +259,67 @@ class DepartamentoPDO {
         return $oDepartamento;
     }
 
+    
+    /**
+     * Método insertarDepartamentos
+     * 
+     * Inserta una cantidad de departamentos importada desde un archivo JSON.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 29/01/2026
+     */
+    public static function insertarDepartamentos($aDepartamentos){
+        $sql = <<<SQL
+            INSERT INTO T02_Departamento(
+                T02_CodDepartamento, 
+                T02_FechaCreacionDepartamento, 
+                T02_FechaBajaDepartamento,
+                T02_DescDepartamento, 
+                T02_VolumenDeNegocio
+                )VALUES(
+                :codDepartamento, 
+                :fechaCreacionDepartamento,
+                :fechaBajaDepartamento,
+                :descDepartamento,
+                :volumenDeNegocio
+            )
+        SQL;
+        
+        $aParametros = [];
+        
+        // Construyo el array de parametros pasando los datos a objetos que pide la BBDD.
+        foreach($aDepartamentos as $departamento){
+            // Pasamos el campo fecha a un objeto DateTime para poder insertar correctamente en la BBDD.
+            $oFechaCreacion = new DateTime($departamento['fechaCreacionDepartamento']);
+            $oFechaCreacion = $oFechaCreacion->format('Y-m-d');
+            
+            // Comprobamos si el departamento está dado de baja
+            if($departamento['fechaBajaDepartamento'] === null){
+                // En caso de que no exista una fecha de baja devolvemos null.
+                $oFechaBaja = null;
+            } else{
+                // En caso de que si esté dado de baja.
+                $oFechaBaja = new DateTime($departamento['fechaBajaDepartamento']);
+                $oFechaBaja = $oFechaBaja->format('Y-m-d');
+            }
+            
+            $aParametros[] = [
+                ':codDepartamento' => $departamento['codDepartamento'],
+                ':descDepartamento' => $departamento['descDepartamento'],
+                ':fechaCreacionDepartamento' => $departamento['fechaCreacionDepartamento'],
+                ':volumenDeNegocio' => $departamento['volumenDeNegocio'],
+                ':fechaBajaDepartamento' => $oFechaBaja
+            ];
+        }
+        
+        try{
+            DBPDO::ejecutarConsultaTransaccion($sql, $aParametros);
+            return true;
+        } catch(PDOException $exPDO){
+            return false;
+        }
+    }
+    
     /**
      * Método bajaFisicaDepartamento
      * 
