@@ -86,4 +86,25 @@ class REST{
             $error
         );
     }
+    
+    public static function apiDepartamentos($codDepartamento = 'DWA'){
+        $error = false;
+        $url = 'http://192.168.1.240/ALPDWESAplicacionFinal/api/wsVolumenDeDepartamentoPorCodigo.php?codDepartamento=';
+        
+        $resultado = file_get_contents($url.$codDepartamento);
+        $archivoApi = json_decode($resultado, true);
+        
+        if(isset($archivoApi)){
+            $oDepartamento = new Departamento(
+                $archivoApi['codDepartamento'], 
+                $archivoApi['descDepartamento'], 
+                $archivoApi['fechaCreacionDepartamento'],
+                $archivoApi['volumenNegocio'],
+                $archivoApi['fechaBajaDepartamento']
+            );
+            return $oDepartamento;
+        } else{
+            return null;
+        }
+    }
 }

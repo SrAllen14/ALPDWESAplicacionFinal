@@ -17,6 +17,12 @@ if (empty($_SESSION['fotoNasa'])) {
     $_SESSION['fotoNasa'] = REST::apiNasa($fechaHoyFormateada);
 }
 
+// Comprobamos si la sesión "fotoNasa" está vacia.
+if (empty($_SESSION['oDepartamento'])) {
+    // Se obtiene la fecha de hoy para valores.
+    $_SESSION['oDepartamento'] = REST::apiDepartamentos("AAA");
+}
+
 // Comprobamos si el botón "detalles" ha sido pulsado.
 if (isset($_REQUEST['detalles'])) {
     // Si ha sido pulsado el damos el valor de la página solicitada a la variable $_SESSION.
@@ -39,7 +45,8 @@ $fotoExiste = true;
 $entradaOk = true;
 // Inicializamos las variables de control.
 $aErrores = [
-    'fechaNasa' => null
+    'fechaNasa' => null,
+    'codDepartamento' => null
 ];
 
 $oFotoNasa = null;
@@ -63,6 +70,23 @@ if (isset($_REQUEST['btnFecha'])) {
     }
 }
 
+$oDepartamentoActual = null;
+
+$entradaCodDptoOk = true;
+
+if(isset($_REQUEST['btnCodDepartamento'])){
+    $aErrores['codDepartamento'] = validacionFormularios::comprobarAlfaNumerico($_POST['codDepartamento'], 3, 3, 0);
+    
+    if ($aErrores['codDepartamento'] != null) {
+        $entradaCodDptoOk = false;
+    }
+
+    if ($entradaCodDptoOk) {
+        $oDepartamentoActual = REST::apiDepartamentos($_POST['codDepartamento']);
+        $_SESSION['oDepartamento'] = $oDepartamentoActual;
+    }
+}
+
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
     'tituloNasa' => $_SESSION['fotoNasa']->getTitulo(),
@@ -70,7 +94,13 @@ $avRest = [
     'fotoNasaHD' => $_SESSION['fotoNasa']->getUrlHD(),
     'explicacionNasa' => $_SESSION['fotoNasa']->getExplicacion(),
     'fechaNasa' => $_SESSION['fotoNasa']->getFecha(),
-    'errorNasa' => $_SESSION['fotoNasa']->getError()
+    'errorNasa' => $_SESSION['fotoNasa']->getError(),
+    'aCodDepartamentos' => DepartamentoPDO::obtenerTodosCodigosDepartamentos(),
+    'codDepartamento' => $_SESSION['oDepartamento']->getCodDepartamento(),
+    'descDepartamento' => $_SESSION['oDepartamento']->getDescDepartamento(),
+    'fechaCreacionDepartamento' => $_SESSION['oDepartamento']->getFechaCreacionDepartamento(),
+    'fechaBajaDepartamento' => $_SESSION['oDepartamento']->getFechaBajaDepartamento(),
+    'volumenNegocio' => (number_format($_SESSION['oDepartamento']->getVolumenNegocio(), 2, ',', '.') . ' €')
 ];
 
 require_once $view['layout'];

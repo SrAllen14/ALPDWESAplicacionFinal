@@ -10,10 +10,34 @@
  * @source DepartamentoPDO.php
  */
 
-require_once 'model/Departamento.php';
-require_once 'model/DBPDO.php';
+require_once __DIR__.'/Departamento.php';
+require_once __DIR__.'/DBPDO.php';
 
 class DepartamentoPDO {
+    
+    public static function obtenerTodosCodigosDepartamentos(){
+        $sql = <<<SQL
+            SELECT
+                T02_CodDepartamento
+            FROM T02_Departamento
+        SQL;
+        try {
+            // Ejecutar la consulta. 
+            $consulta = DBPDO::ejecutaConsulta($sql);
+            $aCodDepartamentos = null;
+            
+            while ($codDepartamento = $consulta->fetch()) {
+                $aCodDepartamentos[] = $codDepartamento[0];
+            }
+            
+            return $aCodDepartamentos;
+        } catch (Exception $ex) {
+            // En caso de error, devolvemos null.
+            echo $ex->getMessage();
+            return null;
+        }
+    }
+    
     /**
      * Método buscaDepartamentoPorCod
      * 

@@ -53,11 +53,23 @@
                 </div>
             </div>
             <div class="api3">
-                <div class="tit">
-                    
+                <div class="cod">
+                    <form method="post" class="form-codigo">
+                        <label><b>Codigo de departamento:</b></label>
+                        <select name="codDepartamento" >
+                            <?php foreach ($avRest['aCodDepartamentos'] as $codigo) {
+                                $selected = (!empty($_SESSION['oDepartamento']) && $_SESSION['oDepartamento']->getCodDepartamento() == $codigo)
+                                            ? 'selected'
+                                            : '';
+                                echo '<option value="'.$codigo.'" '.$selected.'>'.$codigo.'</option>';
+                            }?>
+                        </select>
+                        <button type="submit" name="btnCodDepartamento" class="btnCodDepartamento">Buscar</button>
+                    </form>
                 </div>
-                <div class="foto">
-                    
+                <div class="tit">
+                    <h3>Volumen de negocio:</h3>
+                    <?php echo $avRest['volumenNegocio']?>
                 </div>
             </div>
             
