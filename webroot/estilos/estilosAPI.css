@@ -44,6 +44,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     max-width: 256px;
 }
 
+.infoApi{
+    max-width: 100%;
+    overflow: hidden;
+}
+
 .divDetalles{
     max-width: 100%;
     overflow: hidden;
