@@ -89,7 +89,7 @@ class REST{
     
     public static function apiDepartamentos($codDepartamento = 'DWA'){
         $error = false;
-        $url = 'http://192.168.1.240/ALPDWESAplicacionFinal/api/wsVolumenDeDepartamentoPorCodigo.php?codDepartamento=';
+        $url = 'http://daw201.local.ieslossauces.es/ALPDWESAplicacionFinal/api/wsVolumenDeDepartamentoPorCodigo.php?codDepartamento=';
         
         $resultado = file_get_contents($url.$codDepartamento);
         $archivoApi = json_decode($resultado, true);

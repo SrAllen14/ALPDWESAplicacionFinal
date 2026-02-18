@@ -20,7 +20,7 @@ if (empty($_SESSION['fotoNasa'])) {
 // Comprobamos si la sesión "fotoNasa" está vacia.
 if (empty($_SESSION['oDepartamento'])) {
     // Se obtiene la fecha de hoy para valores.
-    $_SESSION['oDepartamento'] = REST::apiDepartamentos("AAA");
+    $_SESSION['oDepartamento'] = REST::apiDepartamentos();
 }
 
 // Comprobamos si el botón "detalles" ha sido pulsado.
