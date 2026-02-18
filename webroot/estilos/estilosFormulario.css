@@ -57,6 +57,32 @@ button{
     font-weight: bold;
 }
 
+.archivoImportar{
+    width: 100%;
+    max-width: 800px;
+    min-width: 200px;
+    margin: 0 auto;
+    padding: 10px;
+    gap: 20px;
+    align-items: center;
+    font-size: 20px;
+}
+
+.paginacion{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    & #paginacionTabla{
+        display: flex;
+        align-items: center;
+        gap: 10px; 
+    }
+}
+
+.fin{
+    background-color: lightgray;
+}
 .lectura{
     background-color: lightgray;
 }

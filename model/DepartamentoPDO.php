@@ -14,7 +14,15 @@ require_once __DIR__.'/Departamento.php';
 require_once __DIR__.'/DBPDO.php';
 
 class DepartamentoPDO {
-    
+    /*
+     * Método obtenerTodosCodigosDepartamentos
+     * 
+     * Obtener los códigos de cada departamento existente en la base de datos.
+     * 
+     * @author Álvaro Allén alvaro.allper.1@educa.jcyl.es
+     * @since 18/02/2026
+     * @return (Array) Vector de códigos de departamentos
+     */
     public static function obtenerTodosCodigosDepartamentos(){
         $sql = <<<SQL
             SELECT
@@ -171,6 +179,9 @@ class DepartamentoPDO {
     }
     
     /**
+     * Método ContarDepartamentoPorDescEstado
+     * 
+     * 
      * 
      * @param type $descDpto
      * @param type $estadoDpto     
@@ -354,7 +365,7 @@ class DepartamentoPDO {
      * @param (Departamento) $oDepartamento Objeto de la clase Departamento.
      * @return (boolean) true: ha sido borrado correctamente. false: ha habido un error en la ejecución.
      */
-    public static function bajaFisicaDepartamento($oDepartamento) {
+    public static function bajaFisicaDepartamento($codDepartmento) {
         $sql = <<<SQL
             DELETE FROM T02_Departamento
             WHERE T02_CodDepartamento = :codDepartamento
@@ -362,7 +373,7 @@ class DepartamentoPDO {
         
         try{
             $consulta = DBPDO::ejecutaConsulta($sql, [
-                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+                ':codDepartamento' => $codDepartmento
             ]);
             
             if($consulta->rowCount() > 0){
@@ -384,7 +395,7 @@ class DepartamentoPDO {
      * @param (Departamento) $oDepartamento Objeto de la clase Departamento.
      * @return (Departamento) Objeto de la clase Departamento.
      */
-    public static function bajaLogicaDepartamento($oDepartamento) {
+    public static function bajaLogicaDepartamento($codDepartmento) {
         $sql = <<<SQL
             UPDATE T02_Departamento
                 SET T02_FechaBajaDepartamento = now()
@@ -393,12 +404,11 @@ class DepartamentoPDO {
         
         try{
             $consulta = DBPDO::ejecutaConsulta($sql, [
-                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+                ':codDepartamento' => $codDepartmento
             ]);
             
             if($consulta){
-                $oDepartamento->setFechaBajaDepartamento(new DateTime());
-                return $oDepartamento;
+                return self::buscaDepartamentoPorCod($codDepartamento);
             } else{
                 return null;
             }
@@ -419,7 +429,7 @@ class DepartamentoPDO {
      * @param (float) $volumenNegocioNuevo Volumen nuevo del departamento.
      * @return (Departamento) Objeto de la clase Departamento.
      */
-    public static function modificaDepartamento($oDepartamento, $descDepartamentoNuevo, $volumenNegocioNuevo) {
+    public static function modificaDepartamento($codDepartamento, $descDepartamentoNuevo, $volumenNegocioNuevo) {
         $sql = <<<SQL
             UPDATE T02_Departamento
                 SET T02_DescDepartamento = :descDepartamento,
@@ -431,13 +441,12 @@ class DepartamentoPDO {
             $consulta = DBPDO::ejecutaConsulta($sql, [
                 ':descDepartamento' => $descDepartamentoNuevo,
                 ':volumenNegocio' => $volumenNegocioNuevo,
-                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+                ':codDepartamento' => $codDepartamento
             ]);
             
             if($consulta){
-                $oDepartamento->setDescDepartamento($descDepartamentoNuevo);
-                $oDepartamento->setVolumenNegocio($volumenNegocioNuevo);
-                return $oDepartamento;
+                
+                return self::buscaDepartamentoPorCod($codDepartamento);
             } else{
                 return null;
             }
@@ -456,7 +465,7 @@ class DepartamentoPDO {
      * @param (Departamento) $oDepartamento Objeto de la clase Departamento.
      * @return (Departamento) Objeto de la clase Departamento.
      */
-    public static function rehabilitaDepartamento($oDepartamento) {
+    public static function rehabilitaDepartamento($codDepartamento) {
         $sql = <<<SQL
             UPDATE T02_Departamento
                 SET T02_FechaBajaDepartamento = null
@@ -465,12 +474,11 @@ class DepartamentoPDO {
         
         try{
             $consulta = DBPDO::ejecutaConsulta($sql, [
-                ':codDepartamento' => $oDepartamento->getCodDepartamento()
+                ':codDepartamento' => $codDepartamento
             ]);
             
             if($consulta){
-                $oDepartamento->setFechaBajaDepartamento(null);
-                return $oDepartamento;
+                return self::buscaDepartamentoPorCod($codDepartamento);
             } else{
                 return null;
             }

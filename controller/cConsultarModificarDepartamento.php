@@ -53,7 +53,7 @@ if(isset($_REQUEST['bAplicar'])){
     }
     
     if($entradaOk){
-        $oDepartamento = DepartamentoPDO::modificaDepartamento($_SESSION['departamentoActual'], $_REQUEST['descDepartamento'], $_REQUEST['volumenNegocio']);
+        $oDepartamento = DepartamentoPDO::modificaDepartamento($_SESSION['departamentoActual']->getCodDepartamento(), $_REQUEST['descDepartamento'], $_REQUEST['volumenNegocio']);
         $_SESSION['departamentoActual'] = $oDepartamento;
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'mtoDepartamento';

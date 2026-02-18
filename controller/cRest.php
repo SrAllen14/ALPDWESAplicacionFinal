@@ -17,6 +17,10 @@ if (empty($_SESSION['fotoNasa'])) {
     $_SESSION['fotoNasa'] = REST::apiNasa($fechaHoyFormateada);
 }
 
+if (empty($_SESSION['paisActual'])){
+    $_SESSION['paisActual'] = REST::apiPaisesInfo("Spain");
+}
+
 // Comprobamos si la sesión "fotoNasa" está vacia.
 if (empty($_SESSION['oDepartamento'])) {
     // Se obtiene la fecha de hoy para valores.
@@ -70,21 +74,13 @@ if (isset($_REQUEST['btnFecha'])) {
     }
 }
 
-$oDepartamentoActual = null;
-
-$entradaCodDptoOk = true;
+if(isset($_REQUEST['btnBuscarPais'])){
+    $_SESSION['paisActual'] = REST::apiPaisesInfo($_REQUEST['pais']);
+}
 
 if(isset($_REQUEST['btnCodDepartamento'])){
-    $aErrores['codDepartamento'] = validacionFormularios::comprobarAlfaNumerico($_POST['codDepartamento'], 3, 3, 0);
-    
-    if ($aErrores['codDepartamento'] != null) {
-        $entradaCodDptoOk = false;
-    }
-
-    if ($entradaCodDptoOk) {
-        $oDepartamentoActual = REST::apiDepartamentos($_POST['codDepartamento']);
-        $_SESSION['oDepartamento'] = $oDepartamentoActual;
-    }
+    $oDepartamentoActual = REST::apiDepartamentos($_POST['codDepartamento']);
+    $_SESSION['oDepartamento'] = $oDepartamentoActual;
 }
 
 // Se crea un array con todos los datos que se le pasan a la vista.
@@ -100,7 +96,10 @@ $avRest = [
     'descDepartamento' => $_SESSION['oDepartamento']->getDescDepartamento(),
     'fechaCreacionDepartamento' => $_SESSION['oDepartamento']->getFechaCreacionDepartamento(),
     'fechaBajaDepartamento' => $_SESSION['oDepartamento']->getFechaBajaDepartamento(),
-    'volumenNegocio' => (number_format($_SESSION['oDepartamento']->getVolumenNegocio(), 2, ',', '.') . ' €')
+    'volumenNegocio' => (number_format($_SESSION['oDepartamento']->getVolumenNegocio(), 2, ',', '.') . ' €'),
+    'nombrePais' => $_SESSION['paisActual']->getNombre(),
+    'poblacion' => number_format($_SESSION['paisActual']->getPoblacion(), 0, ',', '.'),
+    'capital' => $_SESSION['paisActual']->getCapital(),
+    'area' => number_format($_SESSION['paisActual']->getArea(), 0, ',', '.'). " km²"
 ];
-
 require_once $view['layout'];

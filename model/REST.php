@@ -87,9 +87,66 @@ class REST{
         );
     }
     
+    /*public static function apiPaisesInfo($nombrePais){
+        $url = "https://restcountries.com/v3.1/name/" . urlencode($nombrePais);
+
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        if (!empty($data)) {
+            $pais = $data[0];
+            $idioma = array_keys($pais['name']['nativeName']);
+            $oPaisInfo = new PaisesInfo($pais['name']['nativeName'][$idioma[0]]['common'],  $pais['population'], $pais['capital'][0], $pais['area']);
+            return $oPaisInfo;
+        } else {
+            return null;
+        }
+    }*/
+    
+    public static function apiPaisesInfo($nombrePais){
+        // Endpoint de la API
+        $url = "https://restcountries.com/v3.1/name/" . urlencode($nombrePais);
+        
+        // Iniciar cURL
+        $curl = curl_init();
+        
+        // Configurar opciones
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_TIMEOUT => 10
+        ]);
+        
+        // Ejecutar y obtener respuesta
+        $response = curl_exec($curl);
+        
+        // Cerrar cURL
+        curl_close($curl);
+        
+        // Convertir JSON a array
+        $data = json_decode($response, true);
+        
+        // Comprobar errores
+        if (!$data) {
+            echo "Error al obtener datos o país no encontrado.";
+            exit;
+        }
+        
+        if (!empty($data)) {
+            $pais = $data[0];
+            $idioma = array_keys($pais['name']['nativeName']);
+            $oPaisInfo = new PaisesInfo($pais['name']['nativeName'][$idioma[0]]['common'],  $pais['population'], $pais['capital'][0], $pais['area']);
+            return $oPaisInfo;
+        } else {
+            return null;
+        }
+        
+    }
+    
     public static function apiDepartamentos($codDepartamento = 'DWA'){
         $error = false;
-        $url = 'http://daw201.local.ieslossauces.es/ALPDWESAplicacionFinal/api/wsVolumenDeDepartamentoPorCodigo.php?codDepartamento=';
+        $url = 'http://alvaroallper.ieslossauces.es/ALPDWESAplicacionFinal/api/wsVolumenDeDepartamentoPorCodigo.php?codDepartamento=';
         
         $resultado = file_get_contents($url.$codDepartamento);
         $archivoApi = json_decode($resultado, true);

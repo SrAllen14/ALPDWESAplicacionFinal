@@ -51,7 +51,7 @@ if(isset($_REQUEST['aplicarC'])){
     }
 
     if($entradaOk){
-        $oUsuarioActual = UsuarioPDO::modificarContraseña($oUsuarioActual, $_REQUEST['passwordNueva']);
+        $oUsuarioActual = UsuarioPDO::modificarContraseña($oUsuarioActual->getCodUsuario(), $_REQUEST['passwordNueva']);
         $_SESSION['usuarioDWESLoginLogoff'] = $oUsuarioActual;
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.

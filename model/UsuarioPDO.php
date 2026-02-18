@@ -14,6 +14,44 @@ require_once 'DBPDO.php';
 require_once 'Usuario.php';
 
 class UsuarioPDO {
+    public static function buscarUsuarioPorCod($codUsuario){
+        $sql = <<<SQL
+            SELECT * FROM T01_Usuario
+            WHERE T01_CodUsuario = :usuario
+        SQL;
+        try {
+            // Ejecutar la consulta. 
+            $consulta = DBPDO::ejecutaConsulta($sql, [
+                        ':usuario' => $codUsuario]);
+
+            // Obtener el resultado de la consulta.
+            $usuarioDB = $consulta->fetch(PDO::FETCH_ASSOC);
+
+            // Si no existe el usuario o la contraseña es incorrecta, devolvemos null.
+            if (!$usuarioDB) {
+                return null;
+            }
+
+            $fechaDB = $usuarioDB['T01_FechaHoraUltimaConexion'];
+            $oFechaValida = ($fechaDB) ? new DateTime($fechaDB) : null;
+
+            $oUsuario = new Usuario(
+                $usuarioDB['T01_CodUsuario'],
+                $usuarioDB['T01_Password'],
+                $usuarioDB['T01_DescUsuario'],
+                $usuarioDB['T01_NumConexiones'],
+                $oFechaValida,
+                null,
+                $usuarioDB['T01_Perfil'],
+                $usuarioDB['T01_ImagenUsuario']);
+            return $oUsuario;
+        } catch (Exception $ex) {
+            // En caso de error, devolvemos null.
+            echo $ex->getMessage();
+            return null;
+        }
+    }
+    
     /**
      * Método validarUsuario
      * 
@@ -60,18 +98,14 @@ class UsuarioPDO {
             $oFechaValida = ($fechaDB) ? new DateTime($fechaDB) : null;
 
             $oUsuario = new Usuario(
-                    $usuarioDB['T01_CodUsuario'],
-                    $usuarioDB['T01_Password'],
-                    $usuarioDB['T01_DescUsuario'],
-                    $usuarioDB['T01_NumConexiones'],
-                    $oFechaValida,
-                    null,
-                    $usuarioDB['T01_Perfil'],
-                    $usuarioDB['T01_ImagenUsuario']);
-
-            if (is_null($oUsuario)) {
-                
-            }
+                $usuarioDB['T01_CodUsuario'],
+                $usuarioDB['T01_Password'],
+                $usuarioDB['T01_DescUsuario'],
+                $usuarioDB['T01_NumConexiones'],
+                $oFechaValida,
+                null,
+                $usuarioDB['T01_Perfil'],
+                $usuarioDB['T01_ImagenUsuario']);
             return $oUsuario;
         } catch (Exception $ex) {
             // En caso de error, devolvemos null.
@@ -109,7 +143,7 @@ class UsuarioPDO {
                     $oUsuario->T01_DescUsuario,
                     $oUsuario->T01_NumConexiones,
                     $oUsuario->T01_FechaHoraUltimaConexion,
-                    $oUsuario->T01_FechaHoraUltimaConexionAnterior,
+                    null,
                     $oUsuario->T01_Perfil,
                     $oUsuario->T01_ImagenUsuario
                 );
@@ -132,7 +166,9 @@ class UsuarioPDO {
      * @param (Usuario) objeto de la clase usuario.
      * @return (Usuario) objeto de la clase usuario.
      */
-    public static function actualizarUltimaConexionUsuario($oUsuario) {
+    public static function actualizarUltimaConexionUsuario($codUsuario) {
+        $oUsuario = self::buscarUsuarioPorCod($codUsuario);
+        $fechaAnterior = $oUsuario->getFechaHoraUltimaConexion();
         $sql = <<<SQL
             UPDATE T01_Usuario SET
                 T01_FechaHoraUltimaConexion = NOW(),
@@ -140,21 +176,22 @@ class UsuarioPDO {
             WHERE T01_CodUsuario = :usuario
         SQL;
 
-        // Ejecutamos la actualización en la BD.
-        DBPDO::ejecutaConsulta($sql, [':usuario' => $oUsuario->getCodUsuario()]);
-
-        // Actualizamos el objetos Usuario en memoria.
-        // La fecha actual que tenía ahora pasa a ser la anterior.
-        $oUsuario->setFechaHoraUltimaConexionAnterior($oUsuario->getFechaHoraUltimaConexion());
-
-        // Incrementamos el número de accesos.
-        $oUsuario->setContadorAccesos($oUsuario->getContadorAccesos() + 1);
-
-        // Establecer la nueva fecha de conexión.
-        date_default_timezone_set('Europe/Madrid');
-        $oUsuario->setFechaHoraUltimaConexion(new DateTime());
-
-        return $oUsuario;
+        try{
+            // Ejecutamos la actualización en la BD.
+            $consulta = DBPDO::ejecutaConsulta($sql, [':usuario' => $codUsuario]);
+            
+            if($consulta){
+                $oUsuario = self::buscarUsuarioPorCod($codUsuario);
+                // Actualizamos el objetos Usuario en memoria.
+                // La fecha actual que tenía ahora pasa a ser la anterior.
+                $oUsuario->setFechaHoraUltimaConexionAnterior($fechaAnterior);
+                return $oUsuario;
+            } else{
+                return null;
+            } 
+        } catch (Exception $ex){
+            return null;
+        }
     }
 
     /**
@@ -208,7 +245,7 @@ class UsuarioPDO {
      * @param (string) descripción nueva del usuario.
      * @return (Usuario) objeto de la clase Usuario.
      */
-    public static function modificarUsuario($oUsuario, $descUsuarioNuevo) {
+    public static function modificarUsuario($codUsuario, $descUsuarioNuevo) {
 
         // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
         $sql = <<<SQL
@@ -220,11 +257,10 @@ class UsuarioPDO {
         try {
             $consulta = DBPDO::ejecutaConsulta($sql,
                             [':descUsuario' => $descUsuarioNuevo,
-                            ':codUsuario' => $oUsuario->getCodUsuario()]);
+                            ':codUsuario' => $codUsuario]);
             
             if ($consulta) {
-                $oUsuario->setDescUsuario($descUsuarioNuevo);
-                return $oUsuario;
+                return self::buscarUsuarioPorCod($codUsuario);
             } else{
                 return null;
             }
@@ -244,7 +280,7 @@ class UsuarioPDO {
      * @param (string) contraseña nueva del usuario.
      * @return (Usuario) objeto de la clase Usuario. 
      */
-    public static function modificarContraseña($oUsuario, $passwordNueva){
+    public static function modificarContraseña($codUsuario, $passwordNueva){
          // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
         $sql = <<<SQL
             UPDATE T01_Usuario
@@ -254,12 +290,11 @@ class UsuarioPDO {
         
         try {
             $consulta = DBPDO::ejecutaConsulta($sql,
-                            [':password' => $oUsuario->getCodUsuario().$passwordNueva,
-                            ':codUsuario' => $oUsuario->getCodUsuario()]);
+                            [':password' => $codUsuario.$passwordNueva,
+                            ':codUsuario' => $codUsuario]);
             
             if ($consulta) {
-                $oUsuario->setPassword(hash('sha256', $oUsuario->getCodUsuario().$passwordNueva));
-                return $oUsuario;
+                return self::buscarUsuarioPorCod($codUsuario);
             } else{
                 return null;
             }
@@ -278,7 +313,7 @@ class UsuarioPDO {
      * @param (Usuario) objeto de la clase Usuario.
      * @return (boolean) true: ha funcionado la ejecución. false: no ha funcionado la ejecución.
      */
-    public static function borrarUsuario($oUsuario){
+    public static function borrarUsuario($codUsuario){
         $sql = <<<SQL
             DELETE FROM T01_Usuario
             WHERE T01_codUsuario = :codUsuario
@@ -286,7 +321,7 @@ class UsuarioPDO {
         
         try{
             $consulta = DBPDO::ejecutaConsulta($sql, [
-                ':codUsuario' => $oUsuario->getCodUsuario()
+                ':codUsuario' => $codUsuario
             ]);
             
             if($consulta->rowCount() > 0){
