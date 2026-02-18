@@ -68,7 +68,7 @@ if(isset($_REQUEST['iniciar'])){
 
 // Si la validación es correcta, validar con la BD.
 if($entradaOk){
-    $oUsuario = UsuarioPDO::actualizarUltimaConexionUsuario($oUsuario);
+    $oUsuario = UsuarioPDO::actualizarUltimaConexionUsuario($aRespuestas['usuario']);
     // Crea la sesión con el objeto usuario
     $_SESSION['usuarioDWESLoginLogoff'] = $oUsuario;
 

@@ -91,6 +91,63 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .inFecha:hover{
     border-color: #45a049;
 }
+
+
+.pais{
+    display: block;
+    max-width: 100%;
+    text-align: center;
+}
+
+.resultado{
+    margin-top: 20px;
+    & p{
+        display: block;
+        font-size: 20px;
+    }
+}
+
+.cod{
+    display: block;
+    max-width: 100%;
+    text-align: center;
+}
+
+.form-codigo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    & select{
+        margin-top: 20px;
+        width: 120px;
+        max-width: 100%;
+        text-align: center;
+        width: 220px;
+        padding: 10px 14px;
+        font-size: 16px;
+        border-radius: 12px;
+        border: 2px solid #ddd;
+        cursor: pointer;
+        transition: 0.2s;
+        outline: none;
+    }
+    
+    & select:hover{
+        border-color: #999999;
+    }
+}
+
+.volumenNegocio{
+    margin: 20px;
+    text-align: center;
+    & p{
+        display: block;
+        font-size: 24px;
+    }
+}
+
 @media (max-width: 800px) {
     .subcontainer{
         display: flex;

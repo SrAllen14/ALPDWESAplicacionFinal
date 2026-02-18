@@ -11,14 +11,27 @@ require_once '../model/Usuario.php';
 require_once '../model/UsuarioPDO.php';
 require_once '../model/DBPDO.php';
 require_once '../config/confDBPDO.php';
+require_once '../core/iValidacionFormularios.php';
 
 header('Content-Type: application/json; charset-utf-8');
 $entradaOk = true;
 
+$aErrores=[
+    'descUsuario' => null
+];
+
+if(isset($_REQUEST['descUsuario'])){
+    $aErrores['descUsuario'] = validacionFormularios::comprobarAlfabetico($_REQUEST['descUsuario'],255,0,0);
+
+    if($aErrores['descUsuario'] != null){
+        $entradaOk = false;
+    }
+}
+
 if($entradaOk){
     $aUsuariosDevueltos = UsuarioPDO::buscarUsuariosPorDesc($_REQUEST['descUsuario'] ?? '');
     $amUsuarios = [];
-    
+
     if($aUsuariosDevueltos){
         foreach ($aUsuariosDevueltos as $oUsuario) {
             $amUsuarios[] = [
@@ -35,6 +48,5 @@ if($entradaOk){
     }
     echo json_encode($amUsuarios, JSON_PRETTY_PRINT);
 }
-
 
 ?>

@@ -17,6 +17,7 @@ require_once 'model/UsuarioPDO.php';
 require_once 'model/AppError.php';
 require_once 'model/REST.php';
 require_once 'model/FotoNasa.php';
+require_once 'model/PaisesInfo.php';
 require_once 'model/Departamento.php';
 require_once 'model/DepartamentoPDO.php';
 
