@@ -2,11 +2,11 @@
     <h2><?php echo ($avEditarDepartamento['accion']!="editar") ? 'Consultar departamento' : 'Editar departamento'?></h2>
 </div>
 <div class="cabecera3">
-    <form method="post">
+    <?php if ($avEditarDepartamento['accion']!="editar"):?>
         <form method="post">
             <button type="submit" name="volver" id="volver">Volver</button>
         </form>
-    </form>
+    <?php endif ?>
 </div>
 </header>
 <main>
@@ -26,6 +26,7 @@
                 <input class="lectura" type="date" name="fechaBaja" id="desc" value="<?php echo $avEditarDepartamento['fechaBajaDepartamento']?>" readonly/><br>
                 <?php if($avEditarDepartamento['accion'] == 'editar') :?>
                     <button type="submit" name="bAplicar">Aplicar Cambios</button>
+                    <button type="submit" name="bCancelar" id="cancelar">Cancelar</button>
                 <?php endif; ?>
             </form>
         </div>

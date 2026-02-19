@@ -15,7 +15,7 @@
                 <button type="submit" name="bExportarDptos" id="exportarDepartamentos">Exportar departamentos</button>
             </form>
         </div>
-        <div>
+        <div class="contImportar">
             <form class="archivoImportar" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" 
                 enctype="multipart/form-data"> 
                 
@@ -23,6 +23,8 @@
                 <input type="file" name="archivoDptos" id="archivoDptos" accept="application/json">
                 <button type="submit" name="bImportarDptos" id="importarDepartamentos">Importar departamentos</button>
             </form>
+            <span class="Ierror"><?php echo $aErrores['archivoDptos'] ?></span>
+            <span class="Icorrecto"><?php echo $aRespuestas['archivoDptos'] ?></span>
         </div>
         <div class="formulario">
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">

@@ -74,6 +74,11 @@ $aErrores = [
     'archivoDptos' => null
 ];
 
+$aRespuestas = [
+    'descDepartamento' => null,
+    'archivoDptos' => null
+];
+
 $archivoOk = true;
 $entradaOk = true;
 
@@ -133,7 +138,11 @@ if($archivoOk){
         $aDptos = json_decode($contenidoImagen, true);
 
         // Lo guardamos en la base de datos
-        DepartamentoPDO::insertarDepartamentos($aDptos);
+        if(DepartamentoPDO::insertarDepartamentos($aDptos)){
+            $aRespuestas['archivoDptos'] = 'Departamentos insertados correctamente';
+        } else{
+            $aErrores['archivoDptos'] = 'No se han insertado los registros en la BBDD';
+        }
 
     } else{
         $aErrores['archivoDptos'] = "Error al subir el archivo";

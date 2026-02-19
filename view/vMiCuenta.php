@@ -2,12 +2,6 @@
         <h2>Editar</h2>
     </div>
     <div class="cabecera3">
-        <form method="post">
-            <form method="post">
-                <button type="submit" name="volver" id="volver">Volver</button>
-                <button type="submit" name="cerrarS" id="cerrarS">Cerrar Sesión</button>
-            </form>
-        </form>
     </div>
 </header>
 <main>
@@ -31,7 +25,8 @@
                 <input class="lectura" type="datetime-local" name="fechaUltimaConexion" id="desc" value="<?php echo $avEditar['fechaUltimaConexion']?>" readonly/><br><br>
                 <label>Última conexión anterior</label><br>
                 <input class="lectura" type="datetime-local" name="fechaUltimaConexionAnterior" id="desc" value="<?php echo $avEditar['fechaUltimaConexionAnterior']?>" readonly/><br>
-                <button type="submit" name="aplicarC" id="aplicarC">Aplicar Cambios</button>
+                <button type="submit" name="aplicarC" id="aplicarC">Aceptar</button>
+                <button type="submit" name="cancelar" id="cancelar">Cancelar</button>
                 <button type="submit" name="borrarC" id="borrarC">Borrar cuenta</button>
             </form>
         </div>

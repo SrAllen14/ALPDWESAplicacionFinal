@@ -16,7 +16,7 @@ if(empty($_SESSION['usuarioDWESLoginLogoff'])){
 }
 
 // Comprobamos que el botón "volver" ha sido pulsado.
-if(isset($_REQUEST['volver'])){
+if(isset($_REQUEST['cancelar'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
     $_SESSION['paginaEnCurso'] = 'inicioPrivado';
@@ -24,14 +24,6 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
-// Comprobamos que el botón "Cerrar sesión" ha sido pulsado.
-if(isset($_REQUEST['cerrarS'])){
-    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-    // Si ha sido pulsado le damos el valor de la página solicitada a la variable $_SESSION.
-    $_SESSION['paginaEnCurso'] = 'inicioPublico';
-    header('Location: indexLoginLogoff.php');
-    exit;
-}
 
 // Comprobamos que el botón "cambiarC" ha sido pulsado.
 if(isset($_REQUEST['cambiarC'])){
@@ -52,6 +44,7 @@ if(isset($_REQUEST['borrarC'])){
 }
 
 $oUsuarioActual = $_SESSION['usuarioDWESLoginLogoff'];
+$fechaHoraUltimaConexionAnterior = $oUsuarioActual->getFechaHoraUltimaConexionAnterior();
 $entradaOk = true;
 
 $aErrores = [
@@ -68,8 +61,14 @@ if(isset($_REQUEST['aplicarC'])){
     }
     
     if($entradaOk){
+        echo "hola";
         $oUsuarioActual = UsuarioPDO::modificarUsuario($oUsuarioActual->getCodUsuario(), $_REQUEST['descUsuario']);
         $_SESSION['usuarioDWESLoginLogoff'] = $oUsuarioActual;
+        $_SESSION['usuarioDWESLoginLogoff']->setFechaHoraUltimaConexionAnterior($fechaHoraUltimaConexionAnterior);
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'inicioPrivado';
+        header('Location: indexLoginLogoff.php');
+        exit;
     }
 }
 

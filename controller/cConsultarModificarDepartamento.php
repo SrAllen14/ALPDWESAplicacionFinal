@@ -32,6 +32,15 @@ if(isset($_REQUEST['volver'])){
     exit;
 }
 
+// Comprobamos si ha sido pulsado el botón "cancelar"
+if(isset($_REQUEST['bCancelar'])){
+    // En caso de que no haya iniciado sesión volvemos a la página de inicio público.
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
+    header('Location: indexLoginLogoff.php');
+    exit;
+}
+
 $oDepartamento = $_SESSION['departamentoActual'];
 
 

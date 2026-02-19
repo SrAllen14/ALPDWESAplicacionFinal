@@ -247,7 +247,7 @@ class UsuarioPDO {
      */
     public static function modificarUsuario($codUsuario, $descUsuarioNuevo) {
 
-        // Ceramos y definimos una variable con la consulta de insercción para crear un usuario.
+        // Cerramos y definimos una variable con la consulta de insercción para crear un usuario.
         $sql = <<<SQL
             UPDATE T01_Usuario
                 SET T01_DescUsuario = :descUsuario

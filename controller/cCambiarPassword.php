@@ -44,10 +44,12 @@ if(isset($_REQUEST['aplicarC'])){
     
     if(hash('sha256', $oUsuarioActual->getCodUsuario().$_REQUEST['passwordActual']) != $oUsuarioActual->getPassword()){
         $entradaOk = false;
+        $aErrores['passwordActual'] = 'La contraseña actual no coincide con la del usuario';
     }
     
     if($_REQUEST['passwordNueva'] != $_REQUEST['passwordNuevaRepetir']){
         $entradaOk = false;
+        $aErrores['passwordNuevaRepetir'] = 'La contraseña no coincide';
     }
 
     if($entradaOk){
@@ -60,6 +62,10 @@ if(isset($_REQUEST['aplicarC'])){
         exit;
     }
 }
+
+$avCambiarContraseña = [
+    'errores' => $aErrores
+];
 
 require_once $view['layout'];
 ?>
