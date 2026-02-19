@@ -65,3 +65,8 @@ input[type="radio"] {
 #btn8:checked ~ .apartados #vInicioPublico08 {
     display: block;
 }
+#vInicioPublico06{
+    width: 500px;
+    height: 500px;
+    margin: 50px auto;
+}

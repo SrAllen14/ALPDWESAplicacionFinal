@@ -67,7 +67,18 @@ button{
     align-items: center;
     font-size: 20px;
 }
-
+.contImportar{
+    text-align: center;
+    font-size: 20px;
+    
+    & .Ierror{
+        color: red;
+    }
+    
+    & .Icorrecto{
+        color: green;
+    }
+}
 .paginacion{
     width: 100%;
     display: flex;
