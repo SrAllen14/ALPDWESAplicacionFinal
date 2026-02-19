@@ -11,6 +11,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#constant_API_KEY_NASA"
         },                {
+            "fqsen": "\\RESULTADOSPORPAGINA",
+            "name": "RESULTADOSPORPAGINA",
+            "summary": "",
+            "url": "namespaces/default.html#constant_RESULTADOSPORPAGINA"
+        },                {
             "fqsen": "\\DSN",
             "name": "DSN",
             "summary": "",
@@ -206,6 +211,11 @@ Search.appendIndex(
             "summary": "M\u00E9todo\u0020ejecutaConsulta",
             "url": "classes/DBPDO.html#method_ejecutaConsulta"
         },                {
+            "fqsen": "\\DBPDO\u003A\u003AejecutarConsultaTransaccion\u0028\u0029",
+            "name": "ejecutarConsultaTransaccion",
+            "summary": "",
+            "url": "classes/DBPDO.html#method_ejecutarConsultaTransaccion"
+        },                {
             "fqsen": "\\Departamento",
             "name": "Departamento",
             "summary": "Clase\u0020Departamento.",
@@ -296,6 +306,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/DepartamentoPDO.html"
         },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AobtenerTodosCodigosDepartamentos\u0028\u0029",
+            "name": "obtenerTodosCodigosDepartamentos",
+            "summary": "",
+            "url": "classes/DepartamentoPDO.html#method_obtenerTodosCodigosDepartamentos"
+        },                {
             "fqsen": "\\DepartamentoPDO\u003A\u003AbuscaDepartamentoPorCod\u0028\u0029",
             "name": "buscaDepartamentoPorCod",
             "summary": "M\u00E9todo\u0020buscaDepartamentoPorCod",
@@ -306,10 +321,30 @@ Search.appendIndex(
             "summary": "M\u00E9todo\u0020buscaDepartmentoPorDesc",
             "url": "classes/DepartamentoPDO.html#method_buscaDepartamentoPorDesc"
         },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AbuscaDepartamentosPorDescEstado\u0028\u0029",
+            "name": "buscaDepartamentosPorDescEstado",
+            "summary": "M\u00E9todo\u0020buscaDepartamentosPorDescEstado",
+            "url": "classes/DepartamentoPDO.html#method_buscaDepartamentosPorDescEstado"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AcontarDepartamentoPorDescEstado\u0028\u0029",
+            "name": "contarDepartamentoPorDescEstado",
+            "summary": "M\u00E9todo\u0020ContarDepartamentoPorDescEstado",
+            "url": "classes/DepartamentoPDO.html#method_contarDepartamentoPorDescEstado"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AbuscaDepartamentoPorDescEstadoPaginado\u0028\u0029",
+            "name": "buscaDepartamentoPorDescEstadoPaginado",
+            "summary": "",
+            "url": "classes/DepartamentoPDO.html#method_buscaDepartamentoPorDescEstadoPaginado"
+        },                {
             "fqsen": "\\DepartamentoPDO\u003A\u003AaltaDepartamento\u0028\u0029",
             "name": "altaDepartamento",
             "summary": "M\u00E9todo\u0020altaDepartamento",
             "url": "classes/DepartamentoPDO.html#method_altaDepartamento"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AinsertarDepartamentos\u0028\u0029",
+            "name": "insertarDepartamentos",
+            "summary": "M\u00E9todo\u0020insertarDepartamentos",
+            "url": "classes/DepartamentoPDO.html#method_insertarDepartamentos"
         },                {
             "fqsen": "\\DepartamentoPDO\u003A\u003AbajaFisicaDepartamento\u0028\u0029",
             "name": "bajaFisicaDepartamento",
@@ -431,6 +466,76 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/FotoNasa.html#property_error"
         },                {
+            "fqsen": "\\PaisesInfo",
+            "name": "PaisesInfo",
+            "summary": "Clase\u0020PaisesInfo.",
+            "url": "classes/PaisesInfo.html"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method___construct"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AgetNombre\u0028\u0029",
+            "name": "getNombre",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_getNombre"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AgetPoblacion\u0028\u0029",
+            "name": "getPoblacion",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_getPoblacion"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AgetCapital\u0028\u0029",
+            "name": "getCapital",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_getCapital"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AgetArea\u0028\u0029",
+            "name": "getArea",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_getArea"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AsetNombre\u0028\u0029",
+            "name": "setNombre",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_setNombre"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AsetPoblacion\u0028\u0029",
+            "name": "setPoblacion",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_setPoblacion"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AsetCapital\u0028\u0029",
+            "name": "setCapital",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_setCapital"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003AsetArea\u0028\u0029",
+            "name": "setArea",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#method_setArea"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003A\u0024nombre",
+            "name": "nombre",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#property_nombre"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003A\u0024poblacion",
+            "name": "poblacion",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#property_poblacion"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003A\u0024capital",
+            "name": "capital",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#property_capital"
+        },                {
+            "fqsen": "\\PaisesInfo\u003A\u003A\u0024area",
+            "name": "area",
+            "summary": "",
+            "url": "classes/PaisesInfo.html#property_area"
+        },                {
             "fqsen": "\\REST",
             "name": "REST",
             "summary": "Class\u0020REST",
@@ -440,6 +545,16 @@ Search.appendIndex(
             "name": "apiNasa",
             "summary": "",
             "url": "classes/REST.html#method_apiNasa"
+        },                {
+            "fqsen": "\\REST\u003A\u003AapiPaisesInfo\u0028\u0029",
+            "name": "apiPaisesInfo",
+            "summary": "",
+            "url": "classes/REST.html#method_apiPaisesInfo"
+        },                {
+            "fqsen": "\\REST\u003A\u003AapiDepartamentos\u0028\u0029",
+            "name": "apiDepartamentos",
+            "summary": "",
+            "url": "classes/REST.html#method_apiDepartamentos"
         },                {
             "fqsen": "\\Usuario",
             "name": "Usuario",
@@ -576,10 +691,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/UsuarioPDO.html"
         },                {
+            "fqsen": "\\UsuarioPDO\u003A\u003AbuscarUsuarioPorCod\u0028\u0029",
+            "name": "buscarUsuarioPorCod",
+            "summary": "",
+            "url": "classes/UsuarioPDO.html#method_buscarUsuarioPorCod"
+        },                {
             "fqsen": "\\UsuarioPDO\u003A\u003AvalidarUsuario\u0028\u0029",
             "name": "validarUsuario",
             "summary": "M\u00E9todo\u0020validarUsuario",
             "url": "classes/UsuarioPDO.html#method_validarUsuario"
+        },                {
+            "fqsen": "\\UsuarioPDO\u003A\u003AbuscarUsuariosPorDesc\u0028\u0029",
+            "name": "buscarUsuariosPorDesc",
+            "summary": "M\u00E9todo\u0020buscarUsuarioPorDesc",
+            "url": "classes/UsuarioPDO.html#method_buscarUsuariosPorDesc"
         },                {
             "fqsen": "\\UsuarioPDO\u003A\u003AactualizarUltimaConexionUsuario\u0028\u0029",
             "name": "actualizarUltimaConexionUsuario",
