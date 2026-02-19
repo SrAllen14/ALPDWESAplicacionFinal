@@ -9,6 +9,13 @@
     text-align: center;
 }
 
+.manu-paises{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
 /* Ocultar los inputs radio de la vista */ 
 input[type="radio"] {
     display: none;
@@ -22,8 +29,6 @@ input[type="radio"] {
     left: 0;
     scroll-margin-top: 200px;
     margin: 16px;
-    border: var(--colorBorde1) solid var(--anchoBorde);
-    border-radius: var(--radioBorde);
 }
 
 /* 1. Estilo para el Label seleccionado */
@@ -35,10 +40,20 @@ input[type="radio"] {
 #btn6:checked ~ .menu label[for="btn6"],
 #btn7:checked ~ .menu label[for="btn7"],
 #btn8:checked ~ .menu label[for="btn8"] {
-    color: var(--colorTexto2);
     font-weight: bold;
 }
 
+#spain:checked ~ .menu-paises label[for="spain"],
+#france:checked ~ .menu-paises label[for="france"],
+#portugal:checked ~ .menu-paises label[for="portugal"]{
+    font-weight: bold;
+}
+
+#radioAlta:checked ~ .menu label[for="radioAlta"],
+#radioBaja:checked ~ .menu label[for="radioBaja"],
+#radioTodos:checked ~ .menu label[for="radioTodos"]{
+    font-weight: bold;
+}
 /* Mostramos el elemento correspondiente según el radio pulsado */
 #btn1:checked ~ .apartados #vInicioPublico01,
 #btn2:checked ~ .apartados #vInicioPublico02,

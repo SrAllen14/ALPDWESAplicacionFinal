@@ -17,6 +17,16 @@ if (empty($_SESSION['fotoNasa'])) {
     $_SESSION['fotoNasa'] = REST::apiNasa($fechaHoyFormateada);
 }
 
+if (empty($_SESSION['paisActual'])){
+    $_SESSION['paisActual'] = REST::apiPaisesInfo("Spain");
+}
+
+// Comprobamos si la sesión "fotoNasa" está vacia.
+if (empty($_SESSION['oDepartamento'])) {
+    // Se obtiene la fecha de hoy para valores.
+    $_SESSION['oDepartamento'] = REST::apiDepartamentos();
+}
+
 // Comprobamos si el botón "detalles" ha sido pulsado.
 if (isset($_REQUEST['detalles'])) {
     // Si ha sido pulsado el damos el valor de la página solicitada a la variable $_SESSION.
@@ -39,7 +49,8 @@ $fotoExiste = true;
 $entradaOk = true;
 // Inicializamos las variables de control.
 $aErrores = [
-    'fechaNasa' => null
+    'fechaNasa' => null,
+    'codDepartamento' => null
 ];
 
 $oFotoNasa = null;
@@ -63,6 +74,15 @@ if (isset($_REQUEST['btnFecha'])) {
     }
 }
 
+if(isset($_REQUEST['btnBuscarPais'])){
+    $_SESSION['paisActual'] = REST::apiPaisesInfo($_REQUEST['pais']);
+}
+
+if(isset($_REQUEST['btnCodDepartamento'])){
+    $oDepartamentoActual = REST::apiDepartamentos($_POST['codDepartamento']);
+    $_SESSION['oDepartamento'] = $oDepartamentoActual;
+}
+
 // Se crea un array con todos los datos que se le pasan a la vista.
 $avRest = [
     'tituloNasa' => $_SESSION['fotoNasa']->getTitulo(),
@@ -70,7 +90,16 @@ $avRest = [
     'fotoNasaHD' => $_SESSION['fotoNasa']->getUrlHD(),
     'explicacionNasa' => $_SESSION['fotoNasa']->getExplicacion(),
     'fechaNasa' => $_SESSION['fotoNasa']->getFecha(),
-    'errorNasa' => $_SESSION['fotoNasa']->getError()
+    'errorNasa' => $_SESSION['fotoNasa']->getError(),
+    'aCodDepartamentos' => DepartamentoPDO::obtenerTodosCodigosDepartamentos(),
+    'codDepartamento' => $_SESSION['oDepartamento']->getCodDepartamento(),
+    'descDepartamento' => $_SESSION['oDepartamento']->getDescDepartamento(),
+    'fechaCreacionDepartamento' => $_SESSION['oDepartamento']->getFechaCreacionDepartamento(),
+    'fechaBajaDepartamento' => $_SESSION['oDepartamento']->getFechaBajaDepartamento(),
+    'volumenNegocio' => (number_format($_SESSION['oDepartamento']->getVolumenNegocio(), 2, ',', '.') . ' €'),
+    'nombrePais' => $_SESSION['paisActual']->getNombre(),
+    'poblacion' => number_format($_SESSION['paisActual']->getPoblacion(), 0, ',', '.'),
+    'capital' => $_SESSION['paisActual']->getCapital(),
+    'area' => number_format($_SESSION['paisActual']->getArea(), 0, ',', '.'). " km²"
 ];
-
 require_once $view['layout'];

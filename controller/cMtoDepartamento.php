@@ -218,9 +218,7 @@ if(isset($_REQUEST['bBorrar'])){
 if(isset($_REQUEST['bBajaLogica'])){
     // En caso de haber sido pulsado guardamos el departamento por código en
     // la sesión y realizamos la baja lógica del departamento. Recargamos la página.
-    $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bBajaLogica']);
-    $_SESSION['departamentoActual'] = $oDepartamentoActual;
-    $oDepartamento = DepartamentoPDO::bajaLogicaDepartamento($_SESSION['departamentoActual']);
+    $oDepartamento = DepartamentoPDO::bajaLogicaDepartamento($_REQUEST['bBajaLogica']);
     $_SESSION['departamentoActual'] = $oDepartamento;
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
@@ -232,9 +230,7 @@ if(isset($_REQUEST['bBajaLogica'])){
 if(isset($_REQUEST['bAltaLogica'])){
     // En caso de haber sido pulsado guardamos el departamento por código en
     // la sesión y realizamos la rehabilitación del departamento. Recargamos la página.
-    $oDepartamentoActual = DepartamentoPDO::buscaDepartamentoPorCod($_REQUEST['bAltaLogica']);
-    $_SESSION['departamentoActual'] = $oDepartamentoActual;
-    $oDepartamento = DepartamentoPDO::rehabilitaDepartamento($_SESSION['departamentoActual']);
+    $oDepartamento = DepartamentoPDO::rehabilitaDepartamento($_REQUEST['bAltaLogica']);
     $_SESSION['departamentoActual'] = $oDepartamento;
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
@@ -266,7 +262,9 @@ if (!is_null($aDepartamentos) && is_array($aDepartamentos)) {
 }
 
 $avMtoDepartamentos = [
-  'radioActual' => ($_SESSION['estadoDptoBuscado']) ? $_SESSION['estadoDptoBuscado'] : 'radioTodos'
+    'radioActual' => ($_SESSION['estadoDptoBuscado']) ? $_SESSION['estadoDptoBuscado'] : 'radioTodos',
+    'paginaActual' => $paginaActual,
+    'paginaFinal' => $totalPaginas
 ];
 
 require_once $view['layout'];

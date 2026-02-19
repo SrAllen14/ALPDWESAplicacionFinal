@@ -34,7 +34,7 @@ if(isset($_REQUEST['cancelar'])){
 // Comprobamos que el botón "aceptar" ha sido pulsado.
 if(isset($_REQUEST['aceptar'])){
     // En caso de aceptar borramos el usuario y comprobamos que se ha ejectado correctamente.
-    if(DepartamentoPDO::bajaFisicaDepartamento($_SESSION['departamentoActual'])){
+    if(DepartamentoPDO::bajaFisicaDepartamento($_SESSION['departamentoActual']->getCodDepartamento())){
         // En caso de que funcionado correctamente volvemos a la pagina publica.
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'mtoDepartamento';

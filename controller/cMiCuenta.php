@@ -68,7 +68,7 @@ if(isset($_REQUEST['aplicarC'])){
     }
     
     if($entradaOk){
-        $oUsuarioActual = UsuarioPDO::modificarUsuario($oUsuarioActual, $_REQUEST['descUsuario']);
+        $oUsuarioActual = UsuarioPDO::modificarUsuario($oUsuarioActual->getCodUsuario(), $_REQUEST['descUsuario']);
         $_SESSION['usuarioDWESLoginLogoff'] = $oUsuarioActual;
     }
 }
