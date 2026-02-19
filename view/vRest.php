@@ -74,6 +74,16 @@
                     <p>Capital: <b><?php echo $avRest['capital']; ?></b></p><br>
                     <p>Area: <b><?php echo $avRest['area']; ?></b></p>
                 </div>
+                <div class="infoApi">
+                    <p><b>Instrucciones de uso:</b> <a target="blank" href=" https://restcountries.com/v3.1" id="urlPaises"> https://restcountries.com/v3.1</a></p>
+                    <p> Se forma la url para solicitar la info del pais, 
+                        con la url y el nombre del pais en ingles ($nombrePais). No es necesario API key: "https://restcountries.com/v3.1/name/" . urlencode($nombrePais);
+                        Gracias a la extensíon curl de php, se envía la 
+                        petición al RestCountries, que responde enviando un json 
+                        que hay que pasar a array para poder usar la información</p>
+                    <p><b>Parámetros:</b> NombrePais (Ingles)</p>
+                    <p><b>Método:</b> GET</p>
+                </div>
             </div>
             <div class="api3">
                 <div class="cod">
@@ -93,6 +103,16 @@
                 <div class="volumenNegocio">
                     <h3>Volumen de negocio:</h3>
                     <?php echo "<p>".$avRest['volumenNegocio']."</p>"?>
+                </div>
+                <div class="infoApi">
+                    <p><b>Instrucciones de uso:</b> <a target="blank" href=" https://alvaroallper.ieslossauces.es/ALPDWESAplicacionFinal/api/wsVolumenDeDepartamentoPorCodigo.php" id="urlPaises"> API consultar volumen departamento</a></p>
+                    <p> Se forma la url para solicitar el volumen de negocio del departamento en la base de datos, 
+                        con la url y el codigo de departamento ($codDepartamento). No es necesario API key: "https://restcountries.com/v3.1/name/" . urlencode($nombrePais);
+                        Gracias a la extensíon curl de php, se envía la 
+                        petición a nuestra API guardada en /api, que responde enviando un json 
+                        que hay que pasar a array para poder usar la información</p>
+                    <p><b>Parámetros:</b> Código de Departamento</p>
+                    <p><b>Método:</b> GET</p>
                 </div>
             </div>
             

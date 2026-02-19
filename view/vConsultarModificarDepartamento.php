@@ -1,5 +1,5 @@
 <div class="cabecera2">
-    <h2>Consultar departamento</h2>
+    <h2><?php echo ($avEditarDepartamento['accion']!="editar") ? 'Consultar departamento' : 'Editar departamento'?></h2>
 </div>
 <div class="cabecera3">
     <form method="post">
