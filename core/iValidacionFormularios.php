@@ -182,7 +182,45 @@ class validacionFormularios {  //ELIMINA EL METODO VALIDATEDATE Y LO INCLUYE EN 
         }
         return $mensajeError;
     }
+    /**
+     * Comprueba si una cadena representa un número decimal (float) en formato español (usando coma)
+     * y, si es correcto, valida que esté dentro de un rango [min, max].
+     * * Esta función acepta signo negativo. El valor se convierte a formato float (con punto)
+     * para realizar las comparaciones de rango.
+     * @author Véronique Grué
+     * @version 1.0 Creada la función.
+     * @since 2025-10-15
+     * @param string $float Cadena a validar. Se espera que contenga un número decimal con coma (ej. "1.234,56" o "-1,50").
+     * @param float $max Valor máximo permitido (incluido). Por defecto es el valor máximo de PHP_FLOAT.
+     * @param float $min Valor mínimo permitido (incluido). Por defecto es el valor negativo de PHP_FLOAT.
+     * @param int $obligatorio Indica si el campo es obligatorio (1) o opcional (0). Por defecto es opcional.
+     * @return null|string Devuelve null si el formato y el rango son correctos, o un mensaje de error en caso contrario.
+     */
+    public static function comprobarFloatMonetarioES($float, $max = PHP_FLOAT_MAX, $min = -PHP_FLOAT_MAX, $obligatorio = 0) {
+        $mensajeError = null;
 
+        if ($obligatorio == 1 && $float !== '0') {
+            $mensajeError = self::comprobarNoVacio($float);
+        }
+        if (($obligatorio == 0 && $float !== null && $float !== '') || ($obligatorio == 1 && empty($mensajeError))) {
+
+            if (!preg_match('/^-?[0-9]+(,[0-9]+)?$/', $float)) {
+                $mensajeError = "Formato decimal incorrecto";
+            } else {
+                //se convierte a float con punto para la base de datos
+                $floatConvertido = str_replace(',', '.', $float);
+
+                if ($floatConvertido > $max) {
+                   $mensajeError .= "El número no puede ser mayor que " . $max . ".";
+                }
+                if ($floatConvertido < $min) {
+                    $mensajeError .= "El número no puede ser menor que " . $min . ".";
+                }
+            }
+        }
+        return $mensajeError;
+    }
+    
 // Función para comprobar si es un correo electronico
 // Return nada si es correcto, si hay errores devuelve un mensaje de error
 // Si es un 1 es obligatorio, si es un 0 no lo es

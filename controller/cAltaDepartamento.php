@@ -33,7 +33,7 @@ if(isset($_REQUEST['registrar'])){
     // Validar los campos del formulario.
     $aErrores['codDepartamento'] = validacionFormularios::comprobarAlfabetico($_REQUEST['codDepartamento'], 3, 3, 1);
     $aErrores['descDepartamento'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['descDepartamento'], 255, 1, 1);
-    $aErrores['volumenNegocio'] = validacionFormularios::comprobarFloat($_REQUEST['volumenNegocio'], PHP_FLOAT_MAX, PHP_FLOAT_MIN, 1);
+    $aErrores['volumenNegocio'] = validacionFormularios::comprobarFloatMonetarioES($_REQUEST['volumenNegocio'], 100000, -100000, 1);
 
     // Verificar si hay errores de validación.
     foreach ($aErrores as $valorCampo => $mensajeError){
@@ -45,7 +45,7 @@ if(isset($_REQUEST['registrar'])){
     // Comprobamos que el código de usuario introducido pertenece a la base de datos.
     if(!DepartamentoPDO::validaCodNoExiste($_REQUEST['codDepartamento'])){
         // En caso de existir un usuario con el mismo código invalidamos la entrada.
-        $aErrores['codDepartamento'] = "El código de usuario introducido ya pertenece a un usuario existente";
+        $aErrores['codDepartamento'] = "El código de departamento introducido ya pertenece a un departamento existente";
         $entradaOk = false;
     }
     
@@ -54,7 +54,7 @@ if(isset($_REQUEST['registrar'])){
         // Añadimos al array de respuestas los valores validados.
         $aRespuestas['codDepartamento'] = $_REQUEST['codDepartamento'];
         $aRespuestas['descDepartamento'] = $_REQUEST['descDepartamento'];
-        $aRespuestas['volumenNegocio'] = $_REQUEST['volumenNegocio'];
+        $aRespuestas['volumenNegocio'] = str_replace(',', '.', $_REQUEST['volumenNegocio']);
         
         // Creamos un objeto de la clase UsuarioPDO el cual recibe el valor del método validarUsuario 
         // que busca si el usuario existe y si la contraseña es correcta.
