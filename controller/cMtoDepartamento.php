@@ -66,7 +66,7 @@ if(empty($_SESSION['descDptoBuscado'])){
 }
 
 if(empty($_SESSION['estadoDptoBuscado'])){
-    $_SESSION['estadoDptoBuscado'] = 'radioTodos';
+    $_SESSION['estadoDptoBuscado'] = 'radioAlta';
 }
 
 $aErrores = [

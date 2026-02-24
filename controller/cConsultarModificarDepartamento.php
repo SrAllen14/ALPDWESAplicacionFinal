@@ -52,17 +52,16 @@ $aErrores = [
 
 if(isset($_REQUEST['bAplicar'])){
     $aErrores['descDepartamento'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['descDepartamento'], 255, 0, 1);
-    $aErrores['volumenNegocio'] = validacionFormularios::comprobarFloat($_REQUEST['volumenNegocio'], PHP_FLOAT_MAX, PHP_FLOAT_MIN, 1);
+    $aErrores['volumenNegocio'] = validacionFormularios::comprobarFloatMonetarioES($_REQUEST['volumenNegocio'], 100000, -100000, 1);
     
     foreach($aErrores as $valor){
         if($valor != null){
             $entradaOk = false;
-            echo "hola";
         }
     }
     
     if($entradaOk){
-        $oDepartamento = DepartamentoPDO::modificaDepartamento($_SESSION['departamentoActual']->getCodDepartamento(), $_REQUEST['descDepartamento'], $_REQUEST['volumenNegocio']);
+        $oDepartamento = DepartamentoPDO::modificaDepartamento($_SESSION['departamentoActual']->getCodDepartamento(), $_REQUEST['descDepartamento'], str_replace(',', '.', $_REQUEST['volumenNegocio']));
         $_SESSION['departamentoActual'] = $oDepartamento;
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'mtoDepartamento';
@@ -75,10 +74,11 @@ $_SESSION['departamentoActual'] = $oDepartamento;
 $accion = $_SESSION['accionDepartamento'];
 
 $avEditarDepartamento = [
+    'errores' => $aErrores,
     'codDepartamento' => $oDepartamento->getCodDepartamento(),
     'descDepartamento' => $oDepartamento->getDescDepartamento(),
     'fechaCreacionDepartamento' => ($oDepartamento) ? $oDepartamento->getFechaCreacionDepartamento()->format('Y-m-d') : null,
-    'volumenNegocio' => $oDepartamento->getVolumenNegocio(),
+    'volumenNegocio' => number_format($oDepartamento->getVolumenNegocio(), 2, ',', '.'),
     'fechaBajaDepartamento' => ($oDepartamento->getFechaBajaDepartamento()) ? $oDepartamento->getFechaBajaDepartamento()->format('Y-m-d') : null,
     'accion' => $accion
 ];
